@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageId>SharpSDL</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>Hasan Ali</Authors>
+    <RepositoryUrl>https://github.com/hasali19/SharpSDL</RepositoryUrl>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Description>C# bindings for SDL2.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="runtimes\**\*">
+      <Pack>true</Pack>
+      <PackagePath>%(Identity)</PackagePath>
+    </Content>
+  </ItemGroup>
+
+</Project>
