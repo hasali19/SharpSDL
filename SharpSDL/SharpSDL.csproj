@@ -3,11 +3,13 @@
   <PropertyGroup>
     <PackageId>SharpSDL</PackageId>
     <Version>1.0.0</Version>
-    <Authors>Hasan Ali</Authors>
+    <Authors>hasali19</Authors>
     <RepositoryUrl>https://github.com/hasali19/SharpSDL</RepositoryUrl>
     <TargetFramework>netstandard2.0</TargetFramework>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Description>C# bindings for SDL2.</Description>
+    <PackageTags>SDL2 Game Window</PackageTags>
+    <PackageLicenseUrl>https://github.com/hasali19/SharpSDL/blob/master/LICENSE</PackageLicenseUrl>
   </PropertyGroup>
 
   <ItemGroup>
