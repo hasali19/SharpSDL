@@ -24,8 +24,8 @@ namespace SharpSDL
         [StructLayout(LayoutKind.Sequential)]
         public struct SDL_SysWMinfo
         {
-            SDL_version version;
-            SDL_SYSWM_TYPE subsystem;
+            public SDL_version version;
+            public SDL_SYSWM_TYPE subsystem;
             public SDL_SysWMinfoUnion info;
         }
 
