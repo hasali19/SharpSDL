@@ -22,7 +22,7 @@ namespace SharpSDL
             SDL_NUM_SYSTEM_CURSORS
         }
 
-        public enum SDL_MouseWheelDirection
+        public enum SDL_MouseWheelDirection : uint
         {
             SDL_MOUSEWHEEL_NORMAL,
             SDL_MOUSEWHEEL_FLIPPED

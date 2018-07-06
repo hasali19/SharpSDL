@@ -48,7 +48,7 @@ namespace SharpSDL
             SDL_HITTEST_RESIZE_LEFT
         }
 
-        public enum SDL_WindowEventID
+        public enum SDL_WindowEventID : byte
         {
             SDL_WINDOWEVENT_NONE,
             SDL_WINDOWEVENT_SHOWN,

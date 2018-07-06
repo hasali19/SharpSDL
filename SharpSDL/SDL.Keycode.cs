@@ -279,7 +279,7 @@ namespace SharpSDL
         }
 
         [Flags]
-        public enum SDL_Keymod
+        public enum SDL_Keymod : ushort
         {
             KMOD_NONE = 0x0000,
             KMOD_LSHIFT = 0x0001,

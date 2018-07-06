@@ -30,7 +30,7 @@ namespace SharpSDL
             SDL_JOYSTICK_POWER_MAX
         }
 
-        public enum SDL_Hat
+        public enum SDL_Hat : byte
         {
             SDL_HAT_CENTERED = 0x00,
             SDL_HAT_UP = 0x01,
