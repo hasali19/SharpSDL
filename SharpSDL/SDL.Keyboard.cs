@@ -30,7 +30,7 @@ namespace SharpSDL
         public static extern SDL_Window SDL_GetKeyboardFocus();
 
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern unsafe bool* SDL_GetKeyboardState();
+        public static extern unsafe byte* SDL_GetKeyboardState(int* numKeys);
 
         [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
         public static extern SDL_Keymod SDL_GetModState();
