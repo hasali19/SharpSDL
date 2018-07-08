@@ -6,8 +6,6 @@ namespace SharpSDL
 {
     public static unsafe partial class SDL
     {
-        private const string DllName = "SDL2";
-
         [Flags]
         public enum SDL_InitFlags : uint
         {
