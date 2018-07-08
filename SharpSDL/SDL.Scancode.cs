@@ -1,6 +1,6 @@
 namespace SharpSDL
 {
-    public static partial class SDL
+    public static unsafe partial class SDL
     {
         public enum SDL_Scancode
         {
@@ -153,16 +153,16 @@ namespace SharpSDL
             SDL_SCANCODE_INTERNATIONAL8 = 142,
             SDL_SCANCODE_INTERNATIONAL9 = 143,
             SDL_SCANCODE_LANG1 = 144,
-            SDL_SCANCODE_LANG2 = 145, 
-            SDL_SCANCODE_LANG3 = 146, 
-            SDL_SCANCODE_LANG4 = 147, 
-            SDL_SCANCODE_LANG5 = 148, 
-            SDL_SCANCODE_LANG6 = 149, 
-            SDL_SCANCODE_LANG7 = 150, 
-            SDL_SCANCODE_LANG8 = 151, 
-            SDL_SCANCODE_LANG9 = 152, 
+            SDL_SCANCODE_LANG2 = 145,
+            SDL_SCANCODE_LANG3 = 146,
+            SDL_SCANCODE_LANG4 = 147,
+            SDL_SCANCODE_LANG5 = 148,
+            SDL_SCANCODE_LANG6 = 149,
+            SDL_SCANCODE_LANG7 = 150,
+            SDL_SCANCODE_LANG8 = 151,
+            SDL_SCANCODE_LANG9 = 152,
 
-            SDL_SCANCODE_ALTERASE = 153, 
+            SDL_SCANCODE_ALTERASE = 153,
             SDL_SCANCODE_SYSREQ = 154,
             SDL_SCANCODE_CANCEL = 155,
             SDL_SCANCODE_CLEAR = 156,
@@ -224,12 +224,12 @@ namespace SharpSDL
 
             SDL_SCANCODE_LCTRL = 224,
             SDL_SCANCODE_LSHIFT = 225,
-            SDL_SCANCODE_LALT = 226, 
-            SDL_SCANCODE_LGUI = 227, 
+            SDL_SCANCODE_LALT = 226,
+            SDL_SCANCODE_LGUI = 227,
             SDL_SCANCODE_RCTRL = 228,
             SDL_SCANCODE_RSHIFT = 229,
-            SDL_SCANCODE_RALT = 230, 
-            SDL_SCANCODE_RGUI = 231, 
+            SDL_SCANCODE_RALT = 230,
+            SDL_SCANCODE_RGUI = 231,
 
             SDL_SCANCODE_MODE = 257,
 

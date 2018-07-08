@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 
 namespace SharpSDL
 {
-    public static partial class SDL
+    public static unsafe partial class SDL
     {
         public enum SDL_GameControllerBindType
         {
@@ -87,91 +87,174 @@ namespace SharpSDL
             }
         }
 
-        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int SDL_GameControllerAddMapping(string mappingString);
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        private delegate int SDL_GameControllerAddMapping_d(string mappingString);
 
-        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int SDL_GameControllerAddMappingsFromFile(string filename);
+        private static SDL_GameControllerAddMapping_d SDL_GameControllerAddMapping_f;
 
-        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int SDL_GameControllerClose(SDL_GameController gamecontroller);
+        public static int SDL_GameControllerAddMapping(string mappingString) => SDL_GameControllerAddMapping_f(mappingString);
 
-        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern SDL_GameController SDL_GameControllerFromInstanceID(SDL_JoystickID joyid);
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        private delegate int SDL_GameControllerClose_d(SDL_GameController gamecontroller);
 
-        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern bool SDL_GameControllerGetAttached(SDL_GameController gamecontroller);
+        private static SDL_GameControllerClose_d SDL_GameControllerClose_f;
 
-        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern short SDL_GameControllerGetAxis(SDL_GameController gameController, SDL_GameControllerAxis axis);
+        public static int SDL_GameControllerClose(SDL_GameController gamecontroller) => SDL_GameControllerClose_f(gamecontroller);
 
-        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern SDL_GameControllerAxis SDL_GameControllerGetAxisFromString(string pchString);
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        private delegate SDL_GameController SDL_GameControllerFromInstanceID_d(SDL_JoystickID joyid);
 
-        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern SDL_GameControllerButtonBind SDL_GameControllerGetBindForAxis(SDL_GameController gameController, SDL_GameControllerAxis axis);
+        private static SDL_GameControllerFromInstanceID_d SDL_GameControllerFromInstanceID_f;
 
-        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern SDL_GameControllerButtonBind SDL_GameControllerGetBindForButton(SDL_GameController gameController, SDL_GameControllerButton buttons);
+        public static SDL_GameController SDL_GameControllerFromInstanceID(SDL_JoystickID joyid) => SDL_GameControllerFromInstanceID_f(joyid);
 
-        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern byte SDL_GameControllerGetButton(SDL_GameController gameController, SDL_GameControllerButton button);
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        private delegate bool SDL_GameControllerGetAttached_d(SDL_GameController gamecontroller);
 
-        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern SDL_GameControllerButton SDL_GameControllerGetButtonFromString(string pchString);
+        private static SDL_GameControllerGetAttached_d SDL_GameControllerGetAttached_f;
 
-        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern SDL_Joystick SDL_GameControllerGetJoystick(SDL_GameController gameController);
+        public static bool SDL_GameControllerGetAttached(SDL_GameController gamecontroller) => SDL_GameControllerGetAttached_f(gamecontroller);
 
-        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern unsafe byte* SDL_GameControllerGetStringForAxis(SDL_GameControllerAxis axis);
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        private delegate short SDL_GameControllerGetAxis_d(SDL_GameController gameController, SDL_GameControllerAxis axis);
+
+        private static SDL_GameControllerGetAxis_d SDL_GameControllerGetAxis_f;
+
+        public static short SDL_GameControllerGetAxis(SDL_GameController gameController, SDL_GameControllerAxis axis) => SDL_GameControllerGetAxis_f(gameController, axis);
+
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        private delegate SDL_GameControllerAxis SDL_GameControllerGetAxisFromString_d(string pchString);
+
+        private static SDL_GameControllerGetAxisFromString_d SDL_GameControllerGetAxisFromString_f;
+
+        public static SDL_GameControllerAxis SDL_GameControllerGetAxisFromString(string pchString) => SDL_GameControllerGetAxisFromString_f(pchString);
+
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        private delegate SDL_GameControllerButtonBind SDL_GameControllerGetBindForAxis_d(SDL_GameController gameController, SDL_GameControllerAxis axis);
+
+        private static SDL_GameControllerGetBindForAxis_d SDL_GameControllerGetBindForAxis_f;
+
+        public static SDL_GameControllerButtonBind SDL_GameControllerGetBindForAxis(SDL_GameController gameController, SDL_GameControllerAxis axis) => SDL_GameControllerGetBindForAxis_f(gameController, axis);
+
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        private delegate SDL_GameControllerButtonBind SDL_GameControllerGetBindForButton_d(SDL_GameController gameController, SDL_GameControllerButton buttons);
+
+        private static SDL_GameControllerGetBindForButton_d SDL_GameControllerGetBindForButton_f;
+
+        public static SDL_GameControllerButtonBind SDL_GameControllerGetBindForButton(SDL_GameController gameController, SDL_GameControllerButton buttons) => SDL_GameControllerGetBindForButton_f(gameController, buttons);
+
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        private delegate byte SDL_GameControllerGetButton_d(SDL_GameController gameController, SDL_GameControllerButton button);
+
+        private static SDL_GameControllerGetButton_d SDL_GameControllerGetButton_f;
+
+        public static byte SDL_GameControllerGetButton(SDL_GameController gameController, SDL_GameControllerButton button) => SDL_GameControllerGetButton_f(gameController, button);
+
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        private delegate SDL_GameControllerButton SDL_GameControllerGetButtonFromString_d(string pchString);
+
+        private static SDL_GameControllerGetButtonFromString_d SDL_GameControllerGetButtonFromString_f;
+
+        public static SDL_GameControllerButton SDL_GameControllerGetButtonFromString(string pchString) => SDL_GameControllerGetButtonFromString_f(pchString);
+
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        private delegate SDL_Joystick SDL_GameControllerGetJoystick_d(SDL_GameController gameController);
+
+        private static SDL_GameControllerGetJoystick_d SDL_GameControllerGetJoystick_f;
+
+        public static SDL_Joystick SDL_GameControllerGetJoystick(SDL_GameController gameController) => SDL_GameControllerGetJoystick_f(gameController);
+
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        private delegate byte* SDL_GameControllerGetStringForAxis_d(SDL_GameControllerAxis axis);
+
+        private static SDL_GameControllerGetStringForAxis_d SDL_GameControllerGetStringForAxis_f;
+
+        public static byte* SDL_GameControllerGetStringForAxis(SDL_GameControllerAxis axis) => SDL_GameControllerGetStringForAxis_f(axis);
+
         public static unsafe string SDL_GameControllerGetStringForAxisString(SDL_GameControllerAxis axis)
         {
             return GetString(SDL_GameControllerGetStringForAxis(axis));
         }
 
-        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern unsafe byte* SDL_GameControllerGetStringForButton(SDL_GameControllerButton button);
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        private delegate byte* SDL_GameControllerGetStringForButton_d(SDL_GameControllerButton button);
+
+        private static SDL_GameControllerGetStringForButton_d SDL_GameControllerGetStringForButton_f;
+
+        public static byte* SDL_GameControllerGetStringForButton(SDL_GameControllerButton button) => SDL_GameControllerGetStringForButton_f(button);
+
         public static unsafe string SDL_GameControllerGetStringForButtonString(SDL_GameControllerButton button)
         {
             return GetString(SDL_GameControllerGetStringForButton(button));
         }
 
-        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern unsafe byte* SDL_GameControllerMapping(SDL_GameController gameController);
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        private delegate byte* SDL_GameControllerMapping_d(SDL_GameController gameController);
+
+        private static SDL_GameControllerMapping_d SDL_GameControllerMapping_f;
+
+        public static byte* SDL_GameControllerMapping(SDL_GameController gameController) => SDL_GameControllerMapping_f(gameController);
+
         public static unsafe string SDL_GameControllerMappingString(SDL_GameController gameController)
         {
             return GetString(SDL_GameControllerMapping(gameController));
         }
 
-        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern unsafe byte* SDL_GameControllerMappingForGUID(Guid guid);
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        private delegate byte* SDL_GameControllerMappingForGUID_d(Guid guid);
+
+        private static SDL_GameControllerMappingForGUID_d SDL_GameControllerMappingForGUID_f;
+
+        public static byte* SDL_GameControllerMappingForGUID(Guid guid) => SDL_GameControllerMappingForGUID_f(guid);
+
         public static unsafe string SDL_GameControllerMappingForGUIDString(Guid guid)
         {
             return GetString(SDL_GameControllerMappingForGUID(guid));
         }
 
-        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern unsafe byte* SDL_GameControllerName(SDL_GameController gameController);
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        private delegate byte* SDL_GameControllerName_d(SDL_GameController gameController);
+
+        private static SDL_GameControllerName_d SDL_GameControllerName_f;
+
+        public static byte* SDL_GameControllerName(SDL_GameController gameController) => SDL_GameControllerName_f(gameController);
+
         public static unsafe string SDL_GameControllerNameString(SDL_GameController gameController)
         {
             return GetString(SDL_GameControllerName(gameController));
         }
 
-        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern unsafe byte* SDL_GameControllerNameForIndex(int joystickIndex);
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        private delegate byte* SDL_GameControllerNameForIndex_d(int joystickIndex);
+
+        private static SDL_GameControllerNameForIndex_d SDL_GameControllerNameForIndex_f;
+
+        public static byte* SDL_GameControllerNameForIndex(int joystickIndex) => SDL_GameControllerNameForIndex_f(joystickIndex);
+
         public static unsafe string SDL_GameControllerNameForIndexString(int joystickIndex)
         {
             return GetString(SDL_GameControllerNameForIndex(joystickIndex));
         }
 
-        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern SDL_GameController SDL_GameControllerOpen(int joystickIndex);
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        private delegate SDL_GameController SDL_GameControllerOpen_d(int joystickIndex);
 
-        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SDL_GameControllerUpdate();
+        private static SDL_GameControllerOpen_d SDL_GameControllerOpen_f;
 
-        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern bool SDL_IsGameController(int joystickIndex);
+        public static SDL_GameController SDL_GameControllerOpen(int joystickIndex) => SDL_GameControllerOpen_f(joystickIndex);
+
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        private delegate void SDL_GameControllerUpdate_d();
+
+        private static SDL_GameControllerUpdate_d SDL_GameControllerUpdate_f;
+
+        public static void SDL_GameControllerUpdate() => SDL_GameControllerUpdate_f();
+
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        private delegate bool SDL_IsGameController_d(int joystickIndex);
+
+        private static SDL_IsGameController_d SDL_IsGameController_f;
+
+        public static bool SDL_IsGameController(int joystickIndex) => SDL_IsGameController_f(joystickIndex);
     }
 }

@@ -3,16 +3,25 @@ using System.Runtime.InteropServices;
 
 namespace SharpSDL
 {
-    public static partial class SDL
+    public static unsafe partial class SDL
     {
-        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern unsafe byte* SDL_GetError();
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        private delegate byte* SDL_GetError_d();
+
+        private static SDL_GetError_d SDL_GetError_f;
+
+        public static byte* SDL_GetError() => SDL_GetError_f();
+
         public static unsafe string SDL_GetErrorString()
         {
             return GetString(SDL_GetError());
         }
 
-        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SDL_ClearError();
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        private delegate void SDL_ClearError_d();
+
+        private static SDL_ClearError_d SDL_ClearError_f;
+
+        public static void SDL_ClearError() => SDL_ClearError_f();
     }
 }

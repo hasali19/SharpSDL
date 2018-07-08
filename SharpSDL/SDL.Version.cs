@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 
 namespace SharpSDL
 {
-    public static partial class SDL
+    public static unsafe partial class SDL
     {
         [StructLayout(LayoutKind.Sequential)]
         public struct SDL_version
@@ -14,17 +14,30 @@ namespace SharpSDL
             public byte patch;
         }
 
-        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern unsafe void SDL_GetVersion(SDL_version* version);
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        private delegate void SDL_GetVersion_d(SDL_version* version);
 
-        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern unsafe byte* SDL_GetRevision();
+        private static SDL_GetVersion_d SDL_GetVersion_f;
+
+        public static void SDL_GetVersion(SDL_version* version) => SDL_GetVersion_f(version);
+
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        private delegate byte* SDL_GetRevision_d();
+
+        private static SDL_GetRevision_d SDL_GetRevision_f;
+
+        public static byte* SDL_GetRevision() => SDL_GetRevision_f();
+
         public static unsafe string SDL_GetRevisionString()
         {
             return GetString(SDL_GetRevision());
         }
 
-        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int SDL_GetRevisionNumber();
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        private delegate int SDL_GetRevisionNumber_d();
+
+        private static SDL_GetRevisionNumber_d SDL_GetRevisionNumber_f;
+
+        public static int SDL_GetRevisionNumber() => SDL_GetRevisionNumber_f();
     }
 }

@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 using System.Runtime.InteropServices;
 using System.Text;
 
 namespace SharpSDL
 {
-    public static partial class SDL
+    public static unsafe partial class SDL
     {
         private const string DllName = "SDL2";
 
@@ -24,20 +24,40 @@ namespace SharpSDL
                 | SDL_INIT_JOYSTICK | SDL_INIT_HAPTIC | SDL_INIT_GAMECONTROLLER
         }
 
-        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int SDL_Init(SDL_InitFlags flags);
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        private delegate int SDL_Init_d(SDL_InitFlags flags);
 
-        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int SDL_InitSubSystem(SDL_InitFlags flags);
+        private static SDL_Init_d SDL_Init_f;
 
-        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SDL_QuitSubSystem(SDL_InitFlags flags);
+        public static int SDL_Init(SDL_InitFlags flags) => SDL_Init_f(flags);
 
-        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern SDL_InitFlags SDL_WasInit(SDL_InitFlags flags);
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        private delegate int SDL_InitSubSystem_d(SDL_InitFlags flags);
 
-        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SDL_Quit();
+        private static SDL_InitSubSystem_d SDL_InitSubSystem_f;
+
+        public static int SDL_InitSubSystem(SDL_InitFlags flags) => SDL_InitSubSystem_f(flags);
+
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        private delegate void SDL_QuitSubSystem_d(SDL_InitFlags flags);
+
+        private static SDL_QuitSubSystem_d SDL_QuitSubSystem_f;
+
+        public static void SDL_QuitSubSystem(SDL_InitFlags flags) => SDL_QuitSubSystem_f(flags);
+
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        private delegate SDL_InitFlags SDL_WasInit_d(SDL_InitFlags flags);
+
+        private static SDL_WasInit_d SDL_WasInit_f;
+
+        public static SDL_InitFlags SDL_WasInit(SDL_InitFlags flags) => SDL_WasInit_f(flags);
+
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        private delegate void SDL_Quit_d();
+
+        private static SDL_Quit_d SDL_Quit_f;
+
+        public static void SDL_Quit() => SDL_Quit_f();
 
         private static unsafe string GetString(byte* ptr)
         {

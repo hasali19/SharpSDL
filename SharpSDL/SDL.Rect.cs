@@ -2,7 +2,7 @@ using System.Runtime.InteropServices;
 
 namespace SharpSDL
 {
-    public static partial class SDL
+    public static unsafe partial class SDL
     {
         [StructLayout(LayoutKind.Sequential)]
         public struct SDL_Rect

@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 
 namespace SharpSDL
 {
-    public static partial class SDL
+    public static unsafe partial class SDL
     {
         public enum SDL_SYSWM_TYPE
         {
@@ -61,7 +61,11 @@ namespace SharpSDL
             public IntPtr window;
         }
 
-        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern unsafe bool SDL_GetWindowWMInfo(SDL_Window window, SDL_SysWMinfo* info);
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        private delegate bool SDL_GetWindowWMInfo_d(SDL_Window window, SDL_SysWMinfo* info);
+
+        private static SDL_GetWindowWMInfo_d SDL_GetWindowWMInfo_f;
+
+        public static bool SDL_GetWindowWMInfo(SDL_Window window, SDL_SysWMinfo* info) => SDL_GetWindowWMInfo_f(window, info);
     }
 }

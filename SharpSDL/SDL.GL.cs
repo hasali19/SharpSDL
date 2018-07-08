@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 
 namespace SharpSDL
 {
-    public static partial class SDL
+    public static unsafe partial class SDL
     {
         [StructLayout(LayoutKind.Sequential)]
         public struct SDL_GLContext
@@ -52,56 +52,121 @@ namespace SharpSDL
             SDL_GL_CONTEXT_NO_ERROR
         }
 
-        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern SDL_GLContext SDL_GL_CreateContext(SDL_Window window);
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        private delegate SDL_GLContext SDL_GL_CreateContext_d(SDL_Window window);
 
-        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SDL_GL_DeleteContext(SDL_GLContext context);
+        private static SDL_GL_CreateContext_d SDL_GL_CreateContext_f;
 
-        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern bool SDL_GL_ExtensionSupported(string extension);
+        public static SDL_GLContext SDL_GL_CreateContext(SDL_Window window) => SDL_GL_CreateContext_f(window);
 
-        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int SDL_GL_GetAttribute(SDL_GLattr attr, out int value);
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        private delegate void SDL_GL_DeleteContext_d(SDL_GLContext context);
 
-        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern SDL_GLContext SDL_GL_GetCurrentContext();
+        private static SDL_GL_DeleteContext_d SDL_GL_DeleteContext_f;
 
-        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern SDL_Window SDL_GL_GetCurrentWindow();
+        public static void SDL_GL_DeleteContext(SDL_GLContext context) => SDL_GL_DeleteContext_f(context);
 
-        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern unsafe void SDL_GL_GetDrawableSize(SDL_Window window, int* width, int* height);
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        private delegate bool SDL_GL_ExtensionSupported_d(string extension);
 
-        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern IntPtr SDL_GL_GetProcAddress(string proc);
+        private static SDL_GL_ExtensionSupported_d SDL_GL_ExtensionSupported_f;
+
+        public static bool SDL_GL_ExtensionSupported(string extension) => SDL_GL_ExtensionSupported_f(extension);
+
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        private delegate int SDL_GL_GetAttribute_d(SDL_GLattr attr, int* value);
+
+        private static SDL_GL_GetAttribute_d SDL_GL_GetAttribute_f;
+
+        public static int SDL_GL_GetAttribute(SDL_GLattr attr, int* value) => SDL_GL_GetAttribute_f(attr, value);
+
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        private delegate SDL_GLContext SDL_GL_GetCurrentContext_d();
+
+        private static SDL_GL_GetCurrentContext_d SDL_GL_GetCurrentContext_f;
+
+        public static SDL_GLContext SDL_GL_GetCurrentContext() => SDL_GL_GetCurrentContext_f();
+
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        private delegate SDL_Window SDL_GL_GetCurrentWindow_d();
+
+        private static SDL_GL_GetCurrentWindow_d SDL_GL_GetCurrentWindow_f;
+
+        public static SDL_Window SDL_GL_GetCurrentWindow() => SDL_GL_GetCurrentWindow_f();
+
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        private delegate void SDL_GL_GetDrawableSize_d(SDL_Window window, int* width, int* height);
+
+        private static SDL_GL_GetDrawableSize_d SDL_GL_GetDrawableSize_f;
+
+        public static void SDL_GL_GetDrawableSize(SDL_Window window, int* width, int* height) => SDL_GL_GetDrawableSize_f(window, width, height);
+
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        private delegate IntPtr SDL_GL_GetProcAddress_d(string proc);
+
+        private static SDL_GL_GetProcAddress_d SDL_GL_GetProcAddress_f;
+
+        public static IntPtr SDL_GL_GetProcAddress(string proc) => SDL_GL_GetProcAddress_f(proc);
+
         public static T SDL_GL_GetProcDelegate<T>(string proc) where T : class
         {
             return Marshal.GetDelegateForFunctionPointer<T>(SDL_GL_GetProcAddress(proc));
         }
 
-        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int SDL_GL_GetSwapInterval();
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        private delegate int SDL_GL_GetSwapInterval_d();
 
-        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int SDL_GL_LoadLibrary(string path);
+        private static SDL_GL_GetSwapInterval_d SDL_GL_GetSwapInterval_f;
 
-        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int SDL_GL_MakeCurrent(SDL_Window window, SDL_GLContext context);
+        public static int SDL_GL_GetSwapInterval() => SDL_GL_GetSwapInterval_f();
 
-        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SDL_GL_ResetAttributes();
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        private delegate int SDL_GL_LoadLibrary_d(string path);
 
-        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int SDL_GL_SetAttribute(SDL_GLattr attr, int value);
+        private static SDL_GL_LoadLibrary_d SDL_GL_LoadLibrary_f;
 
-        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int SDL_GL_SetSwapInterval(int interval);
+        public static int SDL_GL_LoadLibrary(string path) => SDL_GL_LoadLibrary_f(path);
 
-        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SDL_GL_SwapWindow(SDL_Window window);
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        private delegate int SDL_GL_MakeCurrent_d(SDL_Window window, SDL_GLContext context);
 
-        [DllImport(DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SDL_GL_UnloadLibrary();
+        private static SDL_GL_MakeCurrent_d SDL_GL_MakeCurrent_f;
+
+        public static int SDL_GL_MakeCurrent(SDL_Window window, SDL_GLContext context) => SDL_GL_MakeCurrent_f(window, context);
+
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        private delegate void SDL_GL_ResetAttributes_d();
+
+        private static SDL_GL_ResetAttributes_d SDL_GL_ResetAttributes_f;
+
+        public static void SDL_GL_ResetAttributes() => SDL_GL_ResetAttributes_f();
+
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        private delegate int SDL_GL_SetAttribute_d(SDL_GLattr attr, int value);
+
+        private static SDL_GL_SetAttribute_d SDL_GL_SetAttribute_f;
+
+        public static int SDL_GL_SetAttribute(SDL_GLattr attr, int value) => SDL_GL_SetAttribute_f(attr, value);
+
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        private delegate int SDL_GL_SetSwapInterval_d(int interval);
+
+        private static SDL_GL_SetSwapInterval_d SDL_GL_SetSwapInterval_f;
+
+        public static int SDL_GL_SetSwapInterval(int interval) => SDL_GL_SetSwapInterval_f(interval);
+
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        private delegate void SDL_GL_SwapWindow_d(SDL_Window window);
+
+        private static SDL_GL_SwapWindow_d SDL_GL_SwapWindow_f;
+
+        public static void SDL_GL_SwapWindow(SDL_Window window) => SDL_GL_SwapWindow_f(window);
+
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        private delegate void SDL_GL_UnloadLibrary_d();
+
+        private static SDL_GL_UnloadLibrary_d SDL_GL_UnloadLibrary_f;
+
+        public static void SDL_GL_UnloadLibrary() => SDL_GL_UnloadLibrary_f();
     }
 }

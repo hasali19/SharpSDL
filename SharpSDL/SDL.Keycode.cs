@@ -2,7 +2,7 @@ using System;
 
 namespace SharpSDL
 {
-    public static partial class SDL
+    public static unsafe partial class SDL
     {
         public const int SDLK_SCANCODE_MASK = 1 << 30;
 
