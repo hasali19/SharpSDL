@@ -9,6 +9,7 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Description>C# bindings for SDL2.</Description>
     <PackageTags>SDL2 Game Window</PackageTags>
+    <PackageProjectUrl>https://github.com/hasali19/SharpSDL</PackageProjectUrl>
     <PackageLicenseUrl>https://github.com/hasali19/SharpSDL/blob/master/LICENSE</PackageLicenseUrl>
   </PropertyGroup>
 
