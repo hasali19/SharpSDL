@@ -131,8 +131,7 @@ namespace SharpSDL
 
         private static SDL_CreateWindow_d SDL_CreateWindow_f;
 
-        public static SDL_Window SDL_CreateWindow(
-string title, int x, int y, int width, int height, SDL_WindowFlags flags) => SDL_CreateWindow_f(title, x, y, width, height, flags);
+        public static SDL_Window SDL_CreateWindow(string title, int x, int y, int width, int height, SDL_WindowFlags flags) => SDL_CreateWindow_f(title, x, y, width, height, flags);
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         private delegate SDL_Window SDL_CreateWindowFrom_d(IntPtr nativeWindow);
@@ -163,22 +162,18 @@ string title, int x, int y, int width, int height, SDL_WindowFlags flags) => SDL
         public static void SDL_EnableScreenSaver() => SDL_EnableScreenSaver_f();
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate SDL_DisplayMode* SDL_GetClosestDisplayMode_d(
-int displayIndex, SDL_DisplayMode* mode, SDL_DisplayMode* closest);
+        private delegate SDL_DisplayMode* SDL_GetClosestDisplayMode_d(int displayIndex, SDL_DisplayMode* mode, SDL_DisplayMode* closest);
 
         private static SDL_GetClosestDisplayMode_d SDL_GetClosestDisplayMode_f;
 
-        public static SDL_DisplayMode* SDL_GetClosestDisplayMode(
-int displayIndex, SDL_DisplayMode* mode, SDL_DisplayMode* closest) => SDL_GetClosestDisplayMode_f(displayIndex, mode, closest);
+        public static SDL_DisplayMode* SDL_GetClosestDisplayMode(int displayIndex, SDL_DisplayMode* mode, SDL_DisplayMode* closest) => SDL_GetClosestDisplayMode_f(displayIndex, mode, closest);
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate int SDL_GetCurrentDisplayMode_d(int displayIndex,
-SDL_DisplayMode* mode);
+        private delegate int SDL_GetCurrentDisplayMode_d(int displayIndex, SDL_DisplayMode* mode);
 
         private static SDL_GetCurrentDisplayMode_d SDL_GetCurrentDisplayMode_f;
 
-        public static int SDL_GetCurrentDisplayMode(int displayIndex,
-SDL_DisplayMode* mode) => SDL_GetCurrentDisplayMode_f(displayIndex, mode);
+        public static int SDL_GetCurrentDisplayMode(int displayIndex, SDL_DisplayMode* mode) => SDL_GetCurrentDisplayMode_f(displayIndex, mode);
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         private delegate byte* SDL_GetCurrentVideoDriver_d();
@@ -193,40 +188,32 @@ SDL_DisplayMode* mode) => SDL_GetCurrentDisplayMode_f(displayIndex, mode);
         }
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate int SDL_GetDesktopDisplayMode_d(int displayIndex,
-                    SDL_DisplayMode* mode);
+        private delegate int SDL_GetDesktopDisplayMode_d(int displayIndex, SDL_DisplayMode* mode);
 
         private static SDL_GetDesktopDisplayMode_d SDL_GetDesktopDisplayMode_f;
 
-        public static int SDL_GetDesktopDisplayMode(int displayIndex,
-SDL_DisplayMode* mode) => SDL_GetDesktopDisplayMode_f(displayIndex, mode);
+        public static int SDL_GetDesktopDisplayMode(int displayIndex, SDL_DisplayMode* mode) => SDL_GetDesktopDisplayMode_f(displayIndex, mode);
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate int SDL_GetDisplayBounds_d(int displayIndex,
-SDL_Rect* rect);
+        private delegate int SDL_GetDisplayBounds_d(int displayIndex, SDL_Rect* rect);
 
         private static SDL_GetDisplayBounds_d SDL_GetDisplayBounds_f;
 
-        public static int SDL_GetDisplayBounds(int displayIndex,
-SDL_Rect* rect) => SDL_GetDisplayBounds_f(displayIndex, rect);
+        public static int SDL_GetDisplayBounds(int displayIndex, SDL_Rect* rect) => SDL_GetDisplayBounds_f(displayIndex, rect);
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate int SDL_GetDisplayDPI_d(int displayIndex,
-float* ddpi, float* hdpi, float* vdpi);
+        private delegate int SDL_GetDisplayDPI_d(int displayIndex, float* ddpi, float* hdpi, float* vdpi);
 
         private static SDL_GetDisplayDPI_d SDL_GetDisplayDPI_f;
 
-        public static int SDL_GetDisplayDPI(int displayIndex,
-float* ddpi, float* hdpi, float* vdpi) => SDL_GetDisplayDPI_f(displayIndex, ddpi, hdpi, vdpi);
+        public static int SDL_GetDisplayDPI(int displayIndex, float* ddpi, float* hdpi, float* vdpi) => SDL_GetDisplayDPI_f(displayIndex, ddpi, hdpi, vdpi);
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate int SDL_GetDisplayMode_d(int displayIndex,
-int modeIndex, SDL_DisplayMode* mode);
+        private delegate int SDL_GetDisplayMode_d(int displayIndex, int modeIndex, SDL_DisplayMode* mode);
 
         private static SDL_GetDisplayMode_d SDL_GetDisplayMode_f;
 
-        public static int SDL_GetDisplayMode(int displayIndex,
-int modeIndex, SDL_DisplayMode* mode) => SDL_GetDisplayMode_f(displayIndex, modeIndex, mode);
+        public static int SDL_GetDisplayMode(int displayIndex, int modeIndex, SDL_DisplayMode* mode) => SDL_GetDisplayMode_f(displayIndex, modeIndex, mode);
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         private delegate byte* SDL_GetDisplayName_d(int displayIndex);
@@ -246,8 +233,7 @@ int modeIndex, SDL_DisplayMode* mode) => SDL_GetDisplayMode_f(displayIndex, mode
 
         private static SDL_GetDisplayUsableBounds_d SDL_GetDisplayUsableBounds_f;
 
-        public static int SDL_GetDisplayUsableBounds(int displayIndex,
-SDL_Rect* rect) => SDL_GetDisplayUsableBounds_f(displayIndex, rect);
+        public static int SDL_GetDisplayUsableBounds(int displayIndex, SDL_Rect* rect) => SDL_GetDisplayUsableBounds_f(displayIndex, rect);
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         private delegate SDL_Window SDL_GetGrabbedWindow_d();
@@ -295,8 +281,7 @@ SDL_Rect* rect) => SDL_GetDisplayUsableBounds_f(displayIndex, rect);
 
         private static SDL_GetWindowBordersSize_d SDL_GetWindowBordersSize_f;
 
-        public static int SDL_GetWindowBordersSize(SDL_Window window,
-int* top, int* left, int* bottom, int* right) => SDL_GetWindowBordersSize_f(window, top, left, bottom, right);
+        public static int SDL_GetWindowBordersSize(SDL_Window window, int* top, int* left, int* bottom, int* right) => SDL_GetWindowBordersSize_f(window, top, left, bottom, right);
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         private delegate float SDL_GetWindowBrightness_d(SDL_Window window);
@@ -306,13 +291,11 @@ int* top, int* left, int* bottom, int* right) => SDL_GetWindowBordersSize_f(wind
         public static float SDL_GetWindowBrightness(SDL_Window window) => SDL_GetWindowBrightness_f(window);
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate void* SDL_GetWindowData_d(SDL_Window window,
-string name);
+        private delegate void* SDL_GetWindowData_d(SDL_Window window, string name);
 
         private static SDL_GetWindowData_d SDL_GetWindowData_f;
 
-        public static void* SDL_GetWindowData(SDL_Window window,
-string name) => SDL_GetWindowData_f(window, name);
+        public static void* SDL_GetWindowData(SDL_Window window, string name) => SDL_GetWindowData_f(window, name);
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         private delegate int SDL_GetWindowDisplayIndex_d(SDL_Window window);
@@ -322,13 +305,11 @@ string name) => SDL_GetWindowData_f(window, name);
         public static int SDL_GetWindowDisplayIndex(SDL_Window window) => SDL_GetWindowDisplayIndex_f(window);
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate int SDL_GetWindowDisplayMode_d(SDL_Window window,
-SDL_DisplayMode* mode);
+        private delegate int SDL_GetWindowDisplayMode_d(SDL_Window window, SDL_DisplayMode* mode);
 
         private static SDL_GetWindowDisplayMode_d SDL_GetWindowDisplayMode_f;
 
-        public static int SDL_GetWindowDisplayMode(SDL_Window window,
-SDL_DisplayMode* mode) => SDL_GetWindowDisplayMode_f(window, mode);
+        public static int SDL_GetWindowDisplayMode(SDL_Window window, SDL_DisplayMode* mode) => SDL_GetWindowDisplayMode_f(window, mode);
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         private delegate SDL_WindowFlags SDL_GetWindowFlags_d(SDL_Window window);
@@ -345,31 +326,25 @@ SDL_DisplayMode* mode) => SDL_GetWindowDisplayMode_f(window, mode);
         public static SDL_Window SDL_GetWindowFromID(uint id) => SDL_GetWindowFromID_f(id);
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate void SDL_GetWindowMaximumSize_d(SDL_Window window,
-int* w, int* h);
+        private delegate void SDL_GetWindowMaximumSize_d(SDL_Window window, int* w, int* h);
 
         private static SDL_GetWindowMaximumSize_d SDL_GetWindowMaximumSize_f;
 
-        public static void SDL_GetWindowMaximumSize(SDL_Window window,
-int* w, int* h) => SDL_GetWindowMaximumSize_f(window, w, h);
+        public static void SDL_GetWindowMaximumSize(SDL_Window window, int* w, int* h) => SDL_GetWindowMaximumSize_f(window, w, h);
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate void SDL_GetWindowMinimumSize_d(SDL_Window window,
-int* w, int* h);
+        private delegate void SDL_GetWindowMinimumSize_d(SDL_Window window, int* w, int* h);
 
         private static SDL_GetWindowMinimumSize_d SDL_GetWindowMinimumSize_f;
 
-        public static void SDL_GetWindowMinimumSize(SDL_Window window,
-int* w, int* h) => SDL_GetWindowMinimumSize_f(window, w, h);
+        public static void SDL_GetWindowMinimumSize(SDL_Window window, int* w, int* h) => SDL_GetWindowMinimumSize_f(window, w, h);
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate int SDL_GetWindowOpacity_d(SDL_Window window,
-float* opacity);
+        private delegate int SDL_GetWindowOpacity_d(SDL_Window window, float* opacity);
 
         private static SDL_GetWindowOpacity_d SDL_GetWindowOpacity_f;
 
-        public static int SDL_GetWindowOpacity(SDL_Window window,
-float* opacity) => SDL_GetWindowOpacity_f(window, opacity);
+        public static int SDL_GetWindowOpacity(SDL_Window window, float* opacity) => SDL_GetWindowOpacity_f(window, opacity);
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         private delegate uint SDL_GetWindowPixelFormat_d(SDL_Window window);
