@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "SharpSDL.Processor": {
+      "commandName": "Project",
+      "commandLineArgs": "../../../../SharpSDL"
+    }
+  }
+}
