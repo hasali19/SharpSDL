@@ -57,7 +57,7 @@ namespace SharpSDL
 
         public static void SDL_Quit() => SDL_Quit_f();
 
-        private static unsafe string GetString(byte* ptr)
+        private static string GetString(byte* ptr)
         {
             int count = 0;
             while (*(ptr + count) != 0)

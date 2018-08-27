@@ -174,7 +174,7 @@ namespace SharpSDL
 
         public static byte* SDL_JoystickName(SDL_Joystick joystick) => SDL_JoystickName_f(joystick);
 
-        public static unsafe string SDL_JoystickNameString(SDL_Joystick joystick)
+        public static string SDL_JoystickNameString(SDL_Joystick joystick)
         {
             return GetString(SDL_JoystickName(joystick));
         }
@@ -186,7 +186,7 @@ namespace SharpSDL
 
         public static byte* SDL_JoystickNameForIndex(int deviceIndex) => SDL_JoystickNameForIndex_f(deviceIndex);
 
-        public static unsafe string SDL_JoystickNameForIndexString(int deviceIndex)
+        public static string SDL_JoystickNameForIndexString(int deviceIndex)
         {
             return GetString(SDL_JoystickNameForIndex(deviceIndex));
         }

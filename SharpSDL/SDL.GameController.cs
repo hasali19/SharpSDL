@@ -171,7 +171,7 @@ namespace SharpSDL
 
         public static byte* SDL_GameControllerGetStringForAxis(SDL_GameControllerAxis axis) => SDL_GameControllerGetStringForAxis_f(axis);
 
-        public static unsafe string SDL_GameControllerGetStringForAxisString(SDL_GameControllerAxis axis)
+        public static string SDL_GameControllerGetStringForAxisString(SDL_GameControllerAxis axis)
         {
             return GetString(SDL_GameControllerGetStringForAxis(axis));
         }
@@ -183,7 +183,7 @@ namespace SharpSDL
 
         public static byte* SDL_GameControllerGetStringForButton(SDL_GameControllerButton button) => SDL_GameControllerGetStringForButton_f(button);
 
-        public static unsafe string SDL_GameControllerGetStringForButtonString(SDL_GameControllerButton button)
+        public static string SDL_GameControllerGetStringForButtonString(SDL_GameControllerButton button)
         {
             return GetString(SDL_GameControllerGetStringForButton(button));
         }
@@ -195,7 +195,7 @@ namespace SharpSDL
 
         public static byte* SDL_GameControllerMapping(SDL_GameController gameController) => SDL_GameControllerMapping_f(gameController);
 
-        public static unsafe string SDL_GameControllerMappingString(SDL_GameController gameController)
+        public static string SDL_GameControllerMappingString(SDL_GameController gameController)
         {
             return GetString(SDL_GameControllerMapping(gameController));
         }
@@ -207,7 +207,7 @@ namespace SharpSDL
 
         public static byte* SDL_GameControllerMappingForGUID(Guid guid) => SDL_GameControllerMappingForGUID_f(guid);
 
-        public static unsafe string SDL_GameControllerMappingForGUIDString(Guid guid)
+        public static string SDL_GameControllerMappingForGUIDString(Guid guid)
         {
             return GetString(SDL_GameControllerMappingForGUID(guid));
         }
@@ -219,7 +219,7 @@ namespace SharpSDL
 
         public static byte* SDL_GameControllerName(SDL_GameController gameController) => SDL_GameControllerName_f(gameController);
 
-        public static unsafe string SDL_GameControllerNameString(SDL_GameController gameController)
+        public static string SDL_GameControllerNameString(SDL_GameController gameController)
         {
             return GetString(SDL_GameControllerName(gameController));
         }
@@ -231,7 +231,7 @@ namespace SharpSDL
 
         public static byte* SDL_GameControllerNameForIndex(int joystickIndex) => SDL_GameControllerNameForIndex_f(joystickIndex);
 
-        public static unsafe string SDL_GameControllerNameForIndexString(int joystickIndex)
+        public static string SDL_GameControllerNameForIndexString(int joystickIndex)
         {
             return GetString(SDL_GameControllerNameForIndex(joystickIndex));
         }

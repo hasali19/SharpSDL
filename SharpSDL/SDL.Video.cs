@@ -123,7 +123,7 @@ namespace SharpSDL
         }
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        public unsafe delegate SDL_HitTestResult SDL_HitTest(SDL_Window window, SDL_Point* area, void* data);
+        public delegate SDL_HitTestResult SDL_HitTest(SDL_Window window, SDL_Point* area, void* data);
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         private delegate SDL_Window SDL_CreateWindow_d(
@@ -187,7 +187,7 @@ SDL_DisplayMode* mode) => SDL_GetCurrentDisplayMode_f(displayIndex, mode);
 
         public static byte* SDL_GetCurrentVideoDriver() => SDL_GetCurrentVideoDriver_f();
 
-        public static unsafe string SDL_GetCurrentVideoDriverString()
+        public static string SDL_GetCurrentVideoDriverString()
         {
             return GetString(SDL_GetCurrentVideoDriver());
         }
@@ -235,7 +235,7 @@ int modeIndex, SDL_DisplayMode* mode) => SDL_GetDisplayMode_f(displayIndex, mode
 
         public static byte* SDL_GetDisplayName(int displayIndex) => SDL_GetDisplayName_f(displayIndex);
 
-        public static unsafe string SDL_GetDisplayNameString(int displayIndex)
+        public static string SDL_GetDisplayNameString(int displayIndex)
         {
             return GetString(SDL_GetDisplayName(displayIndex));
         }
@@ -284,7 +284,7 @@ SDL_Rect* rect) => SDL_GetDisplayUsableBounds_f(displayIndex, rect);
 
         public static byte* SDL_GetVideoDriver(int index) => SDL_GetVideoDriver_f(index);
 
-        public static unsafe string SDL_GetVideoDriverString(int index)
+        public static string SDL_GetVideoDriverString(int index)
         {
             return GetString(SDL_GetVideoDriver(index));
         }
@@ -399,7 +399,7 @@ float* opacity) => SDL_GetWindowOpacity_f(window, opacity);
 
         public static byte* SDL_GetWindowTitle(SDL_Window window) => SDL_GetWindowTitle_f(window);
 
-        public static unsafe string SDL_GetWindowTitleString(SDL_Window window)
+        public static string SDL_GetWindowTitleString(SDL_Window window)
         {
             return GetString(SDL_GetWindowTitle(window));
         }

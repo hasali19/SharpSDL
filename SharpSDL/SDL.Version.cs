@@ -28,7 +28,7 @@ namespace SharpSDL
 
         public static byte* SDL_GetRevision() => SDL_GetRevision_f();
 
-        public static unsafe string SDL_GetRevisionString()
+        public static string SDL_GetRevisionString()
         {
             return GetString(SDL_GetRevision());
         }

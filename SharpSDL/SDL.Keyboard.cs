@@ -34,7 +34,7 @@ namespace SharpSDL
 
         public static byte* SDL_GetKeyName(SDL_Keycode key) => SDL_GetKeyName_f(key);
 
-        public static unsafe string SDL_GetKeyNameString(SDL_Keycode key)
+        public static string SDL_GetKeyNameString(SDL_Keycode key)
         {
             return GetString(SDL_GetKeyName(key));
         }
@@ -81,7 +81,7 @@ namespace SharpSDL
 
         public static byte* SDL_GetScancodeName(SDL_Scancode scancode) => SDL_GetScancodeName_f(scancode);
 
-        public static unsafe string SDL_GetScancodeNameString(SDL_Scancode scancode)
+        public static string SDL_GetScancodeNameString(SDL_Scancode scancode)
         {
             return GetString(SDL_GetScancodeName(scancode));
         }

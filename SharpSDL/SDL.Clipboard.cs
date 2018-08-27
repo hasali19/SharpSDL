@@ -11,7 +11,7 @@ namespace SharpSDL
 
         public static byte* SDL_GetClipboardText() => SDL_GetClipboardText_f();
 
-        public static unsafe string SDL_GetClipboardTextString()
+        public static string SDL_GetClipboardTextString()
         {
             return GetString(SDL_GetClipboardText());
         }

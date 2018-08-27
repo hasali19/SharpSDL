@@ -12,7 +12,7 @@ namespace SharpSDL
 
         public static byte* SDL_GetError() => SDL_GetError_f();
 
-        public static unsafe string SDL_GetErrorString()
+        public static string SDL_GetErrorString()
         {
             return GetString(SDL_GetError());
         }

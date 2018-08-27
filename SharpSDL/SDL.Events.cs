@@ -114,7 +114,7 @@ namespace SharpSDL
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public unsafe struct SDL_WindowEvent
+        public struct SDL_WindowEvent
         {
             public SDL_EventType type;
             public uint timestamp;
@@ -139,7 +139,7 @@ namespace SharpSDL
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public unsafe struct SDL_TextEditingEvent
+        public struct SDL_TextEditingEvent
         {
             public SDL_EventType type;
             public uint timestamp;
@@ -150,7 +150,7 @@ namespace SharpSDL
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public unsafe struct SDL_TextInputEvent
+        public struct SDL_TextInputEvent
         {
             public SDL_EventType type;
             public uint timestamp;
@@ -200,7 +200,7 @@ namespace SharpSDL
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public unsafe struct SDL_JoyAxisEvent
+        public struct SDL_JoyAxisEvent
         {
             public SDL_EventType type;
             public uint timestamp;
@@ -212,7 +212,7 @@ namespace SharpSDL
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public unsafe struct SDL_JoyBallEvent
+        public struct SDL_JoyBallEvent
         {
             public SDL_EventType type;
             public uint timestamp;
@@ -254,7 +254,7 @@ namespace SharpSDL
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public unsafe struct SDL_ControllerAxisEvent
+        public struct SDL_ControllerAxisEvent
         {
             public SDL_EventType type;
             public uint timestamp;
@@ -285,7 +285,7 @@ namespace SharpSDL
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public unsafe struct SDL_AudioDeviceEvent
+        public struct SDL_AudioDeviceEvent
         {
             public SDL_EventType type;
             public uint timestamp;
@@ -336,7 +336,7 @@ namespace SharpSDL
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public unsafe struct SDL_DropEvent
+        public struct SDL_DropEvent
         {
             public SDL_EventType type;
             public uint timestamp;
@@ -359,7 +359,7 @@ namespace SharpSDL
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public unsafe struct SDL_UserEvent
+        public struct SDL_UserEvent
         {
             public SDL_EventType type;
             public uint timestamp;
@@ -370,7 +370,7 @@ namespace SharpSDL
         }
 
         [StructLayout(LayoutKind.Explicit)]
-        public unsafe struct SDL_Event
+        public struct SDL_Event
         {
             [FieldOffset(0)]
             public SDL_EventType type;
@@ -449,7 +449,7 @@ namespace SharpSDL
         }
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        public unsafe delegate int SDL_EventFilter(void* userdata, SDL_Event* evt);
+        public delegate int SDL_EventFilter(void* userdata, SDL_Event* evt);
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         private delegate void SDL_AddEventWatch_d(SDL_EventFilter filter, void* userdata);
@@ -500,7 +500,7 @@ namespace SharpSDL
 
         public static bool SDL_GetEventFilter(IntPtr* filter, void** userdata) => SDL_GetEventFilter_f(filter, userdata);
 
-        public static unsafe bool SDL_GetEventFilter(out SDL_EventFilter filter, void** userdata)
+        public static bool SDL_GetEventFilter(out SDL_EventFilter filter, void** userdata)
         {
             IntPtr ptr;
             bool result = SDL_GetEventFilter(&ptr, userdata);
