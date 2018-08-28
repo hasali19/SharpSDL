@@ -14,8 +14,6 @@ namespace SharpSDL
             SDL_AddEventWatch_f = library.LoadFunction<SDL_AddEventWatch_d>(nameof(SDL_AddEventWatch));
             SDL_AllocFormat_f = library.LoadFunction<SDL_AllocFormat_d>(nameof(SDL_AllocFormat));
             SDL_AllocPalette_f = library.LoadFunction<SDL_AllocPalette_d>(nameof(SDL_AllocPalette));
-            SDL_BlitScaled_f = library.LoadFunction<SDL_BlitScaled_d>(nameof(SDL_BlitScaled));
-            SDL_BlitSurface_f = library.LoadFunction<SDL_BlitSurface_d>(nameof(SDL_BlitSurface));
             SDL_CalculateGammaRamp_f = library.LoadFunction<SDL_CalculateGammaRamp_d>(nameof(SDL_CalculateGammaRamp));
             SDL_CaptureMouse_f = library.LoadFunction<SDL_CaptureMouse_d>(nameof(SDL_CaptureMouse));
             SDL_ClearError_f = library.LoadFunction<SDL_ClearError_d>(nameof(SDL_ClearError));
@@ -27,7 +25,7 @@ namespace SharpSDL
             SDL_CreateRenderer_f = library.LoadFunction<SDL_CreateRenderer_d>(nameof(SDL_CreateRenderer));
             SDL_CreateRGBSurface_f = library.LoadFunction<SDL_CreateRGBSurface_d>(nameof(SDL_CreateRGBSurface));
             SDL_CreateRGBSurfaceFrom_f = library.LoadFunction<SDL_CreateRGBSurfaceFrom_d>(nameof(SDL_CreateRGBSurfaceFrom));
-            SDL_CreateRGBSurfaceWidthFormatFrom_f = library.LoadFunction<SDL_CreateRGBSurfaceWidthFormatFrom_d>(nameof(SDL_CreateRGBSurfaceWidthFormatFrom));
+            SDL_CreateRGBSurfaceWithFormatFrom_f = library.LoadFunction<SDL_CreateRGBSurfaceWithFormatFrom_d>(nameof(SDL_CreateRGBSurfaceWithFormatFrom));
             SDL_CreateRGBSurfaceWithFormat_f = library.LoadFunction<SDL_CreateRGBSurfaceWithFormat_d>(nameof(SDL_CreateRGBSurfaceWithFormat));
             SDL_CreateSoftwareRenderer_f = library.LoadFunction<SDL_CreateSoftwareRenderer_d>(nameof(SDL_CreateSoftwareRenderer));
             SDL_CreateSystemCursor_f = library.LoadFunction<SDL_CreateSystemCursor_d>(nameof(SDL_CreateSystemCursor));
@@ -195,7 +193,6 @@ namespace SharpSDL
             SDL_JoystickNumHats_f = library.LoadFunction<SDL_JoystickNumHats_d>(nameof(SDL_JoystickNumHats));
             SDL_JoystickOpen_f = library.LoadFunction<SDL_JoystickOpen_d>(nameof(SDL_JoystickOpen));
             SDL_JoystickUpdate_f = library.LoadFunction<SDL_JoystickUpdate_d>(nameof(SDL_JoystickUpdate));
-            SDL_LoadBMP_f = library.LoadFunction<SDL_LoadBMP_d>(nameof(SDL_LoadBMP));
             SDL_LockSurface_f = library.LoadFunction<SDL_LockSurface_d>(nameof(SDL_LockSurface));
             SDL_LockTexture_f = library.LoadFunction<SDL_LockTexture_d>(nameof(SDL_LockTexture));
             SDL_LowerBlit_f = library.LoadFunction<SDL_LowerBlit_d>(nameof(SDL_LowerBlit));
@@ -242,7 +239,6 @@ namespace SharpSDL
             SDL_RenderSetViewport_f = library.LoadFunction<SDL_RenderSetViewport_d>(nameof(SDL_RenderSetViewport));
             SDL_RenderTargetSupported_f = library.LoadFunction<SDL_RenderTargetSupported_d>(nameof(SDL_RenderTargetSupported));
             SDL_RestoreWindow_f = library.LoadFunction<SDL_RestoreWindow_d>(nameof(SDL_RestoreWindow));
-            SDL_SaveBMP_f = library.LoadFunction<SDL_SaveBMP_d>(nameof(SDL_SaveBMP));
             SDL_SetClipboardText_f = library.LoadFunction<SDL_SetClipboardText_d>(nameof(SDL_SetClipboardText));
             SDL_SetClipRect_f = library.LoadFunction<SDL_SetClipRect_d>(nameof(SDL_SetClipRect));
             SDL_SetColorKey_f = library.LoadFunction<SDL_SetColorKey_d>(nameof(SDL_SetColorKey));
@@ -289,6 +285,8 @@ namespace SharpSDL
             SDL_UnlockTexture_f = library.LoadFunction<SDL_UnlockTexture_d>(nameof(SDL_UnlockTexture));
             SDL_UpdateTexture_f = library.LoadFunction<SDL_UpdateTexture_d>(nameof(SDL_UpdateTexture));
             SDL_UpdateYUVTexture_f = library.LoadFunction<SDL_UpdateYUVTexture_d>(nameof(SDL_UpdateYUVTexture));
+            SDL_UpperBlit_f = library.LoadFunction<SDL_UpperBlit_d>(nameof(SDL_UpperBlit));
+            SDL_UpperBlitScaled_f = library.LoadFunction<SDL_UpperBlitScaled_d>(nameof(SDL_UpperBlitScaled));
             SDL_VideoInit_f = library.LoadFunction<SDL_VideoInit_d>(nameof(SDL_VideoInit));
             SDL_VideoQuit_f = library.LoadFunction<SDL_VideoQuit_d>(nameof(SDL_VideoQuit));
             SDL_WaitEvent_f = library.LoadFunction<SDL_WaitEvent_d>(nameof(SDL_WaitEvent));

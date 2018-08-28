@@ -27,19 +27,9 @@ namespace SharpSDL
             public int refcount;
         }
 
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate int SDL_BlitScaled_d(SDL_Surface* src, SDL_Rect* srcrect, SDL_Surface* dst, SDL_Rect* dstrect);
+        public static int SDL_BlitScaled(SDL_Surface* src, SDL_Rect* srcrect, SDL_Surface* dst, SDL_Rect* dstrect) => SDL_UpperBlitScaled_f(src, srcrect, dst, dstrect);
 
-        private static SDL_BlitScaled_d SDL_BlitScaled_f;
-
-        public static int SDL_BlitScaled(SDL_Surface* src, SDL_Rect* srcrect, SDL_Surface* dst, SDL_Rect* dstrect) => SDL_BlitScaled_f(src, srcrect, dst, dstrect);
-
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate int SDL_BlitSurface_d(SDL_Surface* src, SDL_Rect* srcrect, SDL_Surface* dst, SDL_Rect* dstrect);
-
-        private static SDL_BlitSurface_d SDL_BlitSurface_f;
-
-        public static int SDL_BlitSurface(SDL_Surface* src, SDL_Rect* srcrect, SDL_Surface* dst, SDL_Rect* dstrect) => SDL_BlitSurface_f(src, srcrect, dst, dstrect);
+        public static int SDL_BlitSurface(SDL_Surface* src, SDL_Rect* srcrect, SDL_Surface* dst, SDL_Rect* dstrect) => SDL_UpperBlit(src, srcrect, dst, dstrect);
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         private delegate int SDL_ConvertPixels_d(int width, int height, uint src_format, void* src, int src_pitch, uint dst_format, void* dst, int dst_pitch);
@@ -84,11 +74,11 @@ namespace SharpSDL
         public static SDL_Surface* SDL_CreateRGBSurfaceWithFormat(uint flags, int width, int height, int depth, uint format) => SDL_CreateRGBSurfaceWithFormat_f(flags, width, height, depth, format);
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate SDL_Surface* SDL_CreateRGBSurfaceWidthFormatFrom_d(void* pixels, int width, int height, int depth, int pitch, uint format);
+        private delegate SDL_Surface* SDL_CreateRGBSurfaceWithFormatFrom_d(void* pixels, int width, int height, int depth, int pitch, uint format);
 
-        private static SDL_CreateRGBSurfaceWidthFormatFrom_d SDL_CreateRGBSurfaceWidthFormatFrom_f;
+        private static SDL_CreateRGBSurfaceWithFormatFrom_d SDL_CreateRGBSurfaceWithFormatFrom_f;
 
-        public static SDL_Surface* SDL_CreateRGBSurfaceWidthFormatFrom(void* pixels, int width, int height, int depth, int pitch, uint format) => SDL_CreateRGBSurfaceWidthFormatFrom_f(pixels, width, height, depth, pitch, format);
+        public static SDL_Surface* SDL_CreateRGBSurfaceWithFormatFrom(void* pixels, int width, int height, int depth, int pitch, uint format) => SDL_CreateRGBSurfaceWithFormatFrom_f(pixels, width, height, depth, pitch, format);
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         private delegate int SDL_FillRect_d(SDL_Surface* dst, SDL_Rect* rect, uint color);
@@ -147,13 +137,6 @@ namespace SharpSDL
         public static int SDL_GetSurfaceColorMod(SDL_Surface* surface, byte* r, byte* g, byte* b) => SDL_GetSurfaceColorMod_f(surface, r, g, b);
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate SDL_Surface* SDL_LoadBMP_d(string file);
-
-        private static SDL_LoadBMP_d SDL_LoadBMP_f;
-
-        public static SDL_Surface* SDL_LoadBMP(string file) => SDL_LoadBMP_f(file);
-
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         private delegate int SDL_LockSurface_d(SDL_Surface* surface);
 
         private static SDL_LockSurface_d SDL_LockSurface_f;
@@ -175,13 +158,6 @@ namespace SharpSDL
         public static int SDL_LowerBlitScaled(SDL_Surface* surface, SDL_Rect* srcrect, SDL_Surface* dst, SDL_Rect* dstrect) => SDL_LowerBlitScaled_f(surface, srcrect, dst, dstrect);
 
         public static bool SDL_MUSTLOCK(SDL_Surface* s) => (s->flags & 0x00000002) != 0;
-
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate int SDL_SaveBMP_d(SDL_Surface* surface, string file);
-
-        private static SDL_SaveBMP_d SDL_SaveBMP_f;
-
-        public static int SDL_SaveBMP(SDL_Surface* surface, string file) => SDL_SaveBMP_f(surface, file);
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         private delegate bool SDL_SetClipRect_d(SDL_Surface* surface, SDL_Rect* rect);
@@ -238,5 +214,19 @@ namespace SharpSDL
         private static SDL_UnlockSurface_d SDL_UnlockSurface_f;
 
         public static void SDL_UnlockSurface(SDL_Surface* surface) => SDL_UnlockSurface_f(surface);
+
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        private delegate int SDL_UpperBlit_d(SDL_Surface* src, SDL_Rect* srcrect, SDL_Surface* dst, SDL_Rect* dstrect);
+
+        private static SDL_UpperBlit_d SDL_UpperBlit_f;
+
+        public static int SDL_UpperBlit(SDL_Surface* src, SDL_Rect* srcrect, SDL_Surface* dst, SDL_Rect* dstrect) => SDL_UpperBlit_f(src, srcrect, dst, dstrect);
+
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        private delegate int SDL_UpperBlitScaled_d(SDL_Surface* src, SDL_Rect* srcrect, SDL_Surface* dst, SDL_Rect* dstrect);
+
+        private static SDL_UpperBlitScaled_d SDL_UpperBlitScaled_f;
+
+        public static int SDL_UpperBlitScaled(SDL_Surface* src, SDL_Rect* srcrect, SDL_Surface* dst, SDL_Rect* dstrect) => SDL_UpperBlitScaled_f(src, srcrect, dst, dstrect);
     }
 }
