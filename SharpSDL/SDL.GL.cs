@@ -53,6 +53,13 @@ namespace SharpSDL
         }
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        private delegate int SDL_GL_BindTexture_d(SDL_Texture texture, float* texw, float* texh);
+
+        private static SDL_GL_BindTexture_d SDL_GL_BindTexture_f;
+
+        public static int SDL_GL_BindTexture(SDL_Texture texture, float* texw, float* texh) => SDL_GL_BindTexture_f(texture, texw, texh);
+
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         private delegate SDL_GLContext SDL_GL_CreateContext_d(SDL_Window window);
 
         private static SDL_GL_CreateContext_d SDL_GL_CreateContext_f;
@@ -161,6 +168,13 @@ namespace SharpSDL
         private static SDL_GL_SwapWindow_d SDL_GL_SwapWindow_f;
 
         public static void SDL_GL_SwapWindow(SDL_Window window) => SDL_GL_SwapWindow_f(window);
+
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        private delegate int SDL_GL_UnbindTexture_d(SDL_Texture texture);
+
+        private static SDL_GL_UnbindTexture_d SDL_GL_UnbindTexture_f;
+
+        public static int SDL_GL_UnbindTexture(SDL_Texture texture) => SDL_GL_UnbindTexture_f(texture);
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         private delegate void SDL_GL_UnloadLibrary_d();
