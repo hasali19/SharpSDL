@@ -58,6 +58,11 @@ namespace SharpSDL
             {
                 return joystick.ptr;
             }
+
+            public static implicit operator SDL_Joystick(IntPtr ptr)
+            {
+                return new SDL_Joystick(ptr);
+            }
         }
 
         [StructLayout(LayoutKind.Sequential)]

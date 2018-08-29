@@ -61,6 +61,11 @@ namespace SharpSDL
             {
                 return cursor.ptr;
             }
+
+            public static implicit operator SDL_Cursor(IntPtr ptr)
+            {
+                return new SDL_Cursor(ptr);
+            }
         }
 
         public static uint SDL_MOUSE(uint x)

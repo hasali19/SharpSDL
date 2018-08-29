@@ -62,6 +62,11 @@ namespace SharpSDL
             {
                 return renderer.ptr;
             }
+
+            public static implicit operator SDL_Renderer(IntPtr ptr)
+            {
+                return new SDL_Renderer(ptr);
+            }
         }
 
         [StructLayout(LayoutKind.Sequential)]
@@ -77,6 +82,11 @@ namespace SharpSDL
             public static implicit operator IntPtr(SDL_Texture texture)
             {
                 return texture.ptr;
+            }
+
+            public static implicit operator SDL_Texture(IntPtr ptr)
+            {
+                return new SDL_Texture(ptr);
             }
         }
 

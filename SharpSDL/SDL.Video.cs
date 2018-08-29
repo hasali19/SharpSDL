@@ -110,6 +110,11 @@ namespace SharpSDL
             {
                 return window.ptr;
             }
+
+            public static implicit operator SDL_Window(IntPtr ptr)
+            {
+                return new SDL_Window(ptr);
+            }
         }
 
         [StructLayout(LayoutKind.Sequential)]

@@ -19,6 +19,11 @@ namespace SharpSDL
             {
                 return context.ptr;
             }
+
+            public static implicit operator SDL_GLContext(IntPtr ptr)
+            {
+                return new SDL_GLContext(ptr);
+            }
         }
 
         public enum SDL_GLattr

@@ -85,6 +85,11 @@ namespace SharpSDL
             {
                 return gameController.ptr;
             }
+
+            public static implicit operator SDL_GameController(IntPtr ptr)
+            {
+                return new SDL_GameController(ptr);
+            }
         }
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
