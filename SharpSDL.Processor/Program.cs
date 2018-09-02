@@ -12,8 +12,6 @@ namespace SharpSDL.Processor
     /// </summary>
     public static class Program
     {
-        private const string LoaderFileName = "SDL.Loader.cs";
-
         public static int Main(string[] args)
         {
             if (args.Length == 0)
@@ -40,77 +38,28 @@ namespace SharpSDL.Processor
             Console.WriteLine($"Processing directory: {path}");
             Console.WriteLine();
 
-            var functions = new HashSet<string>();
-            var loaderPath = Path.Combine(path, LoaderFileName);
-
-            Console.WriteLine($"Reading loader from: {loaderPath}");
-
-            if (!File.Exists(loaderPath))
-            {
-                Console.WriteLine("Loader does not exist.");
-            }
-            else
-            {
-                foreach (var function in ParseLoaderFunctions(loaderPath))
-                {
-                    functions.Add(function);
-                }
-
-                Console.WriteLine($"Found {functions.Count} existing functions.");
-            }
-
-            Console.WriteLine();
-
             foreach (var file in Directory.EnumerateFiles(path, "*.cs"))
             {
                 Console.WriteLine($"Processing file: {file}");
-
-                foreach (var function in ProcessFile(file))
-                {
-                    Console.WriteLine($"Processing function: {function}");
-
-                    functions.Add(function);
-                }
-
                 Console.WriteLine();
+
+                ProcessFile(file);
             }
-
-            Console.WriteLine($"Generating loader at {loaderPath}.");
-
-            GenerateLoader(loaderPath, functions.OrderBy(f => f));
 
             Console.WriteLine();
             Console.WriteLine("Done!");
         }
 
-        private static IEnumerable<string> ParseLoaderFunctions(string path)
-        {
-            const string pattern = @"(\w+_f) = library\.LoadFunction<(\w+_d)>\(nameof\((.+)\)\);";
-
-            foreach (var line in File.ReadLines(path))
-            {
-                var match = Regex.Match(line, pattern);
-
-                if (!match.Success)
-                {
-                    continue;
-                }
-
-                yield return match.Groups[3].Value;
-            }
-        }
-
-        private static IEnumerable<string> ProcessFile(string file)
+        private static void ProcessFile(string file)
         {
             var result = new List<string>();
-            var functions = new List<string>();
 
             foreach (var line in File.ReadLines(file))
             {
                 if (line.Contains("static extern"))
                 {
                     result.Add(ProcessExternFunction(line, out var name));
-                    functions.Add(name);
+                    Console.WriteLine($"Processing function: {name}");
                 }
                 else
                 {
@@ -119,8 +68,6 @@ namespace SharpSDL.Processor
             }
 
             File.WriteAllLines(file, result);
-
-            return functions;
         }
 
         private static string ProcessExternFunction(string line, out string name)
@@ -145,35 +92,6 @@ namespace SharpSDL.Processor
                 + $"{indent}private static {name}_d {name}_f;" + Environment.NewLine
                 + Environment.NewLine
                 + $"{indent}public static {returnType} {name}({parameters}) => {name}_f({arguments});";
-        }
-
-        private static void GenerateLoader(string loaderPath, IEnumerable<string> functions)
-        {
-            using (StreamWriter writer = new StreamWriter(loaderPath))
-            {
-                writer.WriteLine("using NativeLibraryLoader;");
-                writer.WriteLine();
-                writer.WriteLine("namespace SharpSDL");
-                writer.WriteLine("{");
-                writer.WriteLine("    public static partial class SDL");
-                writer.WriteLine("    {");
-                writer.WriteLine("        private static NativeLibrary library;");
-                writer.WriteLine();
-                writer.WriteLine("        public static void LoadLibrary(string name = \"SDL2\")");
-                writer.WriteLine("        {");
-                writer.WriteLine("            library?.Dispose();");
-                writer.WriteLine("            library = new NativeLibrary(name);");
-                writer.WriteLine();
-
-                foreach (var function in functions)
-                {
-                    writer.WriteLine($"            {function}_f = library.LoadFunction<{function}_d>(nameof({function}));");
-                }
-
-                writer.WriteLine("        }");
-                writer.WriteLine("    }");
-                writer.WriteLine("}");
-            }
         }
     }
 }
