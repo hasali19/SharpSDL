@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <PackageId>SharpSDL</PackageId>
-    <Version>1.1.0</Version>
+    <Version>1.2.0</Version>
     <Authors>hasali19</Authors>
     <RepositoryUrl>https://github.com/hasali19/SharpSDL</RepositoryUrl>
     <TargetFramework>netstandard2.0</TargetFramework>
