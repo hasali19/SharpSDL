@@ -451,54 +451,26 @@ namespace SharpSDL
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         public delegate int SDL_EventFilter(void* userdata, SDL_Event* evt);
 
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate void SDL_AddEventWatch_d(SDL_EventFilter filter, void* userdata);
+        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SDL_AddEventWatch(SDL_EventFilter filter, void* userdata);
 
-        private static SDL_AddEventWatch_d SDL_AddEventWatch_f;
+        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SDL_DelEventWatch(SDL_EventFilter filter, void* userdata);
 
-        public static void SDL_AddEventWatch(SDL_EventFilter filter, void* userdata) => SDL_AddEventWatch_f(filter, userdata);
+        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern byte SDL_EventState(SDL_EventType type, int state);
 
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate void SDL_DelEventWatch_d(SDL_EventFilter filter, void* userdata);
+        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SDL_FilterEvents(SDL_EventFilter filter, void* userdata);
 
-        private static SDL_DelEventWatch_d SDL_DelEventWatch_f;
+        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SDL_FlushEvent(SDL_EventType type);
 
-        public static void SDL_DelEventWatch(SDL_EventFilter filter, void* userdata) => SDL_DelEventWatch_f(filter, userdata);
+        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SDL_FlushEvents(SDL_EventType minType, SDL_EventType maxType);
 
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate byte SDL_EventState_d(SDL_EventType type, int state);
-
-        private static SDL_EventState_d SDL_EventState_f;
-
-        public static byte SDL_EventState(SDL_EventType type, int state) => SDL_EventState_f(type, state);
-
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate void SDL_FilterEvents_d(SDL_EventFilter filter, void* userdata);
-
-        private static SDL_FilterEvents_d SDL_FilterEvents_f;
-
-        public static void SDL_FilterEvents(SDL_EventFilter filter, void* userdata) => SDL_FilterEvents_f(filter, userdata);
-
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate void SDL_FlushEvent_d(SDL_EventType type);
-
-        private static SDL_FlushEvent_d SDL_FlushEvent_f;
-
-        public static void SDL_FlushEvent(SDL_EventType type) => SDL_FlushEvent_f(type);
-
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate void SDL_FlushEvents_d(SDL_EventType minType, SDL_EventType maxType);
-
-        private static SDL_FlushEvents_d SDL_FlushEvents_f;
-
-        public static void SDL_FlushEvents(SDL_EventType minType, SDL_EventType maxType) => SDL_FlushEvents_f(minType, maxType);
-
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate bool SDL_GetEventFilter_d(IntPtr* filter, void** userdata);
-
-        private static SDL_GetEventFilter_d SDL_GetEventFilter_f;
-
-        public static bool SDL_GetEventFilter(IntPtr* filter, void** userdata) => SDL_GetEventFilter_f(filter, userdata);
+        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern bool SDL_GetEventFilter(IntPtr* filter, void** userdata);
 
         public static bool SDL_GetEventFilter(out SDL_EventFilter filter, void** userdata)
         {
@@ -511,74 +483,34 @@ namespace SharpSDL
             return result;
         }
 
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate bool SDL_HasEvent_d(SDL_EventType type);
+        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern bool SDL_HasEvent(SDL_EventType type);
 
-        private static SDL_HasEvent_d SDL_HasEvent_f;
+        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern bool SDL_HasEvents(SDL_EventType minType, SDL_EventType maxType);
 
-        public static bool SDL_HasEvent(SDL_EventType type) => SDL_HasEvent_f(type);
+        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern int SDL_PeepEvents(SDL_Event* events, int numevents, SDL_eventaction action, SDL_EventType minType, SDL_EventType maxType);
 
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate bool SDL_HasEvents_d(SDL_EventType minType, SDL_EventType maxType);
+        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern int SDL_PollEvent(SDL_Event* evt);
 
-        private static SDL_HasEvents_d SDL_HasEvents_f;
+        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SDL_PumpEvents();
 
-        public static bool SDL_HasEvents(SDL_EventType minType, SDL_EventType maxType) => SDL_HasEvents_f(minType, maxType);
+        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern int SDL_PushEvent(SDL_Event* evt);
 
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate int SDL_PeepEvents_d(SDL_Event* events, int numevents, SDL_eventaction action, SDL_EventType minType, SDL_EventType maxType);
+        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern uint SDL_RegisterEvents(int numevents);
 
-        private static SDL_PeepEvents_d SDL_PeepEvents_f;
+        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SDL_SetEventFilter(SDL_EventFilter filter, void* userdata);
 
-        public static int SDL_PeepEvents(SDL_Event* events, int numevents, SDL_eventaction action, SDL_EventType minType, SDL_EventType maxType) => SDL_PeepEvents_f(events, numevents, action, minType, maxType);
+        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern int SDL_WaitEvent(SDL_Event* evt);
 
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate int SDL_PollEvent_d(SDL_Event* evt);
-
-        private static SDL_PollEvent_d SDL_PollEvent_f;
-
-        public static int SDL_PollEvent(SDL_Event* evt) => SDL_PollEvent_f(evt);
-
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate void SDL_PumpEvents_d();
-
-        private static SDL_PumpEvents_d SDL_PumpEvents_f;
-
-        public static void SDL_PumpEvents() => SDL_PumpEvents_f();
-
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate int SDL_PushEvent_d(SDL_Event* evt);
-
-        private static SDL_PushEvent_d SDL_PushEvent_f;
-
-        public static int SDL_PushEvent(SDL_Event* evt) => SDL_PushEvent_f(evt);
-
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate uint SDL_RegisterEvents_d(int numevents);
-
-        private static SDL_RegisterEvents_d SDL_RegisterEvents_f;
-
-        public static uint SDL_RegisterEvents(int numevents) => SDL_RegisterEvents_f(numevents);
-
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate void SDL_SetEventFilter_d(SDL_EventFilter filter, void* userdata);
-
-        private static SDL_SetEventFilter_d SDL_SetEventFilter_f;
-
-        public static void SDL_SetEventFilter(SDL_EventFilter filter, void* userdata) => SDL_SetEventFilter_f(filter, userdata);
-
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate int SDL_WaitEvent_d(SDL_Event* evt);
-
-        private static SDL_WaitEvent_d SDL_WaitEvent_f;
-
-        public static int SDL_WaitEvent(SDL_Event* evt) => SDL_WaitEvent_f(evt);
-
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate int SDL_WaitEventTimeout_d(SDL_Event* evt, int timeout);
-
-        private static SDL_WaitEventTimeout_d SDL_WaitEventTimeout_f;
-
-        public static int SDL_WaitEventTimeout(SDL_Event* evt, int timeout) => SDL_WaitEventTimeout_f(evt, timeout);
+        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern int SDL_WaitEventTimeout(SDL_Event* evt, int timeout);
     }
 }

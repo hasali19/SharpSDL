@@ -61,11 +61,7 @@ namespace SharpSDL
             public IntPtr window;
         }
 
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate bool SDL_GetWindowWMInfo_d(SDL_Window window, SDL_SysWMinfo* info);
-
-        private static SDL_GetWindowWMInfo_d SDL_GetWindowWMInfo_f;
-
-        public static bool SDL_GetWindowWMInfo(SDL_Window window, SDL_SysWMinfo* info) => SDL_GetWindowWMInfo_f(window, info);
+        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern bool SDL_GetWindowWMInfo(SDL_Window window, SDL_SysWMinfo* info);
     }
 }

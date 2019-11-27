@@ -39,29 +39,13 @@ namespace SharpSDL
             SDL_BLENDFACTOR_ONE_MINUS_DST_ALPHA = 0xA
         }
 
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate SDL_BlendMode SDL_ComposeCustomBlendMode_d(
+        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern SDL_BlendMode SDL_ComposeCustomBlendMode(
             SDL_BlendFactor srcColorFactor,
             SDL_BlendFactor dstColorFactor,
             SDL_BlendOperation colorOperation,
             SDL_BlendFactor srcAlphaFactor,
             SDL_BlendFactor dstAlphaFactor,
             SDL_BlendOperation alphaOperation);
-
-        private static SDL_ComposeCustomBlendMode_d SDL_ComposeCustomBlendMode_f;
-
-        public static SDL_BlendMode SDL_ComposeCustomBlendMode(
-            SDL_BlendFactor srcColorFactor,
-            SDL_BlendFactor dstColorFactor,
-            SDL_BlendOperation colorOperation,
-            SDL_BlendFactor srcAlphaFactor,
-            SDL_BlendFactor dstAlphaFactor,
-            SDL_BlendOperation alphaOperation) => SDL_ComposeCustomBlendMode_f(
-                srcColorFactor,
-                dstColorFactor,
-                colorOperation,
-                srcAlphaFactor,
-                dstAlphaFactor,
-                alphaOperation);
     }
 }
