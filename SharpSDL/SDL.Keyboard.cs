@@ -5,70 +5,70 @@ namespace SharpSDL
     public static unsafe partial class SDL
     {
         [StructLayout(LayoutKind.Sequential)]
-        public struct SDL_Keysym
+        public struct Keysym
         {
-            public SDL_Scancode scancode;
-            public SDL_Keycode sym;
-            public SDL_Keymod mod;
-            public uint unused;
+            public Scancode Scancode;
+            public Keycode Sym;
+            public KeyModifier Mod;
+            public uint Unused;
         }
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern SDL_Keycode SDL_GetKeyFromName(string name);
+        public static extern Keycode GetKeyFromName(string name);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern SDL_Keycode SDL_GetKeyFromScancode(SDL_Scancode scancode);
+        public static extern Keycode GetKeyFromScancode(Scancode scancode);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern byte* SDL_GetKeyName(SDL_Keycode key);
+        public static extern byte* GetKeyName(Keycode key);
 
-        public static string SDL_GetKeyNameString(SDL_Keycode key)
+        public static string GetKeyNameString(Keycode key)
         {
-            return GetString(SDL_GetKeyName(key));
+            return GetString(GetKeyName(key));
         }
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern SDL_Window SDL_GetKeyboardFocus();
+        public static extern Window GetKeyboardFocus();
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern byte* SDL_GetKeyboardState(int* numKeys);
+        public static extern byte* GetKeyboardState(int* numKeys);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern SDL_Keymod SDL_GetModState();
+        public static extern KeyModifier GetModState();
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern SDL_Scancode SDL_GetScancodeFromKey(SDL_Keycode key);
+        public static extern Scancode GetScancodeFromKey(Keycode key);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern SDL_Scancode SDL_GetScancodeFromName(string name);
+        public static extern Scancode GetScancodeFromName(string name);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern byte* SDL_GetScancodeName(SDL_Scancode scancode);
+        public static extern byte* GetScancodeName(Scancode scancode);
 
-        public static string SDL_GetScancodeNameString(SDL_Scancode scancode)
+        public static string GetScancodeNameString(Scancode scancode)
         {
-            return GetString(SDL_GetScancodeName(scancode));
+            return GetString(GetScancodeName(scancode));
         }
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern bool SDL_HasScreenKeyboardSupport();
+        public static extern bool HasScreenKeyboardSupport();
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern bool SDL_IsScreenKeyboardShown(SDL_Window window);
+        public static extern bool IsScreenKeyboardShown(Window window);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern bool SDL_IsTextInputActive();
+        public static extern bool IsTextInputActive();
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SDL_SetModState(SDL_Keymod modstate);
+        public static extern void SetModState(KeyModifier modstate);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SDL_SetTextInputRect(SDL_Rect* rect);
+        public static extern void SetTextInputRect(Rect* rect);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SDL_StartTextInput();
+        public static extern void StartTextInput();
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SDL_StopTextInput();
+        public static extern void StopTextInput();
     }
 }

@@ -5,326 +5,326 @@ namespace SharpSDL
 {
     public static unsafe partial class SDL
     {
-        public const int SDL_WINDOWPOS_UNDEFINED = 0x1FFF0000;
-        public const int SDL_WINDOWPOS_CENTERED = 0x2FFF0000;
+        public const int WINDOWPOS_UNDEFINED = 0x1FFF0000;
+        public const int WINDOWPOS_CENTERED = 0x2FFF0000;
 
         [Flags]
-        public enum SDL_WindowFlags : uint
+        public enum WindowFlags : uint
         {
-            SDL_WINDOW_FULLSCREEN = 0x00000001,
-            SDL_WINDOW_OPENGL = 0x00000002,
-            SDL_WINDOW_SHOWN = 0x00000004,
-            SDL_WINDOW_HIDDEN = 0x00000008,
-            SDL_WINDOW_BORDERLESS = 0x00000010,
-            SDL_WINDOW_RESIZABLE = 0x00000020,
-            SDL_WINDOW_MINIMIZED = 0x00000040,
-            SDL_WINDOW_MAXIMIZED = 0x00000080,
-            SDL_WINDOW_INPUT_GRABBED = 0x00000100,
-            SDL_WINDOW_INPUT_FOCUS = 0x00000200,
-            SDL_WINDOW_MOUSE_FOCUS = 0x00000400,
-            SDL_WINDOW_FULLSCREEN_DESKTOP = (SDL_WINDOW_FULLSCREEN | 0x00001000),
-            SDL_WINDOW_FOREIGN = 0x00000800,
-            SDL_WINDOW_ALLOW_HIGHDPI = 0x00002000,
-            SDL_WINDOW_MOUSE_CAPTURE = 0x00004000,
-            SDL_WINDOW_ALWAYS_ON_TOP = 0x00008000,
-            SDL_WINDOW_SKIP_TASKBAR = 0x00010000,
-            SDL_WINDOW_UTILITY = 0x00020000,
-            SDL_WINDOW_TOOLTIP = 0x00040000,
-            SDL_WINDOW_POPUP_MENU = 0x00080000,
-            SDL_WINDOW_VULKAN = 0x10000000
+            Fullscreen = 0x00000001,
+            OpenGL = 0x00000002,
+            Shown = 0x00000004,
+            Hidden = 0x00000008,
+            Borderless = 0x00000010,
+            Resizable = 0x00000020,
+            Minimized = 0x00000040,
+            Maximized = 0x00000080,
+            InputGrabbed = 0x00000100,
+            InputFocus = 0x00000200,
+            MouseFocus = 0x00000400,
+            FullscreenDesktop = (Fullscreen | 0x00001000),
+            Foreign = 0x00000800,
+            AllowHighDPI = 0x00002000,
+            MouseCapture = 0x00004000,
+            AlwaysOnTop = 0x00008000,
+            SkipTaskbar = 0x00010000,
+            Utility = 0x00020000,
+            Tooltip = 0x00040000,
+            PopupMenu = 0x00080000,
+            Vulkan = 0x10000000
         }
 
-        public enum SDL_HitTestResult
+        public enum HitTestResult
         {
-            SDL_HITTEST_NORMAL,
-            SDL_HITTEST_DRAGGABLE,
-            SDL_HITTEST_RESIZE_TOPLEFT,
-            SDL_HITTEST_RESIZE_TOP,
-            SDL_HITTEST_RESIZE_TOPRIGHT,
-            SDL_HITTEST_RESIZE_RIGHT,
-            SDL_HITTEST_RESIZE_BOTTOMRIGHT,
-            SDL_HITTEST_RESIZE_BOTTOM,
-            SDL_HITTEST_RESIZE_BOTTOMLEFT,
-            SDL_HITTEST_RESIZE_LEFT
+            Normal,
+            Draggable,
+            ResizeTopLeft,
+            ResizeTop,
+            ResizeTopRight,
+            ResizeRight,
+            ResizeBottomRight,
+            ResizeBottom,
+            ResizeBottomLeft,
+            ResizeLeft
         }
 
-        public enum SDL_WindowEventID : byte
+        public enum WindowEventID : byte
         {
-            SDL_WINDOWEVENT_NONE,
-            SDL_WINDOWEVENT_SHOWN,
-            SDL_WINDOWEVENT_HIDDEN,
-            SDL_WINDOWEVENT_EXPOSED,
-            SDL_WINDOWEVENT_MOVED,
-            SDL_WINDOWEVENT_RESIZED,
-            SDL_WINDOWEVENT_SIZE_CHANGED,
-            SDL_WINDOWEVENT_MINIMIZED,
-            SDL_WINDOWEVENT_MAXIMIZED,
-            SDL_WINDOWEVENT_RESTORED,
-            SDL_WINDOWEVENT_ENTER,
-            SDL_WINDOWEVENT_LEAVE,
-            SDL_WINDOWEVENT_FOCUS_GAINED,
-            SDL_WINDOWEVENT_FOCUS_LOST,
-            SDL_WINDOWEVENT_CLOSE,
-            SDL_WINDOWEVENT_TAKE_FOCUS,
-            SDL_WINDOWEVENT_HIT_TEST
+            None,
+            Shown,
+            Hidden,
+            Exposed,
+            Moved,
+            Resized,
+            SizeChanged,
+            Minimized,
+            Maximized,
+            Restored,
+            Enter,
+            Leave,
+            FocusGained,
+            FocusLost,
+            Close,
+            TakeFocus,
+            HitTest
         }
 
-        public enum SDL_GLprofile
+        public enum OpenGLProfile
         {
-            SDL_GL_CONTEXT_PROFILE_CORE = 0x0001,
-            SDL_GL_CONTEXT_PROFILE_COMPATIBILITY = 0x0002,
-            SDL_GL_CONTEXT_PROFILE_ES = 0x0004 /**< GLX_CONTEXT_ES2_PROFILE_BIT_EXT */
+            Core = 0x0001,
+            Compatibility = 0x0002,
+            ES = 0x0004
         }
 
-        public enum SDL_GLcontextFlag
+        public enum OpenGLContextFlag
         {
-            SDL_GL_CONTEXT_DEBUG_FLAG = 0x0001,
-            SDL_GL_CONTEXT_FORWARD_COMPATIBLE_FLAG = 0x0002,
-            SDL_GL_CONTEXT_ROBUST_ACCESS_FLAG = 0x0004,
-            SDL_GL_CONTEXT_RESET_ISOLATION_FLAG = 0x0008
+            Debug = 0x0001,
+            FowardCompatible = 0x0002,
+            RobustAccess = 0x0004,
+            ResetIsolation = 0x0008
         }
 
-        public enum SDL_GLcontextReleaseBehaviour
+        public enum OpenGLContextReleaseBehaviour
         {
-            SDL_GL_CONTEXT_RELEASE_BEHAVIOR_NONE = 0x0000,
-            SDL_GL_CONTEXT_RELEASE_BEHAVIOR_FLUSH = 0x0001
+            None = 0x0000,
+            Flush = 0x0001
         }
 
-        public enum SDL_GLContextResetNotification
+        public enum OpenGLContextResetNotification
         {
-            SDL_GL_CONTEXT_RESET_NO_NOTIFICATION = 0x0000,
-            SDL_GL_CONTEXT_RESET_LOSE_CONTEXT = 0x0001
+            NoNotification = 0x0000,
+            LoseContext = 0x0001
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public struct SDL_Window
+        public struct Window
         {
-            private IntPtr ptr;
+            private readonly IntPtr ptr;
 
-            public SDL_Window(IntPtr ptr)
+            public Window(IntPtr ptr)
             {
                 this.ptr = ptr;
             }
 
-            public static implicit operator IntPtr(SDL_Window window)
+            public static implicit operator IntPtr(Window window)
             {
                 return window.ptr;
             }
 
-            public static implicit operator SDL_Window(IntPtr ptr)
+            public static implicit operator Window(IntPtr ptr)
             {
-                return new SDL_Window(ptr);
+                return new Window(ptr);
             }
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public struct SDL_DisplayMode
+        public struct DisplayMode
         {
-            public uint format;
-            public int w;
-            public int h;
-            public int refreshrate;
-            public IntPtr driverdata;
+            public uint Format;
+            public int Width;
+            public int Height;
+            public int RefreshRate;
+            public IntPtr DriverData;
         }
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        public delegate SDL_HitTestResult SDL_HitTest(SDL_Window window, SDL_Point* area, void* data);
+        public delegate HitTestResult HitTest(Window window, Point* area, void* data);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern SDL_Window SDL_CreateWindow(string title, int x, int y, int width, int height, SDL_WindowFlags flags);
+        public static extern Window CreateWindow(string title, int x, int y, int width, int height, WindowFlags flags);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern SDL_Window SDL_CreateWindowFrom(IntPtr nativeWindow);
+        public static extern Window CreateWindowFrom(IntPtr nativeWindow);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern SDL_Window SDL_DestroyWindow(SDL_Window window);
+        public static extern Window DestroyWindow(Window window);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SDL_DisableScreenSaver();
+        public static extern void DisableScreenSaver();
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SDL_EnableScreenSaver();
+        public static extern void EnableScreenSaver();
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern SDL_DisplayMode* SDL_GetClosestDisplayMode(int displayIndex, SDL_DisplayMode* mode, SDL_DisplayMode* closest);
+        public static extern DisplayMode* GetClosestDisplayMode(int displayIndex, DisplayMode* mode, DisplayMode* closest);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int SDL_GetCurrentDisplayMode(int displayIndex, SDL_DisplayMode* mode);
+        public static extern int GetCurrentDisplayMode(int displayIndex, DisplayMode* mode);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern byte* SDL_GetCurrentVideoDriver();
+        public static extern byte* GetCurrentVideoDriver();
 
-        public static string SDL_GetCurrentVideoDriverString()
+        public static string GetCurrentVideoDriverString()
         {
-            return GetString(SDL_GetCurrentVideoDriver());
+            return GetString(GetCurrentVideoDriver());
         }
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int SDL_GetDesktopDisplayMode(int displayIndex, SDL_DisplayMode* mode);
+        public static extern int GetDesktopDisplayMode(int displayIndex, DisplayMode* mode);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int SDL_GetDisplayBounds(int displayIndex, SDL_Rect* rect);
+        public static extern int GetDisplayBounds(int displayIndex, Rect* rect);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int SDL_GetDisplayDPI(int displayIndex, float* ddpi, float* hdpi, float* vdpi);
+        public static extern int GetDisplayDPI(int displayIndex, float* ddpi, float* hdpi, float* vdpi);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int SDL_GetDisplayMode(int displayIndex, int modeIndex, SDL_DisplayMode* mode);
+        public static extern int GetDisplayMode(int displayIndex, int modeIndex, DisplayMode* mode);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern byte* SDL_GetDisplayName(int displayIndex);
+        public static extern byte* GetDisplayName(int displayIndex);
 
-        public static string SDL_GetDisplayNameString(int displayIndex)
+        public static string GetDisplayNameString(int displayIndex)
         {
-            return GetString(SDL_GetDisplayName(displayIndex));
+            return GetString(GetDisplayName(displayIndex));
         }
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int SDL_GetDisplayUsableBounds(int displayIndex, SDL_Rect* rect);
+        public static extern int GetDisplayUsableBounds(int displayIndex, Rect* rect);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern SDL_Window SDL_GetGrabbedWindow();
+        public static extern Window GetGrabbedWindow();
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int SDL_GetNumDisplayModes(int displayIndex);
+        public static extern int GetNumDisplayModes(int displayIndex);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int SDL_GetNumVideoDisplays();
+        public static extern int GetNumVideoDisplays();
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int SDL_GetNumVideoDrivers();
+        public static extern int GetNumVideoDrivers();
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern byte* SDL_GetVideoDriver(int index);
+        public static extern byte* GetVideoDriver(int index);
 
-        public static string SDL_GetVideoDriverString(int index)
+        public static string GetVideoDriverString(int index)
         {
-            return GetString(SDL_GetVideoDriver(index));
+            return GetString(GetVideoDriver(index));
         }
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int SDL_GetWindowBordersSize(SDL_Window window, int* top, int* left, int* bottom, int* right);
+        public static extern int GetWindowBordersSize(Window window, int* top, int* left, int* bottom, int* right);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern float SDL_GetWindowBrightness(SDL_Window window);
+        public static extern float GetWindowBrightness(Window window);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void* SDL_GetWindowData(SDL_Window window, string name);
+        public static extern void* GetWindowData(Window window, string name);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int SDL_GetWindowDisplayIndex(SDL_Window window);
+        public static extern int GetWindowDisplayIndex(Window window);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int SDL_GetWindowDisplayMode(SDL_Window window, SDL_DisplayMode* mode);
+        public static extern int GetWindowDisplayMode(Window window, DisplayMode* mode);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern SDL_WindowFlags SDL_GetWindowFlags(SDL_Window window);
+        public static extern WindowFlags GetWindowFlags(Window window);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern SDL_Window SDL_GetWindowFromID(uint id);
+        public static extern Window GetWindowFromID(uint id);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SDL_GetWindowMaximumSize(SDL_Window window, int* w, int* h);
+        public static extern void GetWindowMaximumSize(Window window, int* w, int* h);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SDL_GetWindowMinimumSize(SDL_Window window, int* w, int* h);
+        public static extern void GetWindowMinimumSize(Window window, int* w, int* h);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int SDL_GetWindowOpacity(SDL_Window window, float* opacity);
+        public static extern int GetWindowOpacity(Window window, float* opacity);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern uint SDL_GetWindowPixelFormat(SDL_Window window);
+        public static extern uint GetWindowPixelFormat(Window window);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SDL_GetWindowPosition(SDL_Window window, int* x, int* y);
+        public static extern void GetWindowPosition(Window window, int* x, int* y);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SDL_GetWindowSize(SDL_Window window, int* w, int* h);
+        public static extern void GetWindowSize(Window window, int* w, int* h);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern byte* SDL_GetWindowTitle(SDL_Window window);
+        public static extern byte* GetWindowTitle(Window window);
 
-        public static string SDL_GetWindowTitleString(SDL_Window window)
+        public static string GetWindowTitleString(Window window)
         {
-            return GetString(SDL_GetWindowTitle(window));
+            return GetString(GetWindowTitle(window));
         }
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SDL_HideWindow(SDL_Window window);
+        public static extern void HideWindow(Window window);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern bool SDL_IsScreenSaverEnabled();
+        public static extern bool IsScreenSaverEnabled();
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SDL_MaximizeWindow(SDL_Window window);
+        public static extern void MaximizeWindow(Window window);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SDL_MinimizeWindow(SDL_Window window);
+        public static extern void MinimizeWindow(Window window);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SDL_RaiseWindow(SDL_Window window);
+        public static extern void RaiseWindow(Window window);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SDL_RestoreWindow(SDL_Window window);
+        public static extern void RestoreWindow(Window window);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SDL_SetWindowBordered(SDL_Window window, bool bordered);
+        public static extern void SetWindowBordered(Window window, bool bordered);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int SDL_SetWindowBrightness(SDL_Window window, float brightness);
+        public static extern int SetWindowBrightness(Window window, float brightness);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void* SDL_SetWindowData(SDL_Window window, string name, void* userdata);
+        public static extern void* SetWindowData(Window window, string name, void* userdata);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int SDL_SetWindowDisplayMode(SDL_Window window, SDL_DisplayMode* mode);
+        public static extern int SetWindowDisplayMode(Window window, DisplayMode* mode);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int SDL_SetWindowFullscreen(SDL_Window window, SDL_WindowFlags flags);
+        public static extern int SetWindowFullscreen(Window window, WindowFlags flags);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int SDL_SetWindowGammaRamp(SDL_Window window, ushort* red, ushort* green, ushort* blue);
+        public static extern int SetWindowGammaRamp(Window window, ushort* red, ushort* green, ushort* blue);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SDL_SetWindowGrab(SDL_Window window, bool grabbed);
+        public static extern void SetWindowGrab(Window window, bool grabbed);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int SDL_SetWindowHitTest(SDL_Window window, SDL_HitTest callback, void* data);
+        public static extern int SetWindowHitTest(Window window, HitTest callback, void* data);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int SDL_SetWindowInputFocus(SDL_Window window);
+        public static extern int SetWindowInputFocus(Window window);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SDL_SetWindowMaximumSize(SDL_Window window, int maxWidth, int maxHeight);
+        public static extern void SetWindowMaximumSize(Window window, int maxWidth, int maxHeight);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SDL_SetWindowMinimumSize(SDL_Window window, int minWidth, int minHeight);
+        public static extern void SetWindowMinimumSize(Window window, int minWidth, int minHeight);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int SDL_SetWindowModalFor(SDL_Window modalWindow, SDL_Window parentWindow);
+        public static extern int SetWindowModalFor(Window modalWindow, Window parentWindow);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int SDL_SetWindowOpacity(SDL_Window window, float opacity);
+        public static extern int SetWindowOpacity(Window window, float opacity);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SDL_SetWindowPosition(SDL_Window window, int x, int y);
+        public static extern void SetWindowPosition(Window window, int x, int y);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SDL_SetWindowResizable(SDL_Window window, bool resizable);
+        public static extern void SetWindowResizable(Window window, bool resizable);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SDL_SetWindowSize(SDL_Window window, int width, int height);
+        public static extern void SetWindowSize(Window window, int width, int height);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SDL_SetWindowTitle(SDL_Window window, string title);
+        public static extern void SetWindowTitle(Window window, string title);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SDL_ShowWindow(SDL_Window window);
+        public static extern void ShowWindow(Window window);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int SDL_VideoInit(string driverName);
+        public static extern int VideoInit(string driverName);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SDL_VideoQuit();
+        public static extern void VideoQuit();
     }
 }

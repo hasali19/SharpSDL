@@ -5,19 +5,19 @@ namespace SharpSDL
     public static unsafe partial class SDL
     {
         [StructLayout(LayoutKind.Sequential)]
-        public struct SDL_Rect
+        public struct Rect
         {
-            public int x;
-            public int y;
-            public int w;
-            public int h;
+            public int X;
+            public int Y;
+            public int Width;
+            public int Height;
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public struct SDL_Point
+        public struct Point
         {
-            public int x;
-            public int y;
+            public int X;
+            public int Y;
         }
     }
 }

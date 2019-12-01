@@ -5,120 +5,119 @@ namespace SharpSDL
 {
     public static unsafe partial class SDL
     {
-        public enum SDL_SystemCursor
+        public enum SystemCursor
         {
-            SDL_SYSTEM_CURSOR_ARROW,
-            SDL_SYSTEM_CURSOR_IBEAM,
-            SDL_SYSTEM_CURSOR_WAIT,
-            SDL_SYSTEM_CURSOR_CROSSHAIR,
-            SDL_SYSTEM_CURSOR_WAITARROW,
-            SDL_SYSTEM_CURSOR_SIZENWSE,
-            SDL_SYSTEM_CURSOR_SIZENESW,
-            SDL_SYSTEM_CURSOR_SIZEWE,
-            SDL_SYSTEM_CURSOR_SIZENS,
-            SDL_SYSTEM_CURSOR_SIZEALL,
-            SDL_SYSTEM_CURSOR_NO,
-            SDL_SYSTEM_CURSOR_HAND,
-            SDL_NUM_SYSTEM_CURSORS
+            Arrow,
+            IBeam,
+            Wait,
+            Crosshair,
+            WaitArrow,
+            SizeNWSE,
+            SizeNESW,
+            SizeWE,
+            SizeNS,
+            SizeALL,
+            NO,
+            Hand
         }
 
-        public enum SDL_MouseWheelDirection : uint
+        public enum MouseWheelDirection : uint
         {
-            SDL_MOUSEWHEEL_NORMAL,
-            SDL_MOUSEWHEEL_FLIPPED
+            Normal,
+            Flipped
         }
 
-        public enum SDL_Button : uint
+        public enum Button : uint
         {
-            SDL_BUTTON_LEFT = 1,
-            SDL_BUTTON_MIDDLE = 2,
-            SDL_BUTTON_RIGHT = 3,
-            SDL_BUTTON_X1 = 4,
-            SDL_BUTTON_X2 = 5,
+            Left = 1,
+            Middle = 2,
+            Right = 3,
+            X1 = 4,
+            X2 = 5,
         }
 
         [Flags]
-        public enum SDL_ButtonMask : uint
+        public enum ButtonMask : uint
         {
-            SDL_BUTTON_LMASK = 1 << ((int)SDL_Button.SDL_BUTTON_LEFT - 1),
-            SDL_BUTTON_MMASK = 1 << ((int)SDL_Button.SDL_BUTTON_MIDDLE - 1),
-            SDL_BUTTON_RMASK = 1 << ((int)SDL_Button.SDL_BUTTON_RIGHT - 1),
-            SDL_BUTTON_X1MASK = 1 << ((int)SDL_Button.SDL_BUTTON_X1 - 1),
-            SDL_BUTTON_X2MASK = 1 << ((int)SDL_Button.SDL_BUTTON_X2 - 1)
+            Left = 1 << ((int)Button.Left - 1),
+            Middle = 1 << ((int)Button.Middle - 1),
+            Right = 1 << ((int)Button.Right - 1),
+            X1 = 1 << ((int)Button.X1 - 1),
+            X2 = 1 << ((int)Button.X2 - 1)
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public struct SDL_Cursor
+        public struct Cursor
         {
-            private IntPtr ptr;
+            private readonly IntPtr ptr;
 
-            public SDL_Cursor(IntPtr ptr)
+            public Cursor(IntPtr ptr)
             {
                 this.ptr = ptr;
             }
 
-            public static implicit operator IntPtr(SDL_Cursor cursor)
+            public static implicit operator IntPtr(Cursor cursor)
             {
                 return cursor.ptr;
             }
 
-            public static implicit operator SDL_Cursor(IntPtr ptr)
+            public static implicit operator Cursor(IntPtr ptr)
             {
-                return new SDL_Cursor(ptr);
+                return new Cursor(ptr);
             }
         }
 
-        public static uint SDL_MOUSE(uint x)
+        public static uint MOUSE(uint x)
         {
             return (uint)(1 << ((int)x - 1));
         }
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int SDL_CaptureMouse(bool enabled);
+        public static extern int CaptureMouse(bool enabled);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern SDL_Cursor SDL_CreateCursor(byte* data, byte* mask, int w, int h, int hotX, int hotY);
+        public static extern Cursor CreateCursor(byte* data, byte* mask, int w, int h, int hotX, int hotY);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern SDL_Cursor SDL_CreateSystemCursor(SDL_SystemCursor id);
+        public static extern Cursor CreateSystemCursor(SystemCursor id);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SDL_FreeCursor(SDL_Cursor cursor);
+        public static extern void FreeCursor(Cursor cursor);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern SDL_Cursor SDL_GetCursor();
+        public static extern Cursor GetCursor();
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern SDL_Cursor SDL_GetDefaultCursor();
+        public static extern Cursor GetDefaultCursor();
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern SDL_ButtonMask SDL_GetGlobalMouseState(int* x, int* y);
+        public static extern ButtonMask GetGlobalMouseState(int* x, int* y);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern SDL_Window SDL_GetMouseFocus();
+        public static extern Window GetMouseFocus();
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern SDL_ButtonMask SDL_GetMouseState(int* x, int* y);
+        public static extern ButtonMask GetMouseState(int* x, int* y);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern bool SDL_GetRelativeMouseMode();
+        public static extern bool GetRelativeMouseMode();
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern SDL_ButtonMask SDL_GetRelativeMouseState(int* x, int* y);
+        public static extern ButtonMask GetRelativeMouseState(int* x, int* y);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SDL_SetCursor(SDL_Cursor cursor);
+        public static extern void SetCursor(Cursor cursor);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int SDL_SetRelativeMouseMode(bool enabled);
+        public static extern int SetRelativeMouseMode(bool enabled);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int SDL_ShowCursor(int toggle);
+        public static extern int ShowCursor(int toggle);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int SDL_WarpMouseGlobal(int x, int y);
+        public static extern int WarpMouseGlobal(int x, int y);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SDL_WarpMouseInWindow(SDL_Window window, int x, int y);
+        public static extern void WarpMouseInWindow(Window window, int x, int y);
     }
 }

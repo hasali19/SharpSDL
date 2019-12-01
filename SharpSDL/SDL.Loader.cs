@@ -9,9 +9,9 @@ namespace SharpSDL
     {
         private const string LibraryName = "SDL2";
 
+#if NETCOREAPP3_0
         private static IntPtr _handle;
 
-#if NETCOREAPP3_0
         static SDL()
         {
             NativeLibrary.SetDllImportResolver(typeof(SDL).Assembly, ResolveDllImport);

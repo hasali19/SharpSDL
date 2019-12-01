@@ -4,59 +4,59 @@ namespace SharpSDL
 {
     public static unsafe partial class SDL
     {
-        public const uint SDL_TOUCH_MOUSEID = unchecked((uint)-1);
+        public const uint TOUCH_MOUSEID = unchecked((uint)-1);
 
         [StructLayout(LayoutKind.Sequential)]
-        public struct SDL_TouchID
+        public struct TouchID
         {
-            private long id;
+            private readonly long id;
 
-            public SDL_TouchID(long id)
+            public TouchID(long id)
             {
                 this.id = id;
             }
 
-            public static implicit operator long(SDL_TouchID touchID)
+            public static implicit operator long(TouchID touchID)
             {
                 return touchID.id;
             }
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public struct SDL_FingerID
+        public struct FingerID
         {
-            private long id;
+            private readonly long id;
 
-            public SDL_FingerID(long id)
+            public FingerID(long id)
             {
                 this.id = id;
             }
 
-            public static implicit operator long(SDL_FingerID fingerID)
+            public static implicit operator long(FingerID fingerID)
             {
                 return fingerID.id;
             }
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public struct SDL_Finger
+        public struct Finger
         {
-            public SDL_FingerID id;
-            public float x;
-            public float y;
-            public float pressure;
+            public FingerID Id;
+            public float X;
+            public float Y;
+            public float Pressure;
         }
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int SDL_GetNumTouchDevices();
+        public static extern int GetNumTouchDevices();
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern SDL_TouchID SDL_GetTouchDevice(int index);
+        public static extern TouchID GetTouchDevice(int index);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int SDL_GetNumTouchFingers(SDL_TouchID touchID);
+        public static extern int GetNumTouchFingers(TouchID touchID);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern SDL_Finger SDL_GetTouchFinger(SDL_TouchID touchID, int index);
+        public static extern Finger GetTouchFinger(TouchID touchID, int index);
     }
 }

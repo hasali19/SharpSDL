@@ -5,89 +5,89 @@ namespace SharpSDL
     public static unsafe partial class SDL
     {
         [StructLayout(LayoutKind.Sequential)]
-        public struct SDL_Color
+        public struct Color
         {
-            public byte r;
-            public byte g;
-            public byte b;
-            public byte a;
+            public byte R;
+            public byte G;
+            public byte B;
+            public byte A;
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public struct SDL_Palette
+        public struct Palette
         {
-            public int ncolors;
-            public SDL_Color* colors;
-            public uint version;
-            public int refcount;
+            public int NumColors;
+            public Color* Colors;
+            public uint Version;
+            public int RefCount;
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public struct SDL_PixelFormat
+        public struct PixelFormat
         {
-            public uint format;
-            public SDL_Palette* palette;
+            public uint Format;
+            public Palette* Palette;
             public byte BitsPerPixel;
             public byte BytesPerPixel;
-            public fixed byte padding[2];
-            public uint Rmask;
-            public uint Gmask;
-            public uint Bmask;
-            public uint Amask;
-            public byte Rloss;
-            public byte Gloss;
-            public byte Bloss;
-            public byte Aloss;
-            public byte Rshift;
-            public byte Gshift;
-            public byte Bshift;
-            public byte Ashift;
-            public int refcount;
-            public SDL_PixelFormat* next;
+            public fixed byte Padding[2];
+            public uint RMask;
+            public uint GMask;
+            public uint BMask;
+            public uint AMask;
+            public byte RLoss;
+            public byte GLoss;
+            public byte BLoss;
+            public byte ALoss;
+            public byte RShift;
+            public byte GShift;
+            public byte BShift;
+            public byte AShift;
+            public int RefCount;
+            public PixelFormat* Next;
         }
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern SDL_PixelFormat* SDL_AllocFormat(uint pixel_format);
+        public static extern PixelFormat* AllocFormat(uint pixel_format);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern SDL_Palette* SDL_AllocPalette(int ncolors);
+        public static extern Palette* AllocPalette(int ncolors);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SDL_CalculateGammaRamp(float gamma, ushort* ramp);
+        public static extern void CalculateGammaRamp(float gamma, ushort* ramp);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SDL_FreeFormat(SDL_PixelFormat* format);
+        public static extern void FreeFormat(PixelFormat* format);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SDL_FreePalette(SDL_Palette* palette);
+        public static extern void FreePalette(Palette* palette);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern byte* SDL_GetPixelFormatName(uint format);
+        public static extern byte* GetPixelFormatName(uint format);
 
-        public static string SDL_GetPixelFormatNameString(uint format) => GetString(SDL_GetPixelFormatName(format));
-
-        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SDL_GetRGB(uint pixel, SDL_PixelFormat* format, byte* r, byte* g, byte* b);
+        public static string GetPixelFormatNameString(uint format) => GetString(GetPixelFormatName(format));
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SDL_GetRGBA(uint pixel, SDL_PixelFormat* format, byte* r, byte* g, byte* b, byte* a);
+        public static extern void GetRGB(uint pixel, PixelFormat* format, byte* r, byte* g, byte* b);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern uint SDL_MapRGB(SDL_PixelFormat* format, byte r, byte g, byte b);
+        public static extern void GetRGBA(uint pixel, PixelFormat* format, byte* r, byte* g, byte* b, byte* a);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern uint SDL_MapRGBA(SDL_PixelFormat* format, byte r, byte g, byte b, byte a);
+        public static extern uint MapRGB(PixelFormat* format, byte r, byte g, byte b);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern uint SDL_MasksToPixelFormatEnum(int bpp, uint Rmask, uint Gmask, uint Bmask, uint Amask);
+        public static extern uint MapRGBA(PixelFormat* format, byte r, byte g, byte b, byte a);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern bool SDL_PixelFormatEnumToMasks(uint format, int* bpp, uint* Rmask, uint* Gmask, uint* Bmask, uint* Amask);
+        public static extern uint MasksToPixelFormatEnum(int bpp, uint Rmask, uint Gmask, uint Bmask, uint Amask);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int SDL_SetPaletteColors(SDL_Palette* palette, SDL_Color* colors, int firstcolor, int ncolors);
+        public static extern bool PixelFormatEnumToMasks(uint format, int* bpp, uint* Rmask, uint* Gmask, uint* Bmask, uint* Amask);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int SDL_SetPixelFormatPalette(SDL_PixelFormat* format, SDL_Palette* palette);
+        public static extern int SetPaletteColors(Palette* palette, Color* colors, int firstcolor, int ncolors);
+
+        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern int SetPixelFormatPalette(PixelFormat* format, Palette* palette);
     }
 }

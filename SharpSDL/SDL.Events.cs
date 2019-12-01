@@ -5,512 +5,512 @@ namespace SharpSDL
 {
     public static unsafe partial class SDL
     {
-        public const byte SDL_QUERY = unchecked((byte)-1);
-        public const byte SDL_IGNORE = 0;
-        public const byte SDL_DISABLE = 0;
-        public const byte SDL_ENABLE = 1;
+        public const byte QUERY = unchecked((byte)-1);
+        public const byte IGNORE = 0;
+        public const byte DISABLE = 0;
+        public const byte ENABLE = 1;
 
-        public const int SDL_TEXTEDITINGEVENT_TEXT_SIZE = 32;
-        public const int SDL_TEXTINPUTEVENT_TEXT_SIZE = 32;
+        public const int TEXTEDITINGEVENT_TEXT_SIZE = 32;
+        public const int TEXTINPUTEVENT_TEXT_SIZE = 32;
 
-        public enum SDL_EventType : uint
+        public enum EventType : uint
         {
-            SDL_FIRSTEVENT = 0,
+            FirstEvent = 0,
 
             /* Application events */
-            SDL_QUIT = 0x100,
+            Quit = 0x100,
 
-            SDL_APP_TERMINATING,
-            SDL_APP_LOWMEMORY,
-            SDL_APP_WILLENTERBACKGROUND,
-            SDL_APP_DIDENTERBACKGROUND,
-            SDL_APP_WILLENTERFOREGROUND,
-            SDL_APP_DIDENTERFOREGROUND,
+            AppTerminating,
+            AppLowMemory,
+            AppWillEnterBackground,
+            AppDidEnterBackground,
+            AppWillEnterForeground,
+            AppDidEnterForeground,
 
             /* Window events */
-            SDL_WINDOWEVENT = 0x200,
-            SDL_SYSWMEVENT,
+            WindowEvent = 0x200,
+            SysWMEvent,
 
             /* Keyboard events */
-            SDL_KEYDOWN = 0x300,
-            SDL_KEYUP,
-            SDL_TEXTEDITING,
-            SDL_TEXTINPUT,
-            SDL_KEYMAPCHANGED,
+            KeyDown = 0x300,
+            KeyUp,
+            TextEditing,
+            TextInput,
+            KeyMapChanged,
 
             /* Mouse events */
-            SDL_MOUSEMOTION = 0x400,
-            SDL_MOUSEBUTTONDOWN,
-            SDL_MOUSEBUTTONUP,
-            SDL_MOUSEWHEEL,
+            MouseMotion = 0x400,
+            MouseButtonDown,
+            MouseButtonUp,
+            MouseWheel,
 
             /* Joystick events */
-            SDL_JOYAXISMOTION = 0x600,
-            SDL_JOYBALLMOTION,
-            SDL_JOYHATMOTION,
-            SDL_JOYBUTTONDOWN,
-            SDL_JOYBUTTONUP,
-            SDL_JOYDEVICEADDED,
-            SDL_JOYDEVICEREMOVED,
+            JoyAxisMotion = 0x600,
+            JoyBallMotion,
+            JoyHatMotion,
+            JoyButtonDown,
+            JoyButtonUp,
+            JoyDeviceAdded,
+            JoyDeviceRemoved,
 
             /* Game controller events */
-            SDL_CONTROLLERAXISMOTION = 0x650,
-            SDL_CONTROLLERBUTTONDOWN,
-            SDL_CONTROLLERBUTTONUP,
-            SDL_CONTROLLERDEVICEADDED,
-            SDL_CONTROLLERDEVICEREMOVED,
-            SDL_CONTROLLERDEVICEREMAPPED,
+            ControllerAxisMotion = 0x650,
+            ControllerButtonDown,
+            ControllerButtonUp,
+            ControllerDeviceAdded,
+            ControllerDeviceRemoved,
+            ControllerDeviceRemapped,
 
             /* Touch events */
-            SDL_FINGERDOWN = 0x700,
-            SDL_FINGERUP,
-            SDL_FINGERMOTION,
+            FingerDown = 0x700,
+            FingerUp,
+            FingerMotion,
 
             /* Gesture events */
-            SDL_DOLLARGESTURE = 0x800,
-            SDL_DOLLARRECORD,
-            SDL_MULTIGESTURE,
+            DollarGesture = 0x800,
+            DollarRecord,
+            MultiGesture,
 
             /* Clipboard events */
-            SDL_CLIPBOARDUPDATE = 0x900,
+            ClipboardUpdate = 0x900,
 
             /* Drag and drop events */
-            SDL_DROPFILE = 0x1000,
-            SDL_DROPTEXT,
-            SDL_DROPBEGIN,
-            SDL_DROPCOMPLETE,
+            DropFile = 0x1000,
+            DropText,
+            DropBegin,
+            DropComplete,
 
             /* Audio hotplug events */
-            SDL_AUDIODEVICEADDED = 0x1100,
-            SDL_AUDIODEVICEREMOVED,
+            AudioDeviceAdded = 0x1100,
+            AudioDeviceRemoved,
 
             /* Render events */
-            SDL_RENDER_TARGETS_RESET = 0x2000,
-            SDL_RENDER_DEVICE_RESET,
+            RenderTargetsReset = 0x2000,
+            RenderDeviceReset,
 
-            SDL_USEREVENT = 0x8000,
+            UserEvent = 0x8000,
 
-            SDL_LASTEVENT = 0xFFFF
+            LastEvent = 0xFFFF
         }
 
-        public enum SDL_ButtonState : byte
+        public enum ButtonState : byte
         {
-            SDL_RELEASED = 0,
-            SDL_PRESSED = 1
+            Released = 0,
+            Pressed = 1
         }
 
-        public enum SDL_eventaction
+        public enum EventAction
         {
-            SDL_ADDEVENT,
-            SDL_PEEKEVENT,
-            SDL_GETEVENT
-        }
-
-        [StructLayout(LayoutKind.Sequential)]
-        public struct SDL_CommonEvent
-        {
-            public SDL_EventType type;
-            public uint timestamp;
+            AddEvent,
+            PeekEvent,
+            GetEvent
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public struct SDL_WindowEvent
+        public struct CommonEvent
         {
-            public SDL_EventType type;
-            public uint timestamp;
-            public uint windowID;
-            public SDL_WindowEventID evt;
+            public EventType Type;
+            public uint Timestamp;
+        }
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct WindowEvent
+        {
+            public EventType Type;
+            public uint Timestamp;
+            public uint WindowID;
+            public WindowEventID Evt;
             private fixed byte padding[3];
-            public int data1;
-            public int data2;
+            public int Data1;
+            public int Data2;
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public struct SDL_KeyboardEvent
+        public struct KeyboardEvent
         {
-            public SDL_EventType type;
-            public uint timestamp;
-            public uint windowID;
-            public SDL_ButtonState state;
-            public byte repeat;
-            public byte padding2;
-            public byte padding3;
-            public SDL_Keysym keysym;
+            public EventType Type;
+            public uint Timestamp;
+            public uint WindowID;
+            public ButtonState State;
+            public byte Repeat;
+            public byte Padding2;
+            public byte Padding3;
+            public Keysym Keysym;
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public struct SDL_TextEditingEvent
+        public struct TextEditingEvent
         {
-            public SDL_EventType type;
-            public uint timestamp;
-            public uint windowID;
-            public fixed byte text[SDL_TEXTEDITINGEVENT_TEXT_SIZE];
-            public int start;
-            public int length;
+            public EventType Type;
+            public uint Timestamp;
+            public uint WindowID;
+            public fixed byte Text[TEXTEDITINGEVENT_TEXT_SIZE];
+            public int Start;
+            public int Length;
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public struct SDL_TextInputEvent
+        public struct TextInputEvent
         {
-            public SDL_EventType type;
-            public uint timestamp;
-            public uint windowID;
-            public fixed byte text[SDL_TEXTINPUTEVENT_TEXT_SIZE];
+            public EventType Type;
+            public uint Timestamp;
+            public uint WindowID;
+            public fixed byte Text[TEXTINPUTEVENT_TEXT_SIZE];
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public struct SDL_MouseMotionEvent
+        public struct MouseMotionEvent
         {
-            public SDL_EventType type;
-            public uint timestamp;
-            public uint windowID;
-            public uint which;
-            public SDL_ButtonMask state;
-            public int x;
-            public int y;
-            public int xrel;
-            public int yrel;
+            public EventType Type;
+            public uint Timestamp;
+            public uint WindowID;
+            public uint Which;
+            public ButtonMask State;
+            public int X;
+            public int Y;
+            public int XRel;
+            public int YRel;
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public struct SDL_MouseButtonEvent
+        public struct MouseButtonEvent
         {
-            public SDL_EventType type;
-            public uint timestamp;
-            public uint windowID;
-            public uint which;
-            public SDL_Button button;
-            public SDL_ButtonState state;
-            public byte clicks;
-            public byte padding;
-            public int x;
-            public int y;
+            public EventType Type;
+            public uint Timestamp;
+            public uint WindowID;
+            public uint Which;
+            public Button Button;
+            public ButtonState State;
+            public byte Clicks;
+            public byte Padding;
+            public int X;
+            public int Y;
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public struct SDL_MouseWheelEvent
+        public struct MouseWheelEvent
         {
-            public SDL_EventType type;
-            public uint timestamp;
-            public uint windowID;
-            public uint which;
-            public int x;
-            public int y;
-            public SDL_MouseWheelDirection direction;
+            public EventType Type;
+            public uint Timestamp;
+            public uint WindowID;
+            public uint Which;
+            public int X;
+            public int Y;
+            public MouseWheelDirection Direction;
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public struct SDL_JoyAxisEvent
+        public struct JoyAxisEvent
         {
-            public SDL_EventType type;
-            public uint timestamp;
-            SDL_JoystickID which;
-            public byte axis;
+            public EventType Type;
+            public uint Timestamp;
+            public JoystickID Which;
+            public byte Axis;
             private fixed byte padding[3];
-            public short value;
+            public short Value;
             private ushort padding4;
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public struct SDL_JoyBallEvent
+        public struct JoyBallEvent
         {
-            public SDL_EventType type;
-            public uint timestamp;
-            public SDL_JoystickID which;
-            public byte ball;
+            public EventType Type;
+            public uint Timestamp;
+            public JoystickID Which;
+            public byte Ball;
             private fixed byte padding[3];
-            public short xrel;
-            public short yrel;
+            public short XRel;
+            public short YRel;
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public struct SDL_JoyHatEvent
+        public struct JoyHatEvent
         {
-            public SDL_EventType type;
-            public uint timestamp;
-            public SDL_JoystickID which;
-            public byte hat;
-            public SDL_Hat value;
+            public EventType Type;
+            public uint Timestamp;
+            public JoystickID Which;
+            public byte Hat;
+            public Hat Value;
+            private ushort Padding;
+        }
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct JoyButtonEvent
+        {
+            public EventType Type;
+            public uint Timestamp;
+            public JoystickID Which;
+            public byte Button;
+            public ButtonState State;
             private ushort padding;
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public struct SDL_JoyButtonEvent
+        public struct JoyDeviceEvent
         {
-            public SDL_EventType type;
-            public uint timestamp;
-            public SDL_JoystickID which;
-            public byte button;
-            public SDL_ButtonState state;
-            private ushort padding;
+            public EventType Type;
+            public uint Timestamp;
+            public int Which;
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public struct SDL_JoyDeviceEvent
+        public struct ControllerAxisEvent
         {
-            public SDL_EventType type;
-            public uint timestamp;
-            public int which;
-        }
-
-        [StructLayout(LayoutKind.Sequential)]
-        public struct SDL_ControllerAxisEvent
-        {
-            public SDL_EventType type;
-            public uint timestamp;
-            public SDL_JoystickID which;
-            public SDL_GameControllerAxis axis;
+            public EventType Type;
+            public uint Timestamp;
+            public JoystickID Which;
+            public GameControllerAxis Axis;
             private fixed byte padding[3];
-            public short value;
+            public short Value;
             private ushort padding4;
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public struct SDL_ControllerButtonEvent
+        public struct ControllerButtonEvent
         {
-            public SDL_EventType type;
-            public uint timestamp;
-            public SDL_JoystickID which;
-            public SDL_GameControllerButton button;
-            public SDL_ButtonState state;
+            public EventType Type;
+            public uint Timestamp;
+            public JoystickID Which;
+            public GameControllerButton Button;
+            public ButtonState State;
             private ushort padding;
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public struct SDL_ControllerDeviceEvent
+        public struct ControllerDeviceEvent
         {
-            public SDL_EventType type;
-            public uint timestamp;
-            public int which;
+            public EventType Type;
+            public uint Timestamp;
+            public int Which;
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public struct SDL_AudioDeviceEvent
+        public struct AudioDeviceEvent
         {
-            public SDL_EventType type;
-            public uint timestamp;
-            public uint which;
-            public byte iscapture;
+            public EventType Type;
+            public uint Timestamp;
+            public uint Which;
+            public byte IsCapture;
             private fixed byte padding[3];
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public struct SDL_TouchFingerEvent
+        public struct TouchFingerEvent
         {
-            public SDL_EventType type;
-            public uint timestamp;
-            public SDL_TouchID touchId;
-            public SDL_FingerID fingerId;
-            public float x;
-            public float y;
-            public float dx;
-            public float dy;
-            public float pressure;
+            public EventType Type;
+            public uint Timestamp;
+            public TouchID TouchId;
+            public FingerID FingerId;
+            public float X;
+            public float Y;
+            public float DX;
+            public float DY;
+            public float Pressure;
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public struct SDL_MultiGestureEvent
+        public struct MultiGestureEvent
         {
-            public SDL_EventType type;
-            public uint timestamp;
-            public SDL_TouchID touchId;
-            public float dTheta;
-            public float dDist;
-            public float x;
-            public float y;
-            public ushort numFingers;
-            private ushort padding;
+            public EventType Type;
+            public uint Timestamp;
+            public TouchID TouchId;
+            public float DTheta;
+            public float DDist;
+            public float X;
+            public float Y;
+            public ushort NumFingers;
+            private ushort Padding;
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public struct SDL_DollarGestureEvent
+        public struct DollarGestureEvent
         {
-            public SDL_EventType type;
-            public uint timestamp;
-            public SDL_TouchID touchId;
-            public long gestureId;
-            public uint numFingers;
-            public float error;
-            public float x;
-            public float y;
+            public EventType Type;
+            public uint Timestamp;
+            public TouchID TouchId;
+            public long GestureId;
+            public uint NumFingers;
+            public float Error;
+            public float X;
+            public float Y;
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public struct SDL_DropEvent
+        public struct DropEvent
         {
-            public SDL_EventType type;
-            public uint timestamp;
-            public byte* file;
-            public uint windowID;
+            public EventType Type;
+            public uint Timestamp;
+            public byte* File;
+            public uint WindowID;
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public struct SDL_QuitEvent
+        public struct QuitEvent
         {
-            public SDL_EventType type;
-            public uint timestamp;
+            public EventType Type;
+            public uint Timestamp;
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public struct SDL_OSEvent
+        public struct OSEvent
         {
-            public SDL_EventType type;
-            public uint timestamp;
+            public EventType Type;
+            public uint Timestamp;
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public struct SDL_UserEvent
+        public struct UserEvent
         {
-            public SDL_EventType type;
-            public uint timestamp;
-            public uint windowID;
-            public int code;
-            public void* data1;
-            public void* data2;
+            public EventType Type;
+            public uint Timestamp;
+            public uint WindowID;
+            public int Code;
+            public void* Data1;
+            public void* Data2;
         }
 
         [StructLayout(LayoutKind.Explicit)]
-        public struct SDL_Event
+        public struct Event
         {
             [FieldOffset(0)]
-            public SDL_EventType type;
+            public EventType Type;
 
             [FieldOffset(0)]
-            public SDL_CommonEvent common;
+            public CommonEvent Common;
 
             [FieldOffset(0)]
-            public SDL_WindowEvent window;
+            public WindowEvent Window;
 
             [FieldOffset(0)]
-            public SDL_KeyboardEvent keyboard;
+            public KeyboardEvent Keyboard;
 
             [FieldOffset(0)]
-            public SDL_TextEditingEvent edit;
+            public TextEditingEvent Edit;
 
             [FieldOffset(0)]
-            public SDL_TextInputEvent text;
+            public TextInputEvent Text;
 
             [FieldOffset(0)]
-            public SDL_MouseMotionEvent motion;
+            public MouseMotionEvent Motion;
 
             [FieldOffset(0)]
-            public SDL_MouseButtonEvent button;
+            public MouseButtonEvent Button;
 
             [FieldOffset(0)]
-            public SDL_MouseWheelEvent wheel;
+            public MouseWheelEvent Wheel;
 
             [FieldOffset(0)]
-            public SDL_JoyAxisEvent jaxis;
+            public JoyAxisEvent JAxis;
 
             [FieldOffset(0)]
-            public SDL_JoyBallEvent jball;
+            public JoyBallEvent JBall;
 
             [FieldOffset(0)]
-            public SDL_JoyHatEvent jhat;
+            public JoyHatEvent JHat;
 
             [FieldOffset(0)]
-            public SDL_JoyButtonEvent jbutton;
+            public JoyButtonEvent JButton;
 
             [FieldOffset(0)]
-            public SDL_JoyDeviceEvent jdevice;
+            public JoyDeviceEvent JDevice;
 
             [FieldOffset(0)]
-            public SDL_ControllerAxisEvent caxis;
+            public ControllerAxisEvent CAxis;
 
             [FieldOffset(0)]
-            public SDL_ControllerButtonEvent cbutton;
+            public ControllerButtonEvent CButton;
 
             [FieldOffset(0)]
-            public SDL_ControllerDeviceEvent cdevice;
+            public ControllerDeviceEvent CDevice;
 
             [FieldOffset(0)]
-            public SDL_AudioDeviceEvent adevice;
+            public AudioDeviceEvent ADevice;
 
             [FieldOffset(0)]
-            public SDL_QuitEvent quit;
+            public QuitEvent Quit;
 
             [FieldOffset(0)]
-            public SDL_UserEvent user;
+            public UserEvent User;
 
             [FieldOffset(0)]
-            public SDL_TouchFingerEvent tfinger;
+            public TouchFingerEvent TFinger;
 
             [FieldOffset(0)]
-            public SDL_MultiGestureEvent mgesture;
+            public MultiGestureEvent MGesture;
 
             [FieldOffset(0)]
-            public SDL_DollarGestureEvent dgesture;
+            public DollarGestureEvent DGesture;
 
             [FieldOffset(0)]
-            public SDL_DropEvent drop;
+            public DropEvent Drop;
 
             [FieldOffset(0)]
             private fixed byte padding[56];
         }
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        public delegate int SDL_EventFilter(void* userdata, SDL_Event* evt);
+        public delegate int EventFilter(void* userdata, Event* evt);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SDL_AddEventWatch(SDL_EventFilter filter, void* userdata);
+        public static extern void AddEventWatch(EventFilter filter, void* userdata);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SDL_DelEventWatch(SDL_EventFilter filter, void* userdata);
+        public static extern void DelEventWatch(EventFilter filter, void* userdata);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern byte SDL_EventState(SDL_EventType type, int state);
+        public static extern byte EventState(EventType Type, int state);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SDL_FilterEvents(SDL_EventFilter filter, void* userdata);
+        public static extern void FilterEvents(EventFilter filter, void* userdata);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SDL_FlushEvent(SDL_EventType type);
+        public static extern void FlushEvent(EventType Type);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SDL_FlushEvents(SDL_EventType minType, SDL_EventType maxType);
+        public static extern void FlushEvents(EventType minType, EventType maxType);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern bool SDL_GetEventFilter(IntPtr* filter, void** userdata);
+        public static extern bool GetEventFilter(IntPtr* filter, void** userdata);
 
-        public static bool SDL_GetEventFilter(out SDL_EventFilter filter, void** userdata)
+        public static bool GetEventFilter(out EventFilter filter, void** userdata)
         {
             IntPtr ptr;
-            bool result = SDL_GetEventFilter(&ptr, userdata);
+            bool result = GetEventFilter(&ptr, userdata);
             if (result)
-                filter = Marshal.GetDelegateForFunctionPointer<SDL_EventFilter>(ptr);
+                filter = Marshal.GetDelegateForFunctionPointer<EventFilter>(ptr);
             else
                 filter = null;
             return result;
         }
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern bool SDL_HasEvent(SDL_EventType type);
+        public static extern bool HasEvent(EventType Type);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern bool SDL_HasEvents(SDL_EventType minType, SDL_EventType maxType);
+        public static extern bool HasEvents(EventType minType, EventType maxType);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int SDL_PeepEvents(SDL_Event* events, int numevents, SDL_eventaction action, SDL_EventType minType, SDL_EventType maxType);
+        public static extern int PeepEvents(Event* events, int numevents, EventAction action, EventType minType, EventType maxType);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int SDL_PollEvent(SDL_Event* evt);
+        public static extern int PollEvent(Event* evt);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SDL_PumpEvents();
+        public static extern void PumpEvents();
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int SDL_PushEvent(SDL_Event* evt);
+        public static extern int PushEvent(Event* evt);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern uint SDL_RegisterEvents(int numevents);
+        public static extern uint RegisterEvents(int numevents);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SDL_SetEventFilter(SDL_EventFilter filter, void* userdata);
+        public static extern void SetEventFilter(EventFilter filter, void* userdata);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int SDL_WaitEvent(SDL_Event* evt);
+        public static extern int WaitEvent(Event* evt);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int SDL_WaitEventTimeout(SDL_Event* evt, int timeout);
+        public static extern int WaitEventTimeout(Event* evt, int timeout);
     }
 }

@@ -5,63 +5,63 @@ namespace SharpSDL
 {
     public static unsafe partial class SDL
     {
-        public enum SDL_SYSWM_TYPE
+        public enum SysWMType
         {
-            SDL_SYSWM_UNKNOWN,
-            SDL_SYSWM_WINDOWS,
-            SDL_SYSWM_X11,
-            SDL_SYSWM_DIRECTFB,
-            SDL_SYSWM_COCOA,
-            SDL_SYSWM_UIKIT,
-            SDL_SYSWM_WAYLAND,
-            SDL_SYSWM_MIR,
-            SDL_SYSWM_WINRT,
-            SDL_SYSWM_ANDROID,
-            SDL_SYSWM_VIVANTE,
-            SDL_SYSWM_OS2
+            Unknown,
+            Windows,
+            X11,
+            DirectFB,
+            Cocoa,
+            UIKit,
+            Wayland,
+            Mir,
+            WinRT,
+            Android,
+            Vivante,
+            OS2
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public struct SDL_SysWMinfo
+        public struct SysWMInfo
         {
-            public SDL_version version;
-            public SDL_SYSWM_TYPE subsystem;
-            public SDL_SysWMinfoUnion info;
+            public Version Version;
+            public SysWMType Subsystem;
+            public SysWMInfoUnion Info;
         }
 
         [StructLayout(LayoutKind.Explicit)]
-        public struct SDL_SysWMinfoUnion
+        public struct SysWMInfoUnion
         {
             [FieldOffset(0)]
-            public SDL_SysWMinfoWin win;
+            public SysWMInfoWin Win;
             [FieldOffset(0)]
-            public SDL_SysWMinfoX11 x11;
+            public SysWMInfoX11 X11;
             [FieldOffset(0)]
-            public SDL_SysWMinfoCocoa cocoa;
+            public SysWMInfoCocoa Cocoa;
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public struct SDL_SysWMinfoWin
+        public struct SysWMInfoWin
         {
-            public IntPtr window;
-            public IntPtr hdc;
-            public IntPtr hinstance;
+            public IntPtr Window;
+            public IntPtr HDc;
+            public IntPtr HInstance;
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public struct SDL_SysWMinfoCocoa
+        public struct SysWMInfoCocoa
         {
-            public IntPtr window;
+            public IntPtr Window;
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public struct SDL_SysWMinfoX11
+        public struct SysWMInfoX11
         {
-            public IntPtr display;
-            public IntPtr window;
+            public IntPtr Display;
+            public IntPtr Window;
         }
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern bool SDL_GetWindowWMInfo(SDL_Window window, SDL_SysWMinfo* info);
+        public static extern bool GetWindowWMInfo(Window window, SysWMInfo* info);
     }
 }

@@ -7,35 +7,35 @@ namespace SharpSDL
     public static unsafe partial class SDL
     {
         [Flags]
-        public enum SDL_InitFlags : uint
+        public enum InitFlags : uint
         {
-            SDL_INIT_NONE = 0,
-            SDL_INIT_TIMER = 0x00000001u,
-            SDL_INIT_AUDIO = 0x00000010u,
-            SDL_INIT_VIDEO = 0x00000020u,
-            SDL_INIT_JOYSTICK = 0x00000200u,
-            SDL_INIT_HAPTIC = 0x00001000u,
-            SDL_INIT_GAMECONTROLLER = 0x00002000u,
-            SDL_INIT_EVENTS = 0x00004000u,
-            SDL_INIT_NOPARACHUTE = 0x00100000u,
-            SDL_INIT_EVERYTHING = SDL_INIT_TIMER | SDL_INIT_AUDIO | SDL_INIT_VIDEO | SDL_INIT_EVENTS
-                | SDL_INIT_JOYSTICK | SDL_INIT_HAPTIC | SDL_INIT_GAMECONTROLLER
+            None = 0,
+            Timer = 0x00000001u,
+            Audio = 0x00000010u,
+            Video = 0x00000020u,
+            Joystick = 0x00000200u,
+            Haptic = 0x00001000u,
+            GameController = 0x00002000u,
+            Events = 0x00004000u,
+            NoParachute = 0x00100000u,
+            Everything = Timer | Audio | Video | Events
+                | Joystick | Haptic | GameController
         }
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int SDL_Init(SDL_InitFlags flags);
+        public static extern int Init(InitFlags flags);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int SDL_InitSubSystem(SDL_InitFlags flags);
+        public static extern int InitSubSystem(InitFlags flags);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SDL_QuitSubSystem(SDL_InitFlags flags);
+        public static extern void QuitSubSystem(InitFlags flags);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern SDL_InitFlags SDL_WasInit(SDL_InitFlags flags);
+        public static extern InitFlags WasInit(InitFlags flags);
 
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SDL_Quit();
+        public static extern void Quit();
 
         private static string GetString(byte* ptr)
         {
