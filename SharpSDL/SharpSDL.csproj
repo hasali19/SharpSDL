@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <PackageId>SharpSDL</PackageId>
-    <Version>1.2.1</Version>
+    <Version>2.0.0</Version>
     <Authors>hasali19</Authors>
     <RepositoryUrl>https://github.com/hasali19/SharpSDL</RepositoryUrl>
     <TargetFrameworks>netcoreapp3.0;netstandard2.0</TargetFrameworks>
@@ -10,7 +10,7 @@
     <Description>C# bindings for SDL2.</Description>
     <PackageTags>SDL2 Game Window</PackageTags>
     <PackageProjectUrl>https://github.com/hasali19/SharpSDL</PackageProjectUrl>
-    <PackageLicenseUrl>https://github.com/hasali19/SharpSDL/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
   <ItemGroup>
