@@ -4,58 +4,38 @@ using System.Text;
 
 namespace SharpSDL
 {
+    [Flags]
+    public enum InitFlags : uint
+    {
+        None = 0,
+        Timer = 0x00000001u,
+        Audio = 0x00000010u,
+        Video = 0x00000020u,
+        Joystick = 0x00000200u,
+        Haptic = 0x00001000u,
+        GameController = 0x00002000u,
+        Events = 0x00004000u,
+        NoParachute = 0x00100000u,
+        Everything = Timer | Audio | Video | Events
+            | Joystick | Haptic | GameController
+    }
+
     public static unsafe partial class SDL
     {
-        [Flags]
-        public enum SDL_InitFlags : uint
-        {
-            SDL_INIT_NONE = 0,
-            SDL_INIT_TIMER = 0x00000001u,
-            SDL_INIT_AUDIO = 0x00000010u,
-            SDL_INIT_VIDEO = 0x00000020u,
-            SDL_INIT_JOYSTICK = 0x00000200u,
-            SDL_INIT_HAPTIC = 0x00001000u,
-            SDL_INIT_GAMECONTROLLER = 0x00002000u,
-            SDL_INIT_EVENTS = 0x00004000u,
-            SDL_INIT_NOPARACHUTE = 0x00100000u,
-            SDL_INIT_EVERYTHING = SDL_INIT_TIMER | SDL_INIT_AUDIO | SDL_INIT_VIDEO | SDL_INIT_EVENTS
-                | SDL_INIT_JOYSTICK | SDL_INIT_HAPTIC | SDL_INIT_GAMECONTROLLER
-        }
+        [DllImport(LibraryName, EntryPoint = "SDL_Init", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int Init(InitFlags flags);
 
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate int SDL_Init_d(SDL_InitFlags flags);
+        [DllImport(LibraryName, EntryPoint = "SDL_InitSubSystem", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int InitSubSystem(InitFlags flags);
 
-        private static SDL_Init_d SDL_Init_f;
+        [DllImport(LibraryName, EntryPoint = "SDL_QuitSubSystem", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void QuitSubSystem(InitFlags flags);
 
-        public static int SDL_Init(SDL_InitFlags flags) => SDL_Init_f(flags);
+        [DllImport(LibraryName, EntryPoint = "SDL_WasInit", CallingConvention = CallingConvention.Cdecl)]
+        public static extern InitFlags WasInit(InitFlags flags);
 
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate int SDL_InitSubSystem_d(SDL_InitFlags flags);
-
-        private static SDL_InitSubSystem_d SDL_InitSubSystem_f;
-
-        public static int SDL_InitSubSystem(SDL_InitFlags flags) => SDL_InitSubSystem_f(flags);
-
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate void SDL_QuitSubSystem_d(SDL_InitFlags flags);
-
-        private static SDL_QuitSubSystem_d SDL_QuitSubSystem_f;
-
-        public static void SDL_QuitSubSystem(SDL_InitFlags flags) => SDL_QuitSubSystem_f(flags);
-
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate SDL_InitFlags SDL_WasInit_d(SDL_InitFlags flags);
-
-        private static SDL_WasInit_d SDL_WasInit_f;
-
-        public static SDL_InitFlags SDL_WasInit(SDL_InitFlags flags) => SDL_WasInit_f(flags);
-
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate void SDL_Quit_d();
-
-        private static SDL_Quit_d SDL_Quit_f;
-
-        public static void SDL_Quit() => SDL_Quit_f();
+        [DllImport(LibraryName, EntryPoint = "SDL_Quit", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void Quit();
 
         private static string GetString(byte* ptr)
         {

@@ -2,137 +2,73 @@ using System.Runtime.InteropServices;
 
 namespace SharpSDL
 {
+    [StructLayout(LayoutKind.Sequential)]
+    public struct Keysym
+    {
+        public Scancode Scancode;
+        public Keycode Sym;
+        public KeyModifier Mod;
+        public uint Unused;
+    }
+
     public static unsafe partial class SDL
     {
-        [StructLayout(LayoutKind.Sequential)]
-        public struct SDL_Keysym
+        [DllImport(LibraryName, EntryPoint = "SDL_GetKeyFromName", CallingConvention = CallingConvention.Cdecl)]
+        public static extern Keycode GetKeyFromName(string name);
+
+        [DllImport(LibraryName, EntryPoint = "SDL_GetKeyFromScancode", CallingConvention = CallingConvention.Cdecl)]
+        public static extern Keycode GetKeyFromScancode(Scancode scancode);
+
+        [DllImport(LibraryName, EntryPoint = "SDL_GetKeyName", CallingConvention = CallingConvention.Cdecl)]
+        public static extern byte* GetKeyName(Keycode key);
+
+        public static string GetKeyNameString(Keycode key)
         {
-            public SDL_Scancode scancode;
-            public SDL_Keycode sym;
-            public SDL_Keymod mod;
-            public uint unused;
+            return GetString(GetKeyName(key));
         }
 
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate SDL_Keycode SDL_GetKeyFromName_d(string name);
+        [DllImport(LibraryName, EntryPoint = "SDL_GetKeyboardFocus", CallingConvention = CallingConvention.Cdecl)]
+        public static extern Window GetKeyboardFocus();
 
-        private static SDL_GetKeyFromName_d SDL_GetKeyFromName_f;
+        [DllImport(LibraryName, EntryPoint = "SDL_GetKeyboardState", CallingConvention = CallingConvention.Cdecl)]
+        public static extern byte* GetKeyboardState(int* numKeys);
 
-        public static SDL_Keycode SDL_GetKeyFromName(string name) => SDL_GetKeyFromName_f(name);
+        [DllImport(LibraryName, EntryPoint = "SDL_GetModState", CallingConvention = CallingConvention.Cdecl)]
+        public static extern KeyModifier GetModState();
 
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate SDL_Keycode SDL_GetKeyFromScancode_d(SDL_Scancode scancode);
+        [DllImport(LibraryName, EntryPoint = "SDL_GetScancodeFromKey", CallingConvention = CallingConvention.Cdecl)]
+        public static extern Scancode GetScancodeFromKey(Keycode key);
 
-        private static SDL_GetKeyFromScancode_d SDL_GetKeyFromScancode_f;
+        [DllImport(LibraryName, EntryPoint = "SDL_GetScancodeFromName", CallingConvention = CallingConvention.Cdecl)]
+        public static extern Scancode GetScancodeFromName(string name);
 
-        public static SDL_Keycode SDL_GetKeyFromScancode(SDL_Scancode scancode) => SDL_GetKeyFromScancode_f(scancode);
+        [DllImport(LibraryName, EntryPoint = "SDL_GetScancodeName", CallingConvention = CallingConvention.Cdecl)]
+        public static extern byte* GetScancodeName(Scancode scancode);
 
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate byte* SDL_GetKeyName_d(SDL_Keycode key);
-
-        private static SDL_GetKeyName_d SDL_GetKeyName_f;
-
-        public static byte* SDL_GetKeyName(SDL_Keycode key) => SDL_GetKeyName_f(key);
-
-        public static string SDL_GetKeyNameString(SDL_Keycode key)
+        public static string GetScancodeNameString(Scancode scancode)
         {
-            return GetString(SDL_GetKeyName(key));
+            return GetString(GetScancodeName(scancode));
         }
 
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate SDL_Window SDL_GetKeyboardFocus_d();
+        [DllImport(LibraryName, EntryPoint = "SDL_HasScreenKeyboardSupport", CallingConvention = CallingConvention.Cdecl)]
+        public static extern bool HasScreenKeyboardSupport();
 
-        private static SDL_GetKeyboardFocus_d SDL_GetKeyboardFocus_f;
+        [DllImport(LibraryName, EntryPoint = "SDL_IsScreenKeyboardShown", CallingConvention = CallingConvention.Cdecl)]
+        public static extern bool IsScreenKeyboardShown(Window window);
 
-        public static SDL_Window SDL_GetKeyboardFocus() => SDL_GetKeyboardFocus_f();
+        [DllImport(LibraryName, EntryPoint = "SDL_IsTextInputActive", CallingConvention = CallingConvention.Cdecl)]
+        public static extern bool IsTextInputActive();
 
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate byte* SDL_GetKeyboardState_d(int* numKeys);
+        [DllImport(LibraryName, EntryPoint = "SDL_SetModState", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SetModState(KeyModifier modstate);
 
-        private static SDL_GetKeyboardState_d SDL_GetKeyboardState_f;
+        [DllImport(LibraryName, EntryPoint = "SDL_SetTextInputRect", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SetTextInputRect(Rect* rect);
 
-        public static byte* SDL_GetKeyboardState(int* numKeys) => SDL_GetKeyboardState_f(numKeys);
+        [DllImport(LibraryName, EntryPoint = "SDL_StartTextInput", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void StartTextInput();
 
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate SDL_Keymod SDL_GetModState_d();
-
-        private static SDL_GetModState_d SDL_GetModState_f;
-
-        public static SDL_Keymod SDL_GetModState() => SDL_GetModState_f();
-
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate SDL_Scancode SDL_GetScancodeFromKey_d(SDL_Keycode key);
-
-        private static SDL_GetScancodeFromKey_d SDL_GetScancodeFromKey_f;
-
-        public static SDL_Scancode SDL_GetScancodeFromKey(SDL_Keycode key) => SDL_GetScancodeFromKey_f(key);
-
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate SDL_Scancode SDL_GetScancodeFromName_d(string name);
-
-        private static SDL_GetScancodeFromName_d SDL_GetScancodeFromName_f;
-
-        public static SDL_Scancode SDL_GetScancodeFromName(string name) => SDL_GetScancodeFromName_f(name);
-
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate byte* SDL_GetScancodeName_d(SDL_Scancode scancode);
-
-        private static SDL_GetScancodeName_d SDL_GetScancodeName_f;
-
-        public static byte* SDL_GetScancodeName(SDL_Scancode scancode) => SDL_GetScancodeName_f(scancode);
-
-        public static string SDL_GetScancodeNameString(SDL_Scancode scancode)
-        {
-            return GetString(SDL_GetScancodeName(scancode));
-        }
-
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate bool SDL_HasScreenKeyboardSupport_d();
-
-        private static SDL_HasScreenKeyboardSupport_d SDL_HasScreenKeyboardSupport_f;
-
-        public static bool SDL_HasScreenKeyboardSupport() => SDL_HasScreenKeyboardSupport_f();
-
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate bool SDL_IsScreenKeyboardShown_d(SDL_Window window);
-
-        private static SDL_IsScreenKeyboardShown_d SDL_IsScreenKeyboardShown_f;
-
-        public static bool SDL_IsScreenKeyboardShown(SDL_Window window) => SDL_IsScreenKeyboardShown_f(window);
-
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate bool SDL_IsTextInputActive_d();
-
-        private static SDL_IsTextInputActive_d SDL_IsTextInputActive_f;
-
-        public static bool SDL_IsTextInputActive() => SDL_IsTextInputActive_f();
-
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate void SDL_SetModState_d(SDL_Keymod modstate);
-
-        private static SDL_SetModState_d SDL_SetModState_f;
-
-        public static void SDL_SetModState(SDL_Keymod modstate) => SDL_SetModState_f(modstate);
-
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate void SDL_SetTextInputRect_d(SDL_Rect* rect);
-
-        private static SDL_SetTextInputRect_d SDL_SetTextInputRect_f;
-
-        public static void SDL_SetTextInputRect(SDL_Rect* rect) => SDL_SetTextInputRect_f(rect);
-
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate void SDL_StartTextInput_d();
-
-        private static SDL_StartTextInput_d SDL_StartTextInput_f;
-
-        public static void SDL_StartTextInput() => SDL_StartTextInput_f();
-
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate void SDL_StopTextInput_d();
-
-        private static SDL_StopTextInput_d SDL_StopTextInput_f;
-
-        public static void SDL_StopTextInput() => SDL_StopTextInput_f();
+        [DllImport(LibraryName, EntryPoint = "SDL_StopTextInput", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void StopTextInput();
     }
 }

@@ -4,30 +4,18 @@ namespace SharpSDL
 {
     public static unsafe partial class SDL
     {
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate byte* SDL_GetClipboardText_d();
+        [DllImport(LibraryName, EntryPoint = "SDL_GetClipboardText", CallingConvention = CallingConvention.Cdecl)]
+        public static extern byte* GetClipboardText();
 
-        private static SDL_GetClipboardText_d SDL_GetClipboardText_f;
-
-        public static byte* SDL_GetClipboardText() => SDL_GetClipboardText_f();
-
-        public static string SDL_GetClipboardTextString()
+        public static string GetClipboardTextString()
         {
-            return GetString(SDL_GetClipboardText());
+            return GetString(GetClipboardText());
         }
 
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate bool SDL_HasClipboardText_d();
+        [DllImport(LibraryName, EntryPoint = "SDL_HasClipboardText", CallingConvention = CallingConvention.Cdecl)]
+        public static extern bool HasClipboardText();
 
-        private static SDL_HasClipboardText_d SDL_HasClipboardText_f;
-
-        public static bool SDL_HasClipboardText() => SDL_HasClipboardText_f();
-
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate int SDL_SetClipboardText_d(string text);
-
-        private static SDL_SetClipboardText_d SDL_SetClipboardText_f;
-
-        public static int SDL_SetClipboardText(string text) => SDL_SetClipboardText_f(text);
+        [DllImport(LibraryName, EntryPoint = "SDL_SetClipboardText", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int SetClipboardText(string text);
     }
 }

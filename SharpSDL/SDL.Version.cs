@@ -3,41 +3,29 @@ using System.Runtime.InteropServices;
 
 namespace SharpSDL
 {
+    [StructLayout(LayoutKind.Sequential)]
+    public struct Version
+    {
+        public const int SizeInBytes = 3;
+        public byte Major;
+        public byte Minor;
+        public byte Patch;
+    }
+
     public static unsafe partial class SDL
     {
-        [StructLayout(LayoutKind.Sequential)]
-        public struct SDL_version
+        [DllImport(LibraryName, EntryPoint = "SDL_GetVersion", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void GetVersion(Version* version);
+
+        [DllImport(LibraryName, EntryPoint = "SDL_GetRevision", CallingConvention = CallingConvention.Cdecl)]
+        public static extern byte* GetRevision();
+
+        public static string GetRevisionString()
         {
-            public const int SizeInBytes = 3;
-            public byte major;
-            public byte minor;
-            public byte patch;
+            return GetString(GetRevision());
         }
 
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate void SDL_GetVersion_d(SDL_version* version);
-
-        private static SDL_GetVersion_d SDL_GetVersion_f;
-
-        public static void SDL_GetVersion(SDL_version* version) => SDL_GetVersion_f(version);
-
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate byte* SDL_GetRevision_d();
-
-        private static SDL_GetRevision_d SDL_GetRevision_f;
-
-        public static byte* SDL_GetRevision() => SDL_GetRevision_f();
-
-        public static string SDL_GetRevisionString()
-        {
-            return GetString(SDL_GetRevision());
-        }
-
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate int SDL_GetRevisionNumber_d();
-
-        private static SDL_GetRevisionNumber_d SDL_GetRevisionNumber_f;
-
-        public static int SDL_GetRevisionNumber() => SDL_GetRevisionNumber_f();
+        [DllImport(LibraryName, EntryPoint = "SDL_GetRevisionNumber", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int GetRevisionNumber();
     }
 }

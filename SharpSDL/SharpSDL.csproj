@@ -5,7 +5,7 @@
     <Version>1.2.1</Version>
     <Authors>hasali19</Authors>
     <RepositoryUrl>https://github.com/hasali19/SharpSDL</RepositoryUrl>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFrameworks>netcoreapp3.0;netstandard2.0</TargetFrameworks>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Description>C# bindings for SDL2.</Description>
     <PackageTags>SDL2 Game Window</PackageTags>
@@ -21,7 +21,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="NativeLibraryLoader" Version="1.0.11" />
+    <None Include="runtimes\**\*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

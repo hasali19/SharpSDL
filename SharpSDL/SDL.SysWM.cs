@@ -3,69 +3,65 @@ using System.Runtime.InteropServices;
 
 namespace SharpSDL
 {
+    public enum SysWMType
+    {
+        Unknown,
+        Windows,
+        X11,
+        DirectFB,
+        Cocoa,
+        UIKit,
+        Wayland,
+        Mir,
+        WinRT,
+        Android,
+        Vivante,
+        OS2
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public struct SysWMInfo
+    {
+        public Version Version;
+        public SysWMType Subsystem;
+        public SysWMInfoUnion Info;
+    }
+
+    [StructLayout(LayoutKind.Explicit)]
+    public struct SysWMInfoUnion
+    {
+        [FieldOffset(0)]
+        public SysWMInfoWin Win;
+        [FieldOffset(0)]
+        public SysWMInfoX11 X11;
+        [FieldOffset(0)]
+        public SysWMInfoCocoa Cocoa;
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public struct SysWMInfoWin
+    {
+        public IntPtr Window;
+        public IntPtr HDc;
+        public IntPtr HInstance;
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public struct SysWMInfoCocoa
+    {
+        public IntPtr Window;
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public struct SysWMInfoX11
+    {
+        public IntPtr Display;
+        public IntPtr Window;
+    }
+
     public static unsafe partial class SDL
     {
-        public enum SDL_SYSWM_TYPE
-        {
-            SDL_SYSWM_UNKNOWN,
-            SDL_SYSWM_WINDOWS,
-            SDL_SYSWM_X11,
-            SDL_SYSWM_DIRECTFB,
-            SDL_SYSWM_COCOA,
-            SDL_SYSWM_UIKIT,
-            SDL_SYSWM_WAYLAND,
-            SDL_SYSWM_MIR,
-            SDL_SYSWM_WINRT,
-            SDL_SYSWM_ANDROID,
-            SDL_SYSWM_VIVANTE,
-            SDL_SYSWM_OS2
-        }
-
-        [StructLayout(LayoutKind.Sequential)]
-        public struct SDL_SysWMinfo
-        {
-            public SDL_version version;
-            public SDL_SYSWM_TYPE subsystem;
-            public SDL_SysWMinfoUnion info;
-        }
-
-        [StructLayout(LayoutKind.Explicit)]
-        public struct SDL_SysWMinfoUnion
-        {
-            [FieldOffset(0)]
-            public SDL_SysWMinfoWin win;
-            [FieldOffset(0)]
-            public SDL_SysWMinfoX11 x11;
-            [FieldOffset(0)]
-            public SDL_SysWMinfoCocoa cocoa;
-        }
-
-        [StructLayout(LayoutKind.Sequential)]
-        public struct SDL_SysWMinfoWin
-        {
-            public IntPtr window;
-            public IntPtr hdc;
-            public IntPtr hinstance;
-        }
-
-        [StructLayout(LayoutKind.Sequential)]
-        public struct SDL_SysWMinfoCocoa
-        {
-            public IntPtr window;
-        }
-
-        [StructLayout(LayoutKind.Sequential)]
-        public struct SDL_SysWMinfoX11
-        {
-            public IntPtr display;
-            public IntPtr window;
-        }
-
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate bool SDL_GetWindowWMInfo_d(SDL_Window window, SDL_SysWMinfo* info);
-
-        private static SDL_GetWindowWMInfo_d SDL_GetWindowWMInfo_f;
-
-        public static bool SDL_GetWindowWMInfo(SDL_Window window, SDL_SysWMinfo* info) => SDL_GetWindowWMInfo_f(window, info);
+        [DllImport(LibraryName, EntryPoint = "SDL_GetWindowWMInfo", CallingConvention = CallingConvention.Cdecl)]
+        public static extern bool GetWindowWMInfo(Window window, SysWMInfo* info);
     }
 }

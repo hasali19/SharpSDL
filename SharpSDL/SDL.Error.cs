@@ -5,23 +5,15 @@ namespace SharpSDL
 {
     public static unsafe partial class SDL
     {
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate byte* SDL_GetError_d();
+        [DllImport(LibraryName, EntryPoint = "SDL_GetError", CallingConvention = CallingConvention.Cdecl)]
+        public static extern byte* GetError();
 
-        private static SDL_GetError_d SDL_GetError_f;
-
-        public static byte* SDL_GetError() => SDL_GetError_f();
-
-        public static string SDL_GetErrorString()
+        public static string GetErrorString()
         {
-            return GetString(SDL_GetError());
+            return GetString(GetError());
         }
 
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate void SDL_ClearError_d();
-
-        private static SDL_ClearError_d SDL_ClearError_f;
-
-        public static void SDL_ClearError() => SDL_ClearError_f();
+        [DllImport(LibraryName, EntryPoint = "SDL_ClearError", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void ClearError();
     }
 }
