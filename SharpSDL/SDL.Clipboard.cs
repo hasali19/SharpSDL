@@ -4,7 +4,7 @@ namespace SharpSDL
 {
     public static unsafe partial class SDL
     {
-        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(LibraryName, EntryPoint = "SDL_GetClipboardText", CallingConvention = CallingConvention.Cdecl)]
         public static extern byte* GetClipboardText();
 
         public static string GetClipboardTextString()
@@ -12,10 +12,10 @@ namespace SharpSDL
             return GetString(GetClipboardText());
         }
 
-        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(LibraryName, EntryPoint = "SDL_HasClipboardText", CallingConvention = CallingConvention.Cdecl)]
         public static extern bool HasClipboardText();
 
-        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(LibraryName, EntryPoint = "SDL_SetClipboardText", CallingConvention = CallingConvention.Cdecl)]
         public static extern int SetClipboardText(string text);
     }
 }

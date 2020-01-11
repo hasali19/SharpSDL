@@ -92,40 +92,40 @@ namespace SharpSDL
             }
         }
 
-        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(LibraryName, EntryPoint = "SDL_GameControllerAddMapping", CallingConvention = CallingConvention.Cdecl)]
         public static extern int GameControllerAddMapping(string mappingString);
 
-        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(LibraryName, EntryPoint = "SDL_GameControllerClose", CallingConvention = CallingConvention.Cdecl)]
         public static extern int GameControllerClose(GameController gamecontroller);
 
-        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(LibraryName, EntryPoint = "SDL_GameControllerFromInstanceID", CallingConvention = CallingConvention.Cdecl)]
         public static extern GameController GameControllerFromInstanceID(JoystickID joyid);
 
-        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(LibraryName, EntryPoint = "SDL_GameControllerGetAttached", CallingConvention = CallingConvention.Cdecl)]
         public static extern bool GameControllerGetAttached(GameController gamecontroller);
 
-        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(LibraryName, EntryPoint = "SDL_GameControllerGetAxis", CallingConvention = CallingConvention.Cdecl)]
         public static extern short GameControllerGetAxis(GameController gameController, GameControllerAxis axis);
 
-        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(LibraryName, EntryPoint = "SDL_GameControllerGetAxisFromString", CallingConvention = CallingConvention.Cdecl)]
         public static extern GameControllerAxis GameControllerGetAxisFromString(string pchString);
 
-        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(LibraryName, EntryPoint = "SDL_GameControllerGetBindForAxis", CallingConvention = CallingConvention.Cdecl)]
         public static extern GameControllerButtonBind GameControllerGetBindForAxis(GameController gameController, GameControllerAxis axis);
 
-        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(LibraryName, EntryPoint = "SDL_GameControllerGetBindForButton", CallingConvention = CallingConvention.Cdecl)]
         public static extern GameControllerButtonBind GameControllerGetBindForButton(GameController gameController, GameControllerButton buttons);
 
-        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(LibraryName, EntryPoint = "SDL_GameControllerGetButton", CallingConvention = CallingConvention.Cdecl)]
         public static extern byte GameControllerGetButton(GameController gameController, GameControllerButton button);
 
-        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(LibraryName, EntryPoint = "SDL_GameControllerGetButtonFromString", CallingConvention = CallingConvention.Cdecl)]
         public static extern GameControllerButton GameControllerGetButtonFromString(string pchString);
 
-        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(LibraryName, EntryPoint = "SDL_GameControllerGetJoystick", CallingConvention = CallingConvention.Cdecl)]
         public static extern Joystick GameControllerGetJoystick(GameController gameController);
 
-        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(LibraryName, EntryPoint = "SDL_GameControllerGetStringForAxis", CallingConvention = CallingConvention.Cdecl)]
         public static extern byte* GameControllerGetStringForAxis(GameControllerAxis axis);
 
         public static string GameControllerGetStringForAxisString(GameControllerAxis axis)
@@ -133,7 +133,7 @@ namespace SharpSDL
             return GetString(GameControllerGetStringForAxis(axis));
         }
 
-        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(LibraryName, EntryPoint = "SDL_GameControllerGetStringForButton", CallingConvention = CallingConvention.Cdecl)]
         public static extern byte* GameControllerGetStringForButton(GameControllerButton button);
 
         public static string GameControllerGetStringForButtonString(GameControllerButton button)
@@ -141,7 +141,7 @@ namespace SharpSDL
             return GetString(GameControllerGetStringForButton(button));
         }
 
-        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(LibraryName, EntryPoint = "SDL_GameControllerMapping", CallingConvention = CallingConvention.Cdecl)]
         public static extern byte* GameControllerMapping(GameController gameController);
 
         public static string GameControllerMappingString(GameController gameController)
@@ -149,7 +149,7 @@ namespace SharpSDL
             return GetString(GameControllerMapping(gameController));
         }
 
-        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(LibraryName, EntryPoint = "SDL_GameControllerMappingForGUID", CallingConvention = CallingConvention.Cdecl)]
         public static extern byte* GameControllerMappingForGUID(Guid guid);
 
         public static string GameControllerMappingForGUIDString(Guid guid)
@@ -157,7 +157,7 @@ namespace SharpSDL
             return GetString(GameControllerMappingForGUID(guid));
         }
 
-        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(LibraryName, EntryPoint = "SDL_GameControllerName", CallingConvention = CallingConvention.Cdecl)]
         public static extern byte* GameControllerName(GameController gameController);
 
         public static string GameControllerNameString(GameController gameController)
@@ -165,7 +165,7 @@ namespace SharpSDL
             return GetString(GameControllerName(gameController));
         }
 
-        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(LibraryName, EntryPoint = "SDL_GameControllerNameForIndex", CallingConvention = CallingConvention.Cdecl)]
         public static extern byte* GameControllerNameForIndex(int joystickIndex);
 
         public static string GameControllerNameForIndexString(int joystickIndex)
@@ -173,13 +173,13 @@ namespace SharpSDL
             return GetString(GameControllerNameForIndex(joystickIndex));
         }
 
-        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(LibraryName, EntryPoint = "SDL_GameControllerOpen", CallingConvention = CallingConvention.Cdecl)]
         public static extern GameController GameControllerOpen(int joystickIndex);
 
-        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(LibraryName, EntryPoint = "SDL_GameControllerUpdate", CallingConvention = CallingConvention.Cdecl)]
         public static extern void GameControllerUpdate();
 
-        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(LibraryName, EntryPoint = "SDL_IsGameController", CallingConvention = CallingConvention.Cdecl)]
         public static extern bool IsGameController(int joystickIndex);
     }
 }

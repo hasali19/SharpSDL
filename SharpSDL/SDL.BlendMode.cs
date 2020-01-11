@@ -36,7 +36,7 @@ namespace SharpSDL
             OneMinusDstAlpha = 0xA
         }
 
-        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(LibraryName, EntryPoint = "SDL_ComposeCustomBlendMode", CallingConvention = CallingConvention.Cdecl)]
         public static extern BlendMode ComposeCustomBlendMode(
             BlendFactor srcColorFactor,
             BlendFactor dstColorFactor,

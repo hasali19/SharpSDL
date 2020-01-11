@@ -14,10 +14,10 @@ namespace SharpSDL
             public byte Patch;
         }
 
-        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(LibraryName, EntryPoint = "SDL_GetVersion", CallingConvention = CallingConvention.Cdecl)]
         public static extern void GetVersion(Version* version);
 
-        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(LibraryName, EntryPoint = "SDL_GetRevision", CallingConvention = CallingConvention.Cdecl)]
         public static extern byte* GetRevision();
 
         public static string GetRevisionString()
@@ -25,7 +25,7 @@ namespace SharpSDL
             return GetString(GetRevision());
         }
 
-        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(LibraryName, EntryPoint = "SDL_GetRevisionNumber", CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetRevisionNumber();
     }
 }

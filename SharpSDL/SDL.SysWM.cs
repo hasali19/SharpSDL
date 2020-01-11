@@ -61,7 +61,7 @@ namespace SharpSDL
             public IntPtr Window;
         }
 
-        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(LibraryName, EntryPoint = "SDL_GetWindowWMInfo", CallingConvention = CallingConvention.Cdecl)]
         public static extern bool GetWindowWMInfo(Window window, SysWMInfo* info);
     }
 }
