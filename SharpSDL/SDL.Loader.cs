@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
@@ -21,21 +22,38 @@ namespace SharpSDL
         {
             if (_handle == IntPtr.Zero)
             {
-                var libPath = libraryName;
-                var baseDir = Path.GetDirectoryName(assembly.Location);
-                var nativeLibDir = Path.Combine(baseDir, "runtimes");
-
-                if (Directory.Exists(nativeLibDir))
+                foreach (var path in GetSearchPaths(assembly))
                 {
-                    libPath = Path.Combine(nativeLibDir, GetRuntimeIdentifier(), "native", GetNativeLibraryName());
-                }
+                    if (path != null && NativeLibrary.TryLoad(path, out _handle))
+                    {
 #if DEBUG
-                Console.WriteLine($"Loading SDL2 from: {libPath}");
+                        Console.WriteLine($"Loading SDL2 from: {path}");
 #endif
-                _handle = NativeLibrary.Load(libPath);
+                        return _handle;
+                    }
+                }
             }
 
             return _handle;
+        }
+
+        private static IEnumerable<string> GetSearchPaths(Assembly assembly)
+        {
+            // Try loading from environment variable, if set
+            yield return Environment.GetEnvironmentVariable("SHARPSDL_SDL2");
+
+            var libName = GetNativeLibraryName();
+
+            // Try loading from runtimes/<rid>/native/<lib-name>
+            yield return Path.Combine(
+                Path.GetDirectoryName(assembly.Location),
+                "runtimes",
+                GetRuntimeIdentifier(),
+                "native",
+                libName);
+
+            // Finally, just try the name of the library
+            yield return libName;
         }
 
         private static string GetRuntimeIdentifier()
@@ -75,7 +93,7 @@ namespace SharpSDL
 
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
             {
-                return "libSDL2.so";
+                return "libSDL2-2.0.so.0";
             }
 
             if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
