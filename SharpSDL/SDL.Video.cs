@@ -3,132 +3,132 @@ using System.Runtime.InteropServices;
 
 namespace SharpSDL
 {
+    [Flags]
+    public enum WindowFlags : uint
+    {
+        Fullscreen = 0x00000001,
+        OpenGL = 0x00000002,
+        Shown = 0x00000004,
+        Hidden = 0x00000008,
+        Borderless = 0x00000010,
+        Resizable = 0x00000020,
+        Minimized = 0x00000040,
+        Maximized = 0x00000080,
+        InputGrabbed = 0x00000100,
+        InputFocus = 0x00000200,
+        MouseFocus = 0x00000400,
+        FullscreenDesktop = (Fullscreen | 0x00001000),
+        Foreign = 0x00000800,
+        AllowHighDPI = 0x00002000,
+        MouseCapture = 0x00004000,
+        AlwaysOnTop = 0x00008000,
+        SkipTaskbar = 0x00010000,
+        Utility = 0x00020000,
+        Tooltip = 0x00040000,
+        PopupMenu = 0x00080000,
+        Vulkan = 0x10000000
+    }
+
+    public enum HitTestResult
+    {
+        Normal,
+        Draggable,
+        ResizeTopLeft,
+        ResizeTop,
+        ResizeTopRight,
+        ResizeRight,
+        ResizeBottomRight,
+        ResizeBottom,
+        ResizeBottomLeft,
+        ResizeLeft
+    }
+
+    public enum WindowEventID : byte
+    {
+        None,
+        Shown,
+        Hidden,
+        Exposed,
+        Moved,
+        Resized,
+        SizeChanged,
+        Minimized,
+        Maximized,
+        Restored,
+        Enter,
+        Leave,
+        FocusGained,
+        FocusLost,
+        Close,
+        TakeFocus,
+        HitTest
+    }
+
+    public enum OpenGLProfile
+    {
+        Core = 0x0001,
+        Compatibility = 0x0002,
+        ES = 0x0004
+    }
+
+    public enum OpenGLContextFlag
+    {
+        Debug = 0x0001,
+        FowardCompatible = 0x0002,
+        RobustAccess = 0x0004,
+        ResetIsolation = 0x0008
+    }
+
+    public enum OpenGLContextReleaseBehaviour
+    {
+        None = 0x0000,
+        Flush = 0x0001
+    }
+
+    public enum OpenGLContextResetNotification
+    {
+        NoNotification = 0x0000,
+        LoseContext = 0x0001
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public struct Window
+    {
+        private readonly IntPtr ptr;
+
+        public Window(IntPtr ptr)
+        {
+            this.ptr = ptr;
+        }
+
+        public static implicit operator IntPtr(Window window)
+        {
+            return window.ptr;
+        }
+
+        public static implicit operator Window(IntPtr ptr)
+        {
+            return new Window(ptr);
+        }
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public struct DisplayMode
+    {
+        public uint Format;
+        public int Width;
+        public int Height;
+        public int RefreshRate;
+        public IntPtr DriverData;
+    }
+
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate HitTestResult HitTest(Window window, Point* area, void* data);
+
     public static unsafe partial class SDL
     {
         public const int WINDOWPOS_UNDEFINED = 0x1FFF0000;
         public const int WINDOWPOS_CENTERED = 0x2FFF0000;
-
-        [Flags]
-        public enum WindowFlags : uint
-        {
-            Fullscreen = 0x00000001,
-            OpenGL = 0x00000002,
-            Shown = 0x00000004,
-            Hidden = 0x00000008,
-            Borderless = 0x00000010,
-            Resizable = 0x00000020,
-            Minimized = 0x00000040,
-            Maximized = 0x00000080,
-            InputGrabbed = 0x00000100,
-            InputFocus = 0x00000200,
-            MouseFocus = 0x00000400,
-            FullscreenDesktop = (Fullscreen | 0x00001000),
-            Foreign = 0x00000800,
-            AllowHighDPI = 0x00002000,
-            MouseCapture = 0x00004000,
-            AlwaysOnTop = 0x00008000,
-            SkipTaskbar = 0x00010000,
-            Utility = 0x00020000,
-            Tooltip = 0x00040000,
-            PopupMenu = 0x00080000,
-            Vulkan = 0x10000000
-        }
-
-        public enum HitTestResult
-        {
-            Normal,
-            Draggable,
-            ResizeTopLeft,
-            ResizeTop,
-            ResizeTopRight,
-            ResizeRight,
-            ResizeBottomRight,
-            ResizeBottom,
-            ResizeBottomLeft,
-            ResizeLeft
-        }
-
-        public enum WindowEventID : byte
-        {
-            None,
-            Shown,
-            Hidden,
-            Exposed,
-            Moved,
-            Resized,
-            SizeChanged,
-            Minimized,
-            Maximized,
-            Restored,
-            Enter,
-            Leave,
-            FocusGained,
-            FocusLost,
-            Close,
-            TakeFocus,
-            HitTest
-        }
-
-        public enum OpenGLProfile
-        {
-            Core = 0x0001,
-            Compatibility = 0x0002,
-            ES = 0x0004
-        }
-
-        public enum OpenGLContextFlag
-        {
-            Debug = 0x0001,
-            FowardCompatible = 0x0002,
-            RobustAccess = 0x0004,
-            ResetIsolation = 0x0008
-        }
-
-        public enum OpenGLContextReleaseBehaviour
-        {
-            None = 0x0000,
-            Flush = 0x0001
-        }
-
-        public enum OpenGLContextResetNotification
-        {
-            NoNotification = 0x0000,
-            LoseContext = 0x0001
-        }
-
-        [StructLayout(LayoutKind.Sequential)]
-        public struct Window
-        {
-            private readonly IntPtr ptr;
-
-            public Window(IntPtr ptr)
-            {
-                this.ptr = ptr;
-            }
-
-            public static implicit operator IntPtr(Window window)
-            {
-                return window.ptr;
-            }
-
-            public static implicit operator Window(IntPtr ptr)
-            {
-                return new Window(ptr);
-            }
-        }
-
-        [StructLayout(LayoutKind.Sequential)]
-        public struct DisplayMode
-        {
-            public uint Format;
-            public int Width;
-            public int Height;
-            public int RefreshRate;
-            public IntPtr DriverData;
-        }
-
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        public delegate HitTestResult HitTest(Window window, Point* area, void* data);
 
         [DllImport(LibraryName, EntryPoint = "SDL_CreateWindow", CallingConvention = CallingConvention.Cdecl)]
         public static extern Window CreateWindow(string title, int x, int y, int width, int height, WindowFlags flags);

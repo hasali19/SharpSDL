@@ -3,70 +3,70 @@ using System.Runtime.InteropServices;
 
 namespace SharpSDL
 {
+    public enum SystemCursor
+    {
+        Arrow,
+        IBeam,
+        Wait,
+        Crosshair,
+        WaitArrow,
+        SizeNWSE,
+        SizeNESW,
+        SizeWE,
+        SizeNS,
+        SizeALL,
+        NO,
+        Hand
+    }
+
+    public enum MouseWheelDirection : uint
+    {
+        Normal,
+        Flipped
+    }
+
+    public enum Button : uint
+    {
+        Left = 1,
+        Middle = 2,
+        Right = 3,
+        X1 = 4,
+        X2 = 5,
+    }
+
+    [Flags]
+    public enum ButtonMask : uint
+    {
+        Left = 1 << ((int)Button.Left - 1),
+        Middle = 1 << ((int)Button.Middle - 1),
+        Right = 1 << ((int)Button.Right - 1),
+        X1 = 1 << ((int)Button.X1 - 1),
+        X2 = 1 << ((int)Button.X2 - 1)
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public struct Cursor
+    {
+        private readonly IntPtr ptr;
+
+        public Cursor(IntPtr ptr)
+        {
+            this.ptr = ptr;
+        }
+
+        public static implicit operator IntPtr(Cursor cursor)
+        {
+            return cursor.ptr;
+        }
+
+        public static implicit operator Cursor(IntPtr ptr)
+        {
+            return new Cursor(ptr);
+        }
+    }
+
     public static unsafe partial class SDL
     {
-        public enum SystemCursor
-        {
-            Arrow,
-            IBeam,
-            Wait,
-            Crosshair,
-            WaitArrow,
-            SizeNWSE,
-            SizeNESW,
-            SizeWE,
-            SizeNS,
-            SizeALL,
-            NO,
-            Hand
-        }
-
-        public enum MouseWheelDirection : uint
-        {
-            Normal,
-            Flipped
-        }
-
-        public enum Button : uint
-        {
-            Left = 1,
-            Middle = 2,
-            Right = 3,
-            X1 = 4,
-            X2 = 5,
-        }
-
-        [Flags]
-        public enum ButtonMask : uint
-        {
-            Left = 1 << ((int)Button.Left - 1),
-            Middle = 1 << ((int)Button.Middle - 1),
-            Right = 1 << ((int)Button.Right - 1),
-            X1 = 1 << ((int)Button.X1 - 1),
-            X2 = 1 << ((int)Button.X2 - 1)
-        }
-
-        [StructLayout(LayoutKind.Sequential)]
-        public struct Cursor
-        {
-            private readonly IntPtr ptr;
-
-            public Cursor(IntPtr ptr)
-            {
-                this.ptr = ptr;
-            }
-
-            public static implicit operator IntPtr(Cursor cursor)
-            {
-                return cursor.ptr;
-            }
-
-            public static implicit operator Cursor(IntPtr ptr)
-            {
-                return new Cursor(ptr);
-            }
-        }
-
         public static uint MOUSE(uint x)
         {
             return (uint)(1 << ((int)x - 1));

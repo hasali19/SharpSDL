@@ -3,60 +3,60 @@ using System.Runtime.InteropServices;
 
 namespace SharpSDL
 {
+    [StructLayout(LayoutKind.Sequential)]
+    public struct GLContext
+    {
+        private readonly IntPtr ptr;
+
+        public GLContext(IntPtr ptr)
+        {
+            this.ptr = ptr;
+        }
+
+        public static implicit operator IntPtr(GLContext context)
+        {
+            return context.ptr;
+        }
+
+        public static implicit operator GLContext(IntPtr ptr)
+        {
+            return new GLContext(ptr);
+        }
+    }
+
+    public enum GLAttr
+    {
+        RedSize,
+        GreenSize,
+        BlueSize,
+        AlphaSize,
+        BufferSize,
+        DoubleBuffer,
+        DepthSize,
+        StencilSize,
+        AccumRedSize,
+        AccumGreenSize,
+        AccumBlueSize,
+        AccumAlphaSize,
+        Stereo,
+        MultiSampleBuffers,
+        MultiSampleSamples,
+        AcceleratedVisual,
+        RetainedBacking,
+        ContextMajorVersion,
+        ContextMinorVersion,
+        ContextEGL,
+        ContextFlags,
+        ContextProfileMask,
+        ShareWithCurrentContext,
+        FramebufferSRGBCapable,
+        ContextReleaseBehaviour,
+        ContextResetNotification,
+        ContextNoError
+    }
+
     public static unsafe partial class SDL
     {
-        [StructLayout(LayoutKind.Sequential)]
-        public struct GLContext
-        {
-            private readonly IntPtr ptr;
-
-            public GLContext(IntPtr ptr)
-            {
-                this.ptr = ptr;
-            }
-
-            public static implicit operator IntPtr(GLContext context)
-            {
-                return context.ptr;
-            }
-
-            public static implicit operator GLContext(IntPtr ptr)
-            {
-                return new GLContext(ptr);
-            }
-        }
-
-        public enum GLAttr
-        {
-            RedSize,
-            GreenSize,
-            BlueSize,
-            AlphaSize,
-            BufferSize,
-            DoubleBuffer,
-            DepthSize,
-            StencilSize,
-            AccumRedSize,
-            AccumGreenSize,
-            AccumBlueSize,
-            AccumAlphaSize,
-            Stereo,
-            MultiSampleBuffers,
-            MultiSampleSamples,
-            AcceleratedVisual,
-            RetainedBacking,
-            ContextMajorVersion,
-            ContextMinorVersion,
-            ContextEGL,
-            ContextFlags,
-            ContextProfileMask,
-            ShareWithCurrentContext,
-            FramebufferSRGBCapable,
-            ContextReleaseBehaviour,
-            ContextResetNotification,
-            ContextNoError
-        }
-
         [DllImport(LibraryName, EntryPoint = "SDL_GL_BindTexture", CallingConvention = CallingConvention.Cdecl)]
         public static extern int GL_BindTexture(Texture texture, float* texw, float* texh);
 

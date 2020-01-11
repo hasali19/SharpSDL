@@ -3,84 +3,84 @@ using System.Runtime.InteropServices;
 
 namespace SharpSDL
 {
+    public enum JoystickType
+    {
+        Unknown,
+        GameController,
+        Wheel,
+        ArcadeStick,
+        FlightStick,
+        DancePad,
+        Guitar,
+        DrumKit,
+        ArcadePad,
+        Throttle
+    }
+
+    public enum JoystickPowerLevel
+    {
+        Unknown = -1,
+        Empty,
+        Low,
+        Medium,
+        Full,
+        Wired,
+        Max
+    }
+
+    public enum Hat : byte
+    {
+        Centered = 0x00,
+        Up = 0x01,
+        Right = 0x02,
+        Down = 0x04,
+        Left = 0x08,
+
+        RightUp = Right | Up,
+        RightDown = Right | Down,
+        LeftUp = Left | Up,
+        LeftDown = Left | Down
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public struct Joystick
+    {
+        private readonly IntPtr ptr;
+
+        public Joystick(IntPtr ptr)
+        {
+            this.ptr = ptr;
+        }
+
+        public static implicit operator IntPtr(Joystick joystick)
+        {
+            return joystick.ptr;
+        }
+
+        public static implicit operator Joystick(IntPtr ptr)
+        {
+            return new Joystick(ptr);
+        }
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public struct JoystickID
+    {
+        private readonly int id;
+
+        public JoystickID(int id)
+        {
+            this.id = id;
+        }
+
+        public static implicit operator int(JoystickID joystickID)
+        {
+            return joystickID.id;
+        }
+    }
+
     public static unsafe partial class SDL
     {
-        public enum JoystickType
-        {
-            Unknown,
-            GameController,
-            Wheel,
-            ArcadeStick,
-            FlightStick,
-            DancePad,
-            Guitar,
-            DrumKit,
-            ArcadePad,
-            Throttle
-        }
-
-        public enum JoystickPowerLevel
-        {
-            Unknown = -1,
-            Empty,
-            Low,
-            Medium,
-            Full,
-            Wired,
-            Max
-        }
-
-        public enum Hat : byte
-        {
-            Centered = 0x00,
-            Up = 0x01,
-            Right = 0x02,
-            Down = 0x04,
-            Left = 0x08,
-
-            RightUp = Right | Up,
-            RightDown = Right | Down,
-            LeftUp = Left | Up,
-            LeftDown = Left | Down
-        }
-
-        [StructLayout(LayoutKind.Sequential)]
-        public struct Joystick
-        {
-            private readonly IntPtr ptr;
-
-            public Joystick(IntPtr ptr)
-            {
-                this.ptr = ptr;
-            }
-
-            public static implicit operator IntPtr(Joystick joystick)
-            {
-                return joystick.ptr;
-            }
-
-            public static implicit operator Joystick(IntPtr ptr)
-            {
-                return new Joystick(ptr);
-            }
-        }
-
-        [StructLayout(LayoutKind.Sequential)]
-        public struct JoystickID
-        {
-            private readonly int id;
-
-            public JoystickID(int id)
-            {
-                this.id = id;
-            }
-
-            public static implicit operator int(JoystickID joystickID)
-            {
-                return joystickID.id;
-            }
-        }
-
         [DllImport(LibraryName, EntryPoint = "SDL_JoystickClose", CallingConvention = CallingConvention.Cdecl)]
         public static extern void JoystickClose(Joystick joystick);
 

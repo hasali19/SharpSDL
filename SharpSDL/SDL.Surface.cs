@@ -3,29 +3,29 @@ using System.Runtime.InteropServices;
 
 namespace SharpSDL
 {
+    [StructLayout(LayoutKind.Sequential)]
+    public unsafe struct Surface
+    {
+        public uint Flags;
+        public PixelFormat* Format;
+        public int W;
+        public int H;
+        public int Pitch;
+        public void* Pixels;
+        public void* UserData;
+        public int Locked;
+        public void* LockData;
+        public Rect ClipRect;
+        public IntPtr Map;
+        public int RefCount;
+    }
+
     public static unsafe partial class SDL
     {
         public const uint SWSURFACE = 0;
         public const uint PREALLOC = 0x00000001;
         public const uint RLEACCEL = 0x00000002;
         public const uint DONTFREE = 0x00000004;
-
-        [StructLayout(LayoutKind.Sequential)]
-        public struct Surface
-        {
-            public uint Flags;
-            public PixelFormat* Format;
-            public int W;
-            public int H;
-            public int Pitch;
-            public void* Pixels;
-            public void* UserData;
-            public int Locked;
-            public void* LockData;
-            public Rect ClipRect;
-            public IntPtr Map;
-            public int RefCount;
-        }
 
         public static int BlitScaled(Surface* src, Rect* srcrect, Surface* dst, Rect* dstrect) => UpperBlitScaled(src, srcrect, dst, dstrect);
 

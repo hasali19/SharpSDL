@@ -4,24 +4,24 @@ using System.Text;
 
 namespace SharpSDL
 {
+    [Flags]
+    public enum InitFlags : uint
+    {
+        None = 0,
+        Timer = 0x00000001u,
+        Audio = 0x00000010u,
+        Video = 0x00000020u,
+        Joystick = 0x00000200u,
+        Haptic = 0x00001000u,
+        GameController = 0x00002000u,
+        Events = 0x00004000u,
+        NoParachute = 0x00100000u,
+        Everything = Timer | Audio | Video | Events
+            | Joystick | Haptic | GameController
+    }
+
     public static unsafe partial class SDL
     {
-        [Flags]
-        public enum InitFlags : uint
-        {
-            None = 0,
-            Timer = 0x00000001u,
-            Audio = 0x00000010u,
-            Video = 0x00000020u,
-            Joystick = 0x00000200u,
-            Haptic = 0x00001000u,
-            GameController = 0x00002000u,
-            Events = 0x00004000u,
-            NoParachute = 0x00100000u,
-            Everything = Timer | Audio | Video | Events
-                | Joystick | Haptic | GameController
-        }
-
         [DllImport(LibraryName, EntryPoint = "SDL_Init", CallingConvention = CallingConvention.Cdecl)]
         public static extern int Init(InitFlags flags);
 

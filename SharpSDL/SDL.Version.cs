@@ -3,17 +3,17 @@ using System.Runtime.InteropServices;
 
 namespace SharpSDL
 {
+    [StructLayout(LayoutKind.Sequential)]
+    public struct Version
+    {
+        public const int SizeInBytes = 3;
+        public byte Major;
+        public byte Minor;
+        public byte Patch;
+    }
+
     public static unsafe partial class SDL
     {
-        [StructLayout(LayoutKind.Sequential)]
-        public struct Version
-        {
-            public const int SizeInBytes = 3;
-            public byte Major;
-            public byte Minor;
-            public byte Patch;
-        }
-
         [DllImport(LibraryName, EntryPoint = "SDL_GetVersion", CallingConvention = CallingConvention.Cdecl)]
         public static extern void GetVersion(Version* version);
 

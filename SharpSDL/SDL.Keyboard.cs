@@ -2,17 +2,17 @@ using System.Runtime.InteropServices;
 
 namespace SharpSDL
 {
+    [StructLayout(LayoutKind.Sequential)]
+    public struct Keysym
+    {
+        public Scancode Scancode;
+        public Keycode Sym;
+        public KeyModifier Mod;
+        public uint Unused;
+    }
+
     public static unsafe partial class SDL
     {
-        [StructLayout(LayoutKind.Sequential)]
-        public struct Keysym
-        {
-            public Scancode Scancode;
-            public Keycode Sym;
-            public KeyModifier Mod;
-            public uint Unused;
-        }
-
         [DllImport(LibraryName, EntryPoint = "SDL_GetKeyFromName", CallingConvention = CallingConvention.Cdecl)]
         public static extern Keycode GetKeyFromName(string name);
 

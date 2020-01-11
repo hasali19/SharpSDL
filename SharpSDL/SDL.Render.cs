@@ -3,93 +3,93 @@ using System.Runtime.InteropServices;
 
 namespace SharpSDL
 {
+    [Flags]
+    public enum RendererFlags : uint
+    {
+        Software = 0x00000001,
+        Accelerated = 0x00000002,
+        PresentVsync = 0x00000004,
+        TargetTexture = 0x00000008
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public unsafe struct RendererInfo
+    {
+        public byte* Name;
+        public RendererFlags Flags;
+        public uint NumTextureFormats;
+        public fixed uint TextureFormats[16];
+        public int MaxTextureWidth;
+        public int MaxTextureHeight;
+    }
+
+    public enum TextureAccess
+    {
+        Static,
+        Streaming,
+        Target
+    }
+
+    [Flags]
+    public enum TextureModulate : uint
+    {
+        None = 0x00000000,
+        Color = 0x00000001,
+        Alpha = 0x00000002
+    }
+
+    [Flags]
+    public enum RendererFlip : uint
+    {
+        None = 0x00000000,
+        Horizontal = 0x00000001,
+        Vertical = 0x00000002
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public struct Renderer
+    {
+        private readonly IntPtr ptr;
+
+        public Renderer(IntPtr ptr)
+        {
+            this.ptr = ptr;
+        }
+
+        public static implicit operator IntPtr(Renderer renderer)
+        {
+            return renderer.ptr;
+        }
+
+        public static implicit operator Renderer(IntPtr ptr)
+        {
+            return new Renderer(ptr);
+        }
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public struct Texture
+    {
+        private readonly IntPtr ptr;
+
+        public Texture(IntPtr ptr)
+        {
+            this.ptr = ptr;
+        }
+
+        public static implicit operator IntPtr(Texture texture)
+        {
+            return texture.ptr;
+        }
+
+        public static implicit operator Texture(IntPtr ptr)
+        {
+            return new Texture(ptr);
+        }
+    }
+
     public static unsafe partial class SDL
     {
-        [Flags]
-        public enum RendererFlags : uint
-        {
-            Software = 0x00000001,
-            Accelerated = 0x00000002,
-            PresentVsync = 0x00000004,
-            TargetTexture = 0x00000008
-        }
-
-        [StructLayout(LayoutKind.Sequential)]
-        public struct RendererInfo
-        {
-            public byte* Name;
-            public RendererFlags Flags;
-            public uint NumTextureFormats;
-            public fixed uint TextureFormats[16];
-            public int MaxTextureWidth;
-            public int MaxTextureHeight;
-        }
-
-        public enum TextureAccess
-        {
-            Static,
-            Streaming,
-            Target
-        }
-
-        [Flags]
-        public enum TextureModulate : uint
-        {
-            None = 0x00000000,
-            Color = 0x00000001,
-            Alpha = 0x00000002
-        }
-
-        [Flags]
-        public enum RendererFlip : uint
-        {
-            None = 0x00000000,
-            Horizontal = 0x00000001,
-            Vertical = 0x00000002
-        }
-
-        [StructLayout(LayoutKind.Sequential)]
-        public struct Renderer
-        {
-            private readonly IntPtr ptr;
-
-            public Renderer(IntPtr ptr)
-            {
-                this.ptr = ptr;
-            }
-
-            public static implicit operator IntPtr(Renderer renderer)
-            {
-                return renderer.ptr;
-            }
-
-            public static implicit operator Renderer(IntPtr ptr)
-            {
-                return new Renderer(ptr);
-            }
-        }
-
-        [StructLayout(LayoutKind.Sequential)]
-        public struct Texture
-        {
-            private readonly IntPtr ptr;
-
-            public Texture(IntPtr ptr)
-            {
-                this.ptr = ptr;
-            }
-
-            public static implicit operator IntPtr(Texture texture)
-            {
-                return texture.ptr;
-            }
-
-            public static implicit operator Texture(IntPtr ptr)
-            {
-                return new Texture(ptr);
-            }
-        }
-
         [DllImport(LibraryName, EntryPoint = "SDL_CreateRenderer", CallingConvention = CallingConvention.Cdecl)]
         public static extern Renderer CreateRenderer(Window window, int index, RendererFlags flags);
 

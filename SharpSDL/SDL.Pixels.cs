@@ -2,50 +2,50 @@ using System.Runtime.InteropServices;
 
 namespace SharpSDL
 {
+    [StructLayout(LayoutKind.Sequential)]
+    public struct Color
+    {
+        public byte R;
+        public byte G;
+        public byte B;
+        public byte A;
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public unsafe struct Palette
+    {
+        public int NumColors;
+        public Color* Colors;
+        public uint Version;
+        public int RefCount;
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public unsafe struct PixelFormat
+    {
+        public uint Format;
+        public Palette* Palette;
+        public byte BitsPerPixel;
+        public byte BytesPerPixel;
+        public fixed byte Padding[2];
+        public uint RMask;
+        public uint GMask;
+        public uint BMask;
+        public uint AMask;
+        public byte RLoss;
+        public byte GLoss;
+        public byte BLoss;
+        public byte ALoss;
+        public byte RShift;
+        public byte GShift;
+        public byte BShift;
+        public byte AShift;
+        public int RefCount;
+        public PixelFormat* Next;
+    }
+
     public static unsafe partial class SDL
     {
-        [StructLayout(LayoutKind.Sequential)]
-        public struct Color
-        {
-            public byte R;
-            public byte G;
-            public byte B;
-            public byte A;
-        }
-
-        [StructLayout(LayoutKind.Sequential)]
-        public struct Palette
-        {
-            public int NumColors;
-            public Color* Colors;
-            public uint Version;
-            public int RefCount;
-        }
-
-        [StructLayout(LayoutKind.Sequential)]
-        public struct PixelFormat
-        {
-            public uint Format;
-            public Palette* Palette;
-            public byte BitsPerPixel;
-            public byte BytesPerPixel;
-            public fixed byte Padding[2];
-            public uint RMask;
-            public uint GMask;
-            public uint BMask;
-            public uint AMask;
-            public byte RLoss;
-            public byte GLoss;
-            public byte BLoss;
-            public byte ALoss;
-            public byte RShift;
-            public byte GShift;
-            public byte BShift;
-            public byte AShift;
-            public int RefCount;
-            public PixelFormat* Next;
-        }
-
         [DllImport(LibraryName, EntryPoint = "SDL_AllocFormat", CallingConvention = CallingConvention.Cdecl)]
         public static extern PixelFormat* AllocFormat(uint pixel_format);
 

@@ -3,95 +3,95 @@ using System.Runtime.InteropServices;
 
 namespace SharpSDL
 {
+    public enum GameControllerBindType
+    {
+        None = 0,
+        Button,
+        Axis,
+        Hat
+    }
+
+    public enum GameControllerAxis
+    {
+        Invalid = -1,
+        LeftX,
+        LeftY,
+        RightX,
+        RightY,
+        TriggerLeft,
+        TriggerRight,
+        Max
+    }
+
+    public enum GameControllerButton
+    {
+        Invalid = -1,
+        A,
+        B,
+        X,
+        Y,
+        Back,
+        Guide,
+        Start,
+        LeftStick,
+        RightStick,
+        LeftShoulder,
+        RightShoulder,
+        DpadUp,
+        DpadDown,
+        DpadLeft,
+        DpadRight,
+        Max
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public struct GameControllerButtonBind
+    {
+        public GameControllerBindType BindType;
+        public GameControllerButtonBindUnion Value;
+    }
+
+    [StructLayout(LayoutKind.Explicit)]
+    public struct GameControllerButtonBindUnion
+    {
+        [FieldOffset(0)]
+        public int Button;
+        [FieldOffset(0)]
+        public int Axis;
+        [FieldOffset(0)]
+        public HatStruct Hat;
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct HatStruct
+        {
+            public int Hat;
+            public int HatMask;
+        }
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public struct GameController
+    {
+        private readonly IntPtr ptr;
+
+        public GameController(IntPtr ptr)
+        {
+            this.ptr = ptr;
+        }
+
+        public static implicit operator IntPtr(GameController gameController)
+        {
+            return gameController.ptr;
+        }
+
+        public static implicit operator GameController(IntPtr ptr)
+        {
+            return new GameController(ptr);
+        }
+    }
+
     public static unsafe partial class SDL
     {
-        public enum GameControllerBindType
-        {
-            None = 0,
-            Button,
-            Axis,
-            Hat
-        }
-
-        public enum GameControllerAxis
-        {
-            Invalid = -1,
-            LeftX,
-            LeftY,
-            RightX,
-            RightY,
-            TriggerLeft,
-            TriggerRight,
-            Max
-        }
-
-        public enum GameControllerButton
-        {
-            Invalid = -1,
-            A,
-            B,
-            X,
-            Y,
-            Back,
-            Guide,
-            Start,
-            LeftStick,
-            RightStick,
-            LeftShoulder,
-            RightShoulder,
-            DpadUp,
-            DpadDown,
-            DpadLeft,
-            DpadRight,
-            Max
-        }
-
-        [StructLayout(LayoutKind.Sequential)]
-        public struct GameControllerButtonBind
-        {
-            public GameControllerBindType BindType;
-            public GameControllerButtonBindUnion Value;
-        }
-
-        [StructLayout(LayoutKind.Explicit)]
-        public struct GameControllerButtonBindUnion
-        {
-            [FieldOffset(0)]
-            public int Button;
-            [FieldOffset(0)]
-            public int Axis;
-            [FieldOffset(0)]
-            public HatStruct Hat;
-
-            [StructLayout(LayoutKind.Sequential)]
-            public struct HatStruct
-            {
-                public int Hat;
-                public int HatMask;
-            }
-        }
-
-        [StructLayout(LayoutKind.Sequential)]
-        public struct GameController
-        {
-            private readonly IntPtr ptr;
-
-            public GameController(IntPtr ptr)
-            {
-                this.ptr = ptr;
-            }
-
-            public static implicit operator IntPtr(GameController gameController)
-            {
-                return gameController.ptr;
-            }
-
-            public static implicit operator GameController(IntPtr ptr)
-            {
-                return new GameController(ptr);
-            }
-        }
-
         [DllImport(LibraryName, EntryPoint = "SDL_GameControllerAddMapping", CallingConvention = CallingConvention.Cdecl)]
         public static extern int GameControllerAddMapping(string mappingString);
 
