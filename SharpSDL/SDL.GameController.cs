@@ -92,7 +92,7 @@ namespace SharpSDL
 
     public static unsafe partial class SDL
     {
-        [DllImport(LibraryName, EntryPoint = "SDL_GameControllerAddMapping", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(LibraryName, EntryPoint = "SDL_GameControllerAddMapping", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi, BestFitMapping = false, ThrowOnUnmappableChar = true)]
         public static extern int GameControllerAddMapping(string mappingString);
 
         [DllImport(LibraryName, EntryPoint = "SDL_GameControllerClose", CallingConvention = CallingConvention.Cdecl)]
@@ -107,7 +107,7 @@ namespace SharpSDL
         [DllImport(LibraryName, EntryPoint = "SDL_GameControllerGetAxis", CallingConvention = CallingConvention.Cdecl)]
         public static extern short GameControllerGetAxis(GameController gameController, GameControllerAxis axis);
 
-        [DllImport(LibraryName, EntryPoint = "SDL_GameControllerGetAxisFromString", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(LibraryName, EntryPoint = "SDL_GameControllerGetAxisFromString", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi, BestFitMapping = false, ThrowOnUnmappableChar = true)]
         public static extern GameControllerAxis GameControllerGetAxisFromString(string pchString);
 
         [DllImport(LibraryName, EntryPoint = "SDL_GameControllerGetBindForAxis", CallingConvention = CallingConvention.Cdecl)]
@@ -119,7 +119,7 @@ namespace SharpSDL
         [DllImport(LibraryName, EntryPoint = "SDL_GameControllerGetButton", CallingConvention = CallingConvention.Cdecl)]
         public static extern byte GameControllerGetButton(GameController gameController, GameControllerButton button);
 
-        [DllImport(LibraryName, EntryPoint = "SDL_GameControllerGetButtonFromString", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(LibraryName, EntryPoint = "SDL_GameControllerGetButtonFromString", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi, BestFitMapping = false, ThrowOnUnmappableChar = true)]
         public static extern GameControllerButton GameControllerGetButtonFromString(string pchString);
 
         [DllImport(LibraryName, EntryPoint = "SDL_GameControllerGetJoystick", CallingConvention = CallingConvention.Cdecl)]

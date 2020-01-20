@@ -66,7 +66,7 @@ namespace SharpSDL
         [DllImport(LibraryName, EntryPoint = "SDL_GL_DeleteContext", CallingConvention = CallingConvention.Cdecl)]
         public static extern void GL_DeleteContext(GLContext context);
 
-        [DllImport(LibraryName, EntryPoint = "SDL_GL_ExtensionSupported", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(LibraryName, EntryPoint = "SDL_GL_ExtensionSupported", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi, BestFitMapping = false, ThrowOnUnmappableChar = true)]
         public static extern bool GL_ExtensionSupported(string extension);
 
         [DllImport(LibraryName, EntryPoint = "SDL_GL_GetAttribute", CallingConvention = CallingConvention.Cdecl)]
@@ -81,7 +81,7 @@ namespace SharpSDL
         [DllImport(LibraryName, EntryPoint = "SDL_GL_GetDrawableSize", CallingConvention = CallingConvention.Cdecl)]
         public static extern void GL_GetDrawableSize(Window window, int* width, int* height);
 
-        [DllImport(LibraryName, EntryPoint = "SDL_GL_GetProcAddress", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(LibraryName, EntryPoint = "SDL_GL_GetProcAddress", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi, BestFitMapping = false, ThrowOnUnmappableChar = true)]
         public static extern IntPtr GL_GetProcAddress(string proc);
 
         public static T GL_GetProcDelegate<T>(string proc) where T : class
@@ -92,7 +92,7 @@ namespace SharpSDL
         [DllImport(LibraryName, EntryPoint = "SDL_GL_GetSwapInterval", CallingConvention = CallingConvention.Cdecl)]
         public static extern int GL_GetSwapInterval();
 
-        [DllImport(LibraryName, EntryPoint = "SDL_GL_LoadLibrary", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(LibraryName, EntryPoint = "SDL_GL_LoadLibrary", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi, BestFitMapping = false, ThrowOnUnmappableChar = true)]
         public static extern int GL_LoadLibrary(string path);
 
         [DllImport(LibraryName, EntryPoint = "SDL_GL_MakeCurrent", CallingConvention = CallingConvention.Cdecl)]

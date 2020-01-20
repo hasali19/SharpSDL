@@ -108,7 +108,7 @@ namespace SharpSDL
         [DllImport(LibraryName, EntryPoint = "SDL_JoystickGetGUID", CallingConvention = CallingConvention.Cdecl)]
         public static extern Guid JoystickGetGUID(Joystick joystick);
 
-        [DllImport(LibraryName, EntryPoint = "SDL_JoystickGetGUIDFromString", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(LibraryName, EntryPoint = "SDL_JoystickGetGUIDFromString", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi, BestFitMapping = false, ThrowOnUnmappableChar = true)]
         public static extern Guid JoystickGetGUIDFromString(string pchGUID);
 
         [DllImport(LibraryName, EntryPoint = "SDL_JoystickGetGUIDString", CallingConvention = CallingConvention.Cdecl)]

@@ -168,7 +168,7 @@ namespace SharpSDL
 
     public static unsafe partial class SDL
     {
-        [DllImport(LibraryName, EntryPoint = "SDL_RWFromFile", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(LibraryName, EntryPoint = "SDL_RWFromFile", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi, BestFitMapping = false, ThrowOnUnmappableChar = true)]
         public static extern RWops RWFromFile(string file, string mode);
 
         [DllImport(LibraryName, EntryPoint = "SDL_LoadWAV_RW", CallingConvention = CallingConvention.Cdecl)]
@@ -189,10 +189,10 @@ namespace SharpSDL
         public static extern int GetNumAudioDrivers();
 
 
-        [DllImport(LibraryName, EntryPoint = "SDL_AudioDriver", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(LibraryName, EntryPoint = "SDL_AudioDriver", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi, BestFitMapping = false, ThrowOnUnmappableChar = true)]
         public static extern string GetAudioDrivers(int index);
 
-        [DllImport(LibraryName, EntryPoint = "SDL_OpenAudioDevice", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(LibraryName, EntryPoint = "SDL_OpenAudioDevice", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi, BestFitMapping = false, ThrowOnUnmappableChar = true)]
         public static extern uint OpenAudioDevice(
             string device, 
             int iscapture, 
@@ -212,10 +212,16 @@ namespace SharpSDL
             Boolean pauseOn
             );
 
+        [DllImport(LibraryName, EntryPoint = "SDL_FreeWave")]
+        public static extern int FreeWave(byte * buf);
+
+
         [DllImport(LibraryName, EntryPoint = "SDL_QueueAudio")]        
         public static extern int QueueAudio(uint device, byte* buf, uint length);
 
         [DllImport(LibraryName, EntryPoint = "SDL_Delay")]
         public static extern void Delay(uint ms);
+
+
     }
 }
