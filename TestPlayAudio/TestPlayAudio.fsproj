@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
@@ -19,5 +19,5 @@
   <ItemGroup>
     <ProjectReference Include="..\SharpSDL\SharpSDL.csproj" />
   </ItemGroup>
-
+  
 </Project>

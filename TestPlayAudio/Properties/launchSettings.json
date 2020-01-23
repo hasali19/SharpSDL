@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "TestPlayAudio": {
+      "commandName": "Project"
+    },
+    "NoQueue": {
+      "commandName": "Project",
+      "commandLineArgs": "noqueue"
+    }
+  }
+}

@@ -5,12 +5,13 @@
     <Version>2.0.0</Version>
     <Authors>hasali19</Authors>
     <RepositoryUrl>https://github.com/hasali19/SharpSDL</RepositoryUrl>
-    <TargetFrameworks>netcoreapp3.0;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>netcoreapp3.0</TargetFrameworks>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Description>C# bindings for SDL2.</Description>
     <PackageTags>SDL2 Game Window</PackageTags>
     <PackageProjectUrl>https://github.com/hasali19/SharpSDL</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
 
   <ItemGroup>
@@ -24,6 +25,12 @@
     <None Include="runtimes\**\*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="runtimes\linux-x64\native\" />
+    <Folder Include="runtimes\linux-x86\native\" />
+    <Folder Include="runtimes\osx-x64\native\" />
   </ItemGroup>
 
 </Project>
