@@ -73,7 +73,15 @@ namespace SharpSDL
 
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
             {
-                return "linux-x64";
+                if (RuntimeInformation.ProcessArchitecture == Architecture.X64)
+                {
+                    return "linux-x64";
+                }
+
+                if (RuntimeInformation.ProcessArchitecture == Architecture.X86)
+                {
+                    return "linux-x86";
+                }
             }
 
             if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
