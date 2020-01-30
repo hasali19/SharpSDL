@@ -130,7 +130,7 @@ namespace SharpSDL
         public const int WINDOWPOS_UNDEFINED = 0x1FFF0000;
         public const int WINDOWPOS_CENTERED = 0x2FFF0000;
 
-        [DllImport(LibraryName, EntryPoint = "SDL_CreateWindow", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(LibraryName, EntryPoint = "SDL_CreateWindow", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi, BestFitMapping = false, ThrowOnUnmappableChar = true)]
         public static extern Window CreateWindow(string title, int x, int y, int width, int height, WindowFlags flags);
 
         [DllImport(LibraryName, EntryPoint = "SDL_CreateWindowFrom", CallingConvention = CallingConvention.Cdecl)]
@@ -208,7 +208,7 @@ namespace SharpSDL
         [DllImport(LibraryName, EntryPoint = "SDL_GetWindowBrightness", CallingConvention = CallingConvention.Cdecl)]
         public static extern float GetWindowBrightness(Window window);
 
-        [DllImport(LibraryName, EntryPoint = "SDL_GetWindowData", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(LibraryName, EntryPoint = "SDL_GetWindowData", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi, BestFitMapping = false, ThrowOnUnmappableChar = true)]
         public static extern void* GetWindowData(Window window, string name);
 
         [DllImport(LibraryName, EntryPoint = "SDL_GetWindowDisplayIndex", CallingConvention = CallingConvention.Cdecl)]
@@ -273,7 +273,7 @@ namespace SharpSDL
         [DllImport(LibraryName, EntryPoint = "SDL_SetWindowBrightness", CallingConvention = CallingConvention.Cdecl)]
         public static extern int SetWindowBrightness(Window window, float brightness);
 
-        [DllImport(LibraryName, EntryPoint = "SDL_SetWindowData", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(LibraryName, EntryPoint = "SDL_SetWindowData", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi, BestFitMapping = false, ThrowOnUnmappableChar = true)]
         public static extern void* SetWindowData(Window window, string name, void* userdata);
 
         [DllImport(LibraryName, EntryPoint = "SDL_SetWindowDisplayMode", CallingConvention = CallingConvention.Cdecl)]
@@ -315,13 +315,13 @@ namespace SharpSDL
         [DllImport(LibraryName, EntryPoint = "SDL_SetWindowSize", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetWindowSize(Window window, int width, int height);
 
-        [DllImport(LibraryName, EntryPoint = "SDL_SetWindowTitle", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(LibraryName, EntryPoint = "SDL_SetWindowTitle", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi, BestFitMapping = false, ThrowOnUnmappableChar = true)]
         public static extern void SetWindowTitle(Window window, string title);
 
         [DllImport(LibraryName, EntryPoint = "SDL_ShowWindow", CallingConvention = CallingConvention.Cdecl)]
         public static extern void ShowWindow(Window window);
 
-        [DllImport(LibraryName, EntryPoint = "SDL_VideoInit", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(LibraryName, EntryPoint = "SDL_VideoInit", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi, BestFitMapping = false, ThrowOnUnmappableChar = true)]
         public static extern int VideoInit(string driverName);
 
         [DllImport(LibraryName, EntryPoint = "SDL_VideoQuit", CallingConvention = CallingConvention.Cdecl)]
