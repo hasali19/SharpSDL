@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "TestPlayAudio": {
+    "AudioExample": {
       "commandName": "Project"
     },
     "NoQueue": {

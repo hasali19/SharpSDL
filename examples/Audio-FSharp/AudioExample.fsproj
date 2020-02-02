@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SharpSDL\SharpSDL.csproj" />
+    <ProjectReference Include="..\..\SharpSDL\SharpSDL.csproj" />
   </ItemGroup>
   
 </Project>
