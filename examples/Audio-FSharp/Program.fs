@@ -6,7 +6,7 @@ open System.Runtime.InteropServices
 
 [<EntryPoint>]
 let main argv =
-    SDL.LogSetAllPriority(LogPriority.LOG_PRIORITY_DEBUG) 
+    SDL.LogSetAllPriority(LogPriority.Debug) 
     let initOk = SDL.Init(InitFlags.Audio ||| InitFlags.Events)
     let mutable spec = new AudioSpec()
     // soundBuffer is alloc'd by C code,

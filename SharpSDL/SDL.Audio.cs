@@ -77,7 +77,7 @@ namespace SharpSDL
         AllowFormatChange = 0x00000002,
         AllowChannelsChange = 0x00000004,
         AllowSamplesChange = 0x00000008,
-        AllowAnyChange = (AllowFrequencyChange | AllowFormatChange | AllowChannelsChange | AllowSamplesChange)
+        AllowAnyChange = AllowFrequencyChange | AllowFormatChange | AllowChannelsChange | AllowSamplesChange
     }
     /* @} */
 
@@ -117,7 +117,7 @@ namespace SharpSDL
     [StructLayout(LayoutKind.Sequential)]
     public unsafe struct AudioSpec
     {
-        public int Frequency;            /* DSP frequency -- samples per second */
+        public int Frequency;       /* DSP frequency -- samples per second */
         public short Format;        /* Audio data format */
         public byte Channels;       /* Number of channels: 1 mono; 2 stereo */
         public byte Silence;        /* Audio buffer silence value (calculated) */
@@ -162,18 +162,14 @@ namespace SharpSDL
 
     public static unsafe partial class SDL
     {
-        [DllImport(LibraryName, EntryPoint = "SDL_RWFromFile", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi, BestFitMapping = false, ThrowOnUnmappableChar = true, SetLastError=true)]
+        [DllImport(LibraryName, EntryPoint = "SDL_RWFromFile", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi, BestFitMapping = false, ThrowOnUnmappableChar = true, SetLastError = true)]
         public static extern RWops RWFromFile(string file, string mode);
 
         [DllImport(LibraryName, EntryPoint = "SDL_LoadWAV_RW", CallingConvention = CallingConvention.Cdecl)]
-        public static extern AudioSpec* LoadWavRW( RWops src, 
-            int freesrc,
-            AudioSpec* audioSpec,
-            byte** buf, 
-            int* len
-            );
+        public static extern AudioSpec* LoadWavRW(RWops src, int freesrc, AudioSpec* audioSpec, byte** buf, int* len);
 
-        public static AudioSpec* LoadWavFromFile(String file, AudioSpec* spec, byte** buf, int* len) {
+        public static AudioSpec* LoadWavFromFile(String file, AudioSpec* spec, byte** buf, int* len)
+        {
             var src = RWFromFile(file, "rb");
             var audSpec = LoadWavRW(src, 1, spec, buf, len);
             return audSpec;
@@ -188,30 +184,19 @@ namespace SharpSDL
 
 
         [DllImport(LibraryName, EntryPoint = "SDL_OpenAudioDevice", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi, BestFitMapping = false, ThrowOnUnmappableChar = true, SetLastError = true)]
-        public static extern uint OpenAudioDevice(
-            string device, 
-            int iscapture, 
-            AudioSpec* desired, 
-            IntPtr obtained, 
-            int allowChanges 
-            );
+        public static extern uint OpenAudioDevice(string device, int iscapture, AudioSpec* desired, IntPtr obtained, int allowChanges);
 
         [DllImport(LibraryName, EntryPoint = "SDL_CloseAudioDevice", CallingConvention = CallingConvention.Cdecl, SetLastError = true)]
-        public static extern uint CloseAudioDevice(
-            uint deviceId
-            );
+        public static extern uint CloseAudioDevice(uint deviceId);
 
         [DllImport(LibraryName, EntryPoint = "SDL_PauseAudioDevice", CallingConvention = CallingConvention.Cdecl, SetLastError = true)]
-        public static extern int PauseAudioDevice(
-            uint deviceId,
-            bool pauseOn
-            );
+        public static extern int PauseAudioDevice(uint deviceId, bool pauseOn);
 
         [DllImport(LibraryName, EntryPoint = "SDL_FreeWave", SetLastError = true)]
-        public static extern int FreeWave(byte * buf);
+        public static extern int FreeWave(byte* buf);
 
 
-        [DllImport(LibraryName, EntryPoint = "SDL_QueueAudio", SetLastError = true)]        
+        [DllImport(LibraryName, EntryPoint = "SDL_QueueAudio", SetLastError = true)]
         public static extern int QueueAudio(uint device, byte* buf, int length);
 
         [DllImport(LibraryName, EntryPoint = "SDL_Delay", SetLastError = true)]
@@ -229,7 +214,5 @@ namespace SharpSDL
 
         [DllImport(LibraryName, EntryPoint = "SDL_ClearQueuedAudio", SetLastError = true)]
         public static extern void ClearQueuedAudio(uint deviceId);
-
-
     }
 }
