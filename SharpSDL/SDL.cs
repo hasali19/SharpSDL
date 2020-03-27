@@ -37,6 +37,15 @@ namespace SharpSDL
         [DllImport(LibraryName, EntryPoint = "SDL_Quit", CallingConvention = CallingConvention.Cdecl)]
         public static extern void Quit();
 
+        [DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
+		public static extern uint GetTicks();
+
+        [DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
+		public static extern ulong GetPerformanceCounter();
+
+		[DllImport(nativeLibName, CallingConvention = CallingConvention.Cdecl)]
+		public static extern ulong GetPerformanceFrequency();
+        
         private static string GetString(byte* ptr)
         {
             int count = 0;
