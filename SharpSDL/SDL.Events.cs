@@ -491,26 +491,44 @@ namespace SharpSDL
 
         [DllImport(LibraryName, EntryPoint = "SDL_PeepEvents", CallingConvention = CallingConvention.Cdecl)]
         public static extern int PeepEvents(Event* events, int numevents, EventAction action, EventType minType, EventType maxType);
-
+        
+        [DllImport(LibraryName, EntryPoint = "SDL_PeepEvents", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int PeepEvents([Out] Event[] events, int numevents, EventAction action, EventType minType, EventType maxType);
+        
         [DllImport(LibraryName, EntryPoint = "SDL_PollEvent", CallingConvention = CallingConvention.Cdecl)]
         public static extern int PollEvent(Event* evt);
 
+        [DllImport(LibraryName, EntryPoint = "SDL_PollEvent", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int PollEvent(out Event evt);
+        
         [DllImport(LibraryName, EntryPoint = "SDL_PumpEvents", CallingConvention = CallingConvention.Cdecl)]
         public static extern void PumpEvents();
 
         [DllImport(LibraryName, EntryPoint = "SDL_PushEvent", CallingConvention = CallingConvention.Cdecl)]
         public static extern int PushEvent(Event* evt);
 
+        [DllImport(LibraryName, EntryPoint = "SDL_PushEvent", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int PushEvent(out Event evt);
+        
         [DllImport(LibraryName, EntryPoint = "SDL_RegisterEvents", CallingConvention = CallingConvention.Cdecl)]
         public static extern uint RegisterEvents(int numevents);
 
         [DllImport(LibraryName, EntryPoint = "SDL_SetEventFilter", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetEventFilter(EventFilter filter, void* userdata);
-
+        
+        [DllImport(LibraryName, EntryPoint = "SDL_SetEventFilter", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SetEventFilter(EventFilter filter, IntPtr userdata);
+        
         [DllImport(LibraryName, EntryPoint = "SDL_WaitEvent", CallingConvention = CallingConvention.Cdecl)]
         public static extern int WaitEvent(Event* evt);
-
+        
+        [DllImport(LibraryName, EntryPoint = "SDL_WaitEvent", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int WaitEvent(out Event evt);
+        
         [DllImport(LibraryName, EntryPoint = "SDL_WaitEventTimeout", CallingConvention = CallingConvention.Cdecl)]
         public static extern int WaitEventTimeout(Event* evt, int timeout);
+                
+        [DllImport(LibraryName, EntryPoint = "SDL_WaitEventTimeout", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int WaitEventTimeout(out Event evt, int timeout);
     }
 }
